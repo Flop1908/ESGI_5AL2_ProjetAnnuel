@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceAnecdote", "WcfServiceAnecdote\WcfServiceAnecdote.csproj", "{396ADEC9-E8E4-45B3-965B-E498CD32F187}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2646C2A0-F2F2-432D-844B-58F7FC9E047B} = {2646C2A0-F2F2-432D-844B-58F7FC9E047B}

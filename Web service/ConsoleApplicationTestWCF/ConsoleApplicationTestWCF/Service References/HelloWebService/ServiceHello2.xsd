@@ -16,6 +16,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AnecdoteCnf" nillable="true" type="tns:AnecdoteCnf" />
+  <xs:complexType name="ArrayOfAnecdoteDtc">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AnecdoteDtc" nillable="true" type="tns:AnecdoteDtc" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAnecdoteDtc" nillable="true" type="tns:ArrayOfAnecdoteDtc" />
+  <xs:complexType name="AnecdoteDtc">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AnecdoteDtc" nillable="true" type="tns:AnecdoteDtc" />
   <xs:complexType name="AnecdoteVdm">
     <xs:sequence>
       <xs:element minOccurs="0" name="Autor" nillable="true" type="xs:string" />
@@ -28,11 +41,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AnecdoteVdm" nillable="true" type="tns:AnecdoteVdm" />
-  <xs:complexType name="AnecdoteDtc">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="AnecdoteDtc" nillable="true" type="tns:AnecdoteDtc" />
 </xs:schema>

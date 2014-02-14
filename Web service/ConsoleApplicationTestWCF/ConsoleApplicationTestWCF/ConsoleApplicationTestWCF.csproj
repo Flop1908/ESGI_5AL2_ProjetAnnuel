@@ -67,6 +67,9 @@
     <None Include="Service References\HelloWebService\ConsoleApplicationTestWCF.HelloWebService.AnecdoteCnf.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\HelloWebService\ConsoleApplicationTestWCF.HelloWebService.AnecdoteDtc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\HelloWebService\ServiceHello.wsdl" />
     <None Include="Service References\HelloWebService\ServiceHello.xsd">
       <SubType>Designer</SubType>
