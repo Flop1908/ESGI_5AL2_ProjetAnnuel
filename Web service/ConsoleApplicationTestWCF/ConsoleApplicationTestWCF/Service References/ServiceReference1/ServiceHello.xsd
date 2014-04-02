@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:13839/ServiceHello.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Core.Anecdotes" />
+  <xs:element name="SayHello">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="who" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SayHelloResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SayHelloResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Test">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TestResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CNF_RetreiveAnecdote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tri" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreAnecdote" type="xs:int" />
+        <xs:element minOccurs="0" name="pageNumber" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CNF_RetreiveAnecdoteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Core.Anecdotes" minOccurs="0" name="CNF_RetreiveAnecdoteResult" nillable="true" type="q1:ArrayOfAnecdoteCnf" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DTC_RetreiveAnecdote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tri" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pageNumber" type="xs:int" />
+        <xs:element minOccurs="0" name="searchWord" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DTC_RetreiveAnecdoteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Core.Anecdotes" minOccurs="0" name="DTC_RetreiveAnecdoteResult" nillable="true" type="q2:ArrayOfAnecdoteDtc" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VDM_NewAnecdote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Core.Anecdotes" minOccurs="0" name="ane" nillable="true" type="q3:AnecdoteVdm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VDM_NewAnecdoteResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DTC_NewAnecdote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Core.Anecdotes" minOccurs="0" name="ane" nillable="true" type="q4:AnecdoteDtc" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DTC_NewAnecdoteResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CNF_NewAnecdote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Core.Anecdotes" minOccurs="0" name="ane" nillable="true" type="q5:AnecdoteCnf" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CNF_NewAnecdoteResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

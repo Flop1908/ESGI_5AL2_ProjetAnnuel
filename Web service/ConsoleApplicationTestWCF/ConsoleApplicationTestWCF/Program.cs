@@ -15,7 +15,7 @@ namespace ConsoleApplicationTestWCF
             */
 
             //ProxyHelper.UsingProxyOf<ServiceHelloClient>(client => repAne = client.NewAnecdote());
-            ProxyHelper.UsingProxyOf<ServiceHelloClient>(client => rep = client.Test());
+            ProxyHelper.UsingProxyOf<ServiceHelloClient>(client => rep = client.);
 
             Console.WriteLine(rep);
             
