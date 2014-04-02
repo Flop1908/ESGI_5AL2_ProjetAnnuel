@@ -52,9 +52,25 @@ namespace WcfServiceAnecdote
             return CNF.RetrieveListAnecdote(tri, int.Parse(nombreAnecdote), int.Parse(pageNumber));
         }
 
-        public List<AnecdoteDtc> DTC_RetreiveAnecdote(String tri, String pageNumber, String searchWord)
+        public List<AnecdoteDtc> DTC_RetreiveAnecdote(String tri, String pageNumber)
+        {
+            return DTC.RetrieveListAnecdote(tri, int.Parse(pageNumber));
+        }
+
+        public List<AnecdoteDtc> DTC_SearchAnecdote(String tri, String pageNumber, String searchWord)
         {
             return DTC.RetrieveListAnecdote(tri, int.Parse(pageNumber), searchWord);
         }
+
+        public List<AnecdoteVdm> VDM_RetreiveAnecdote(String tri, String pageNumber)
+        {
+            return VDM.RetrieveListAnecdote(tri, int.Parse(pageNumber));
+        }
+
+        public List<AnecdoteVdm> VDM_SearchAnecdote(String tri, String pageNumber, String searchWord)
+        {
+            return VDM.RetrieveListAnecdote(tri, int.Parse(pageNumber), searchWord);
+        }
+
     }
 }
