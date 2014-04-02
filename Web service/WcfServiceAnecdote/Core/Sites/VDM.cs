@@ -34,13 +34,13 @@ namespace Core.Sites
 
             foreach (var item in listeRawAnecdotes)
             {
-                listeAne.Add(new AnecdoteVdm(AnecdoteVdm.AdaptatorVdm(
+                listeAne.Add(new AnecdoteVdm(
                     item.Attribute("id").Value,
                     item.Element("author").Value,
                     item.Element("text").Value,
                     item.Element("date").Value,
                     item.Element("agree").Value,
-                    item.Element("deserved").Value)));
+                    item.Element("deserved").Value));
             }
 
             return listeAne;

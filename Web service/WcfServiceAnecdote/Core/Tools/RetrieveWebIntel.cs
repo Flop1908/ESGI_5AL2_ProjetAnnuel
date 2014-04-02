@@ -79,7 +79,7 @@ namespace Core.Tools
                 var receiveReq = result.GetResponseStream();
 
                 //on donne le type d'encodage (utf-8)
-                var encode = Encoding.GetEncoding(0);
+                var encode = Encoding.GetEncoding(65001);
 
                 //on créer un flux pour lire le flux web
                 if (receiveReq != null)

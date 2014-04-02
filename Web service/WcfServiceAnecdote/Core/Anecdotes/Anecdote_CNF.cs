@@ -4,7 +4,7 @@ using System.Web;
 
 namespace Core.Anecdotes
 {
-    [DataContract]
+    [DataContract (Name="AnecdoteCnf")]
     public class AnecdoteCnf
     {
         public AnecdoteCnf(string fact, DateTime date, int vote, int points)

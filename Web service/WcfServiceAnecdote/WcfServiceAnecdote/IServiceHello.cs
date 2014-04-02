@@ -28,7 +28,7 @@ namespace WcfServiceAnecdote
         List<AnecdoteDtc> DTC_RetreiveAnecdote(String tri, String pageNumber);
 
         [OperationContract]
-        [WebGet(UriTemplate = "DTC_SearchAnecdote/{tri}/{pageNumber}/{searchWord}")]
+        [WebGet(UriTemplate = "DTC_SearchAnecdote/{tri}/{pageNumber}/{searchWord}", ResponseFormat = WebMessageFormat.Json)]
         List<AnecdoteDtc> DTC_SearchAnecdote(String tri, String pageNumber, String searchWord);
 
         [OperationContract]
@@ -36,7 +36,7 @@ namespace WcfServiceAnecdote
         List<AnecdoteVdm> VDM_RetreiveAnecdote(String tri, String pageNumber);
 
         [OperationContract]
-        [WebGet(UriTemplate = "VDM_SearchAnecdote/{tri}/{pageNumber}/{searchWord}")]
+        [WebGet(UriTemplate = "VDM_SearchAnecdote/{tri}/{pageNumber}/{searchWord}", ResponseFormat = WebMessageFormat.Json)]
         List<AnecdoteVdm> VDM_SearchAnecdote(String tri, String pageNumber, String searchWord);
     }
 }

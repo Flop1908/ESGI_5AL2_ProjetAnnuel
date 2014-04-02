@@ -6,6 +6,11 @@ namespace Core.Anecdotes
     [DataContract]
     public class AnecdoteDtc
     {
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
+        public String Content { get; set; }
+
         public AnecdoteDtc(int id, string content/*, DateTime parution, int good, int bad, List<CommentDtc> listComments*/)
         {
             Id = id;
@@ -24,10 +29,6 @@ namespace Core.Anecdotes
             Content = anecdoteDtc.Content;
         }
 
-        [DataMember]
-        public int Id { get; set; }
-        [DataMember]
-        public String Content { get; set; }
         /*
         [DataMember]
         public DateTime Parution { get; set; }
