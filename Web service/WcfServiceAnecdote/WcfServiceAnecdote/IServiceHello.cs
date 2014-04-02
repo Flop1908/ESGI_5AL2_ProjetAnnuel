@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using Core.Anecdotes;
+using System.ServiceModel.Web;
 
 namespace WcfServiceAnecdote
 {
@@ -11,24 +12,19 @@ namespace WcfServiceAnecdote
     {
 
         [OperationContract]
+        [WebGet(UriTemplate = "SayHello/{who}")]
         String SayHello(String who);
 
         [OperationContract]
+        [WebGet(UriTemplate = "Test")]
         String Test();
 
         [OperationContract]
-        List<AnecdoteCnf> CNF_RetreiveAnecdote(String tri, int nombreAnecdote, int pageNumber);
+        [WebGet(UriTemplate = "CNF_RetreiveAnecdote/{tri}/{nombreAnecdote}/{pageNumber}")]
+        List<AnecdoteCnf> CNF_RetreiveAnecdote(String tri, String nombreAnecdote, String pageNumber);
 
         [OperationContract]
-        List<AnecdoteDtc> DTC_RetreiveAnecdote(String tri, int pageNumber, String searchWord);
-
-        [OperationContract]
-        void VDM_NewAnecdote(AnecdoteVdm ane);
-
-        [OperationContract]
-        void DTC_NewAnecdote(AnecdoteDtc ane);
-
-        [OperationContract]
-        void CNF_NewAnecdote(AnecdoteCnf ane);
+        [WebGet(UriTemplate = "DTC_RetreiveAnecdote/{tri}/{pageNumber}/{searchWord}")]
+        List<AnecdoteDtc> DTC_RetreiveAnecdote(String tri, String pageNumber, String searchWord);
     }
 }

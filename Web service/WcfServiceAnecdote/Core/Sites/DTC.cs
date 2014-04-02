@@ -22,7 +22,7 @@ namespace Core.Sites
             log4net.Config.XmlConfigurator.Configure(); 
             Log.Fatal("Test Log");
             var url = BuildApiUrl(tri, pageNumber, searchWord);
-            var json = RetrieveJson.Dtc(url,DTC_API_KEY);
+            var json = RetrieveWebIntel.Dtc(url,DTC_API_KEY);
 
             return TransformJsonToListAnecdoteDtc(json);
         }

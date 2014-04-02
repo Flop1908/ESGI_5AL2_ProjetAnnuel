@@ -92,7 +92,7 @@ namespace Core.Sites
             int pageNumber = 1)
         {
             var url = BuildApiUrl(tri, nombreAnecdote, pageNumber);
-            var json = RetrieveJson.Cnf(url);
+            var json = RetrieveWebIntel.Cnf(url);
 
             return TransformJsonToListAnecdoteCnf(json);
         }

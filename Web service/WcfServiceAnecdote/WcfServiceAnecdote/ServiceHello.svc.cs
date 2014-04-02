@@ -12,6 +12,7 @@ namespace WcfServiceAnecdote
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "ServiceHello" à la fois dans le code, le fichier svc et le fichier de configuration.
     public class ServiceHello : IServiceHello
     {
+        public static readonly ILog Log = LogManager.GetLogger(typeof(ServiceHello));
 
         /// <summary>
         /// Test function which says hello
@@ -20,19 +21,20 @@ namespace WcfServiceAnecdote
         /// <returns></returns>
         public String SayHello(String who)
         {
+            Log.Debug(who + " call the SayHello");
             return "Hello " + who + " from web service :)";
         }
 
         public String Test()
         {
             var rep = new StringBuilder();
-            var list = DTC.RetrieveListAnecdote("search", 1, "flop");
+            var list = VDM.RetrieveListAnecdote("search", 1, "flop");
             var i = 0;
 
             foreach (var curAne in list)
             {
                 rep.AppendLine(i++.ToString(CultureInfo.InvariantCulture));
-                rep.AppendLine(curAne.Content);
+                rep.AppendLine(curAne.Contenu);
             }
 
             return rep.ToString();
@@ -45,29 +47,14 @@ namespace WcfServiceAnecdote
         /// <param name="nombreAnecdote">1 to 99</param>
         /// <param name="pageNumber">>=1</param>
         /// <returns></returns>
-        public List<AnecdoteCnf> CNF_RetreiveAnecdote(String tri, int nombreAnecdote, int pageNumber)
+        public List<AnecdoteCnf> CNF_RetreiveAnecdote(String tri, String nombreAnecdote, String pageNumber)
         {
-            return CNF.RetrieveListAnecdote(tri, nombreAnecdote, pageNumber);
+            return CNF.RetrieveListAnecdote(tri, int.Parse(nombreAnecdote), int.Parse(pageNumber));
         }
 
-        public List<AnecdoteDtc> DTC_RetreiveAnecdote(String tri, int pageNumber, String searchWord)
+        public List<AnecdoteDtc> DTC_RetreiveAnecdote(String tri, String pageNumber, String searchWord)
         {
-            return DTC.RetrieveListAnecdote(tri, pageNumber, searchWord);
-        }
-
-        public void VDM_NewAnecdote(AnecdoteVdm ane)
-        {
-            AnecdoteVdm newAne;
-        }
-
-        public void DTC_NewAnecdote(AnecdoteDtc ane)
-        {
-            AnecdoteDtc newAne;
-        }
-
-        public void CNF_NewAnecdote(AnecdoteCnf ane)
-        {
-            AnecdoteCnf newAne;
+            return DTC.RetrieveListAnecdote(tri, int.Parse(pageNumber), searchWord);
         }
     }
 }

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Core.Anecdotes.AnecdoteCnf">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAgAAAAAAAAAAIAAAAAAABAAAAAAABAAA=</HashCode>
+      <FileName>Anecdotes\Anecdote_CNF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Anecdotes.AnecdoteDtc">
+    <Position X="2.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Anecdotes\Anecdote_DTC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Anecdotes.AnecdoteVdm">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgSBAACBAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Anecdotes\Anecdote_VDM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Comments.CommentDtc">
+    <Position X="2.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Comments\Comment_DTC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Comments.CommentVdm">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Comments\Comment_VDM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Sites.CNF">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAgAAAAAAgAAQAAAAAA=</HashCode>
+      <FileName>Sites\CNF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Sites.DTC">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAABAAAAAAAAAAAAAAgQABAAAAAAQAAAAAA=</HashCode>
+      <FileName>Sites\DTC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Sites.VDM">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Sites\VDM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Tools.RetrieveWebIntel">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tools\RetrieveWebIntel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Comments.Comment_CNF">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Comments\Comment_CNF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

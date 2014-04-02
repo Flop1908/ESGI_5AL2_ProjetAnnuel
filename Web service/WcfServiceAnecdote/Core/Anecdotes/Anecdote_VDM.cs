@@ -8,41 +8,62 @@ namespace Core.Anecdotes
     [DataContract]
     public class AnecdoteVdm
     {
-        public AnecdoteVdm(string autor, string contenu)
+        private AnecdoteVdm anecdoteVdm;
+
+        public AnecdoteVdm(string author, string contenu)
         {
-            Autor = autor;
+            Author = author;
             Contenu = contenu;
         }
 
-        public AnecdoteVdm(int id, string autor, string contenu, DateTime parution, int jeValide, int bienMerite)
-            : this(id, autor, contenu, parution, jeValide, bienMerite, null)
+        public AnecdoteVdm(int id, string author, string contenu, DateTime date, int jeValide, int bienMerite)
+            : this(id, author, contenu, date, jeValide, bienMerite, null)
         {
         }
 
-        public AnecdoteVdm(int id, string autor, string contenu, DateTime parution, int jeValide, int bienMerite, List<CommentVdm> listComments)
+        public AnecdoteVdm(int id, string author, string contenu, DateTime date, int jeValide, int bienMerite, List<CommentVdm> listComments)
         {
             Id = id;
-            Autor = autor;
+            Author = author;
             Contenu = contenu;
-            Parution = parution;
+            Date = date;
             JeValide = jeValide;
             BienMerite = bienMerite;
             ListComments = listComments;
         }
 
+        public AnecdoteVdm(AnecdoteVdm anecdoteVdm)
+        {
+            // TODO: Complete member initialization
+            this.anecdoteVdm = anecdoteVdm;
+        }
+
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public String Autor { get; set; }
+        public String Author { get; set; }
         [DataMember]
         public String Contenu { get; set; }
         [DataMember]
-        public DateTime Parution { get; set; }
+        public DateTime Date { get; set; }
         [DataMember]
         public int JeValide { get; set; }
         [DataMember]
         public int BienMerite { get; set; }
         [DataMember]
         public List<CommentVdm> ListComments { get; set; }
+
+        internal static AnecdoteVdm AdaptatorVdm(string id, string author, string text, string date, string agree, string diserve)
+        {
+            int newId = int.Parse(id);
+            string newAuthor = author;
+            string newContenu = text;
+            DateTime newDate = DateTime.Parse(date);
+            int newJeValide = int.Parse(agree);
+            int newBienMerite = int.Parse(diserve);
+
+            return new AnecdoteVdm(newId, newAuthor, newContenu, newDate, newJeValide, newBienMerite);
+        }
+
     }
 }

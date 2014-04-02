@@ -1,0 +1,7 @@
+2014-04-02 07:57:40,680 [6] FATAL [Core.Sites.VDM.RetrieveListAnecdote] - Test Log
+2014-04-02 08:06:50,935 [5] FATAL [Core.Sites.VDM.RetrieveListAnecdote] - Test Log
+2014-04-02 08:22:35,905 [5] FATAL [Core.Sites.VDM.RetrieveListAnecdote] - Test Log
+2014-04-02 08:26:11,230 [6] FATAL [Core.Sites.VDM.RetrieveListAnecdote] - Test Log
+2014-04-02 08:26:42,148 [6] FATAL [Core.Sites.VDM.RetrieveListAnecdote] - Test Log
+2014-04-02 08:27:34,550 [5] FATAL [Core.Sites.VDM.RetrieveListAnecdote] - Test Log
+2014-04-02 08:29:36,752 [5] FATAL [Core.Sites.VDM.RetrieveListAnecdote] - Test Log

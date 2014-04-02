@@ -51,6 +51,7 @@
     <Compile Include="Anecdotes\Anecdote_CNF.cs" />
     <Compile Include="Anecdotes\Anecdote_DTC.cs" />
     <Compile Include="Anecdotes\Anecdote_VDM.cs" />
+    <Compile Include="Comments\Comment_CNF.cs" />
     <Compile Include="Comments\Comment_DTC.cs" />
     <Compile Include="Comments\Comment_VDM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,13 +59,16 @@
     <Compile Include="Sites\DTC.cs" />
     <Compile Include="Sites\VDM.cs" />
     <Compile Include="Test.cs" />
-    <Compile Include="Tools\RetrieveJSON.cs" />
+    <Compile Include="Tools\RetrieveWebIntel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Unirest\Unirest.csproj">
       <Project>{D02841F9-4D91-4635-9A68-026F63483366}</Project>
       <Name>Unirest</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagramCore.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
