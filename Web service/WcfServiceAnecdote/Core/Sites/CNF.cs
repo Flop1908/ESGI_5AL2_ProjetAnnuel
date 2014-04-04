@@ -22,11 +22,10 @@ namespace Core.Sites
             var deserializeJson = JArray.Parse(json);
 
             List<AnecdoteCnf> listAne = deserializeJson.Select(p => new AnecdoteCnf(
-                AnecdoteCnf.AdaptatorCnf(
                     (string) p["fact"],
                     (string) p["date"],
                     (string) p["vote"],
-                    (string) p["points"]))
+                    (string) p["points"])
                 ).ToList();
 
             return listAne;
