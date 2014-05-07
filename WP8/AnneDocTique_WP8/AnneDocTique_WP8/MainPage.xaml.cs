@@ -8,6 +8,9 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AnneDocTique_WP8.Resources;
+using System.Windows.Controls.Primitives;
+using System.ComponentModel;
+using System.Threading;
 
 namespace AnneDocTique_WP8
 {
@@ -17,7 +20,7 @@ namespace AnneDocTique_WP8
         public MainPage()
         {
             InitializeComponent();
-
+            //ShowSplash();
             // Affecter l'exemple de données au contexte de données du contrôle ListBox
             DataContext = App.ViewModel;
 
@@ -49,12 +52,54 @@ namespace AnneDocTique_WP8
 
             // Crée un nouvel élément de menu avec la chaîne localisée d'AppResources.
             ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
+            appBarMenuItem.Click += appBarMenuItem_Click;
             ApplicationBar.MenuItems.Add(appBarMenuItem);
+            
+        }
+        
+        private void appBarMenuItem_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/FiltrePage.xaml", UriKind.Relative));
         }
 
         private void appBarButton_Click(object sender, EventArgs e)
         {
-            App.ViewModel.LoadData();
+            App.ViewModel.LoadRandomCNFData();
+        }
+
+        private Popup popup;
+        private BackgroundWorker backroungWorker;
+
+        private void ShowSplash()
+        {
+            this.popup = new Popup();
+            this.popup.Child = new SplashScreen();
+            this.popup.IsOpen = true;
+            StartLoadingData();
+        }
+
+        private void StartLoadingData()
+        {
+            backroungWorker = new BackgroundWorker();
+            backroungWorker.DoWork += new DoWorkEventHandler(backroungWorker_DoWork);
+            backroungWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backroungWorker_RunWorkerCompleted);
+            backroungWorker.RunWorkerAsync();
+        }
+
+        void backroungWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.Dispatcher.BeginInvoke(() =>
+            {
+                this.popup.IsOpen = false;
+
+            }
+            );
+        }
+
+        void backroungWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //here we can load data
+            Thread.Sleep(1000);
         }
     }
 }

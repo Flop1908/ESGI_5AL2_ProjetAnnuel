@@ -12,6 +12,8 @@ namespace AnneDocTique_WP8.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private int PageRandom = 1;
+
         public MainViewModel()
         {
             this.Items = new ObservableCollection<ItemViewModel>();
@@ -71,10 +73,10 @@ namespace AnneDocTique_WP8.ViewModels
         /// </summary>
         public void LoadData()
         {
-            LoadLastCNF(10, "1");
-            LoadTopCNF(10, "1");
-            LoadFlopCNF(10, "1");
-            LoadRandomCNF(10, "1");
+            LoadLastCNF(10, 1);
+            LoadTopCNF(10, 1);
+            LoadFlopCNF(10, 1);
+            LoadRandomCNF(10, 1);
 
             // Exemple de données ; remplacer par des données réelles
             /*this.Items.Add(new ItemViewModel() { LineOne = "runtime one", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu" });
@@ -97,12 +99,20 @@ namespace AnneDocTique_WP8.ViewModels
             this.IsDataLoaded = true;
         }
 
+        public void LoadRandomCNFData()
+        {
+            PageRandom++;
+            this.RandomItems.Clear();
+            LoadRandomCNF(10, PageRandom);
+            this.IsDataLoaded = true;
+        }
+
         /// <summary>
         /// CNF part
         /// </summary>
         /// <param name="nbcnf">nombre d'anecdote</param>
         /// <param name="nbpage">numero de la page</param>
-        private void LoadLastCNF(int nbcnf, string nbpage)
+        private void LoadLastCNF(int nbcnf, int nbpage)
         {
             string param = "last/" + nbcnf + "/" + nbpage;
             WebClient client = new WebClient();
@@ -110,7 +120,7 @@ namespace AnneDocTique_WP8.ViewModels
             client.DownloadStringAsync(new Uri("http://ralf-esgi.com/myapp/ServiceHello.svc/CNF_RetreiveAnecdote/"+ param));
         }
        
-        private void LoadTopCNF(int nbcnf, string nbpage)
+        private void LoadTopCNF(int nbcnf, int nbpage)
         {
             string param = "top/" + nbcnf + "/" + nbpage;
             WebClient client = new WebClient();
@@ -118,7 +128,7 @@ namespace AnneDocTique_WP8.ViewModels
             client.DownloadStringAsync(new Uri("http://ralf-esgi.com/myapp/ServiceHello.svc/CNF_RetreiveAnecdote/" + param));
         }
 
-        private void LoadFlopCNF(int nbcnf, string nbpage)
+        private void LoadFlopCNF(int nbcnf, int nbpage)
         {
             string param = "flop/" + nbcnf + "/" + nbpage;
             WebClient client = new WebClient();
@@ -126,9 +136,9 @@ namespace AnneDocTique_WP8.ViewModels
             client.DownloadStringAsync(new Uri("http://ralf-esgi.com/myapp/ServiceHello.svc/CNF_RetreiveAnecdote/" + param));
         }
 
-        private void LoadRandomCNF(int nbcnf, string nbpage)
+        private void LoadRandomCNF(int nbcnf, int nbpage)
         {
-            string param = "alea/" + nbcnf + "/" + nbpage;
+            string param = "random/" + nbcnf + "/" + nbpage;
             WebClient client = new WebClient();
             client.DownloadStringCompleted += client_RetreiveRandomAnecdoteCompleted;
             client.DownloadStringAsync(new Uri("http://ralf-esgi.com/myapp/ServiceHello.svc/CNF_RetreiveAnecdote/" + param));
@@ -137,7 +147,7 @@ namespace AnneDocTique_WP8.ViewModels
         private void client_RetreiveRandomAnecdoteCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error == null)
-            {
+            {               
                 var cnf = JsonConvert.DeserializeObject<CNF[]>(e.Result);
                 foreach (var anecdote in cnf)
                 {
