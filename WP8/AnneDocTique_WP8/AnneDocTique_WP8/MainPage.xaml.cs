@@ -20,7 +20,8 @@ namespace AnneDocTique_WP8
         public MainPage()
         {
             InitializeComponent();
-            //ShowSplash();
+            
+            ShowSplash();
             // Affecter l'exemple de données au contexte de données du contrôle ListBox
             DataContext = App.ViewModel;
 
@@ -42,7 +43,7 @@ namespace AnneDocTique_WP8
         {
             // Définit l'ApplicationBar de la page sur une nouvelle instance d'ApplicationBar.
             ApplicationBar = new ApplicationBar();
-
+            ApplicationBar.IsVisible = false;
             // Crée un bouton et définit la valeur du texte sur la chaîne localisée issue d'AppResources.
             
             ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/Images/sync.png", UriKind.Relative));
@@ -54,7 +55,8 @@ namespace AnneDocTique_WP8
             ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
             appBarMenuItem.Click += appBarMenuItem_Click;
             ApplicationBar.MenuItems.Add(appBarMenuItem);
-            
+
+           
         }
         
         private void appBarMenuItem_Click(object sender, EventArgs e)
@@ -91,7 +93,7 @@ namespace AnneDocTique_WP8
             this.Dispatcher.BeginInvoke(() =>
             {
                 this.popup.IsOpen = false;
-
+                ApplicationBar.IsVisible = true;
             }
             );
         }
@@ -99,7 +101,7 @@ namespace AnneDocTique_WP8
         void backroungWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             //here we can load data
-            Thread.Sleep(1000);
+            Thread.Sleep(5000);
         }
     }
 }

@@ -9,9 +9,9 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
 
-    <Grid x:Name="LayoutRoot" Background="White" Width="480" Height="800">
+    <Grid x:Name="LayoutRoot" Background="White" Width="480" Margin="0,0,0,-320" Height="800" VerticalAlignment="Top">
         <ProgressBar HorizontalAlignment="Left" Margin="47,692,0,89" Name="progressBar1" Width="383"  />
-        <Image Height="512" HorizontalAlignment="Left" Margin="0,0,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="480" Source="Assets/Images/SplashScreenImage.jpg" />
-        <TextBlock HorizontalAlignment="Left" Margin="185,656,0,114" Name="textBlock1" Text="Please Wait..." Width="111" Foreground="Black" FontSize="22" />
+        <Image Height="800" HorizontalAlignment="Left" Margin="0,0,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="480" Source="Assets/Images/SplashScreenImage.png" />
+
     </Grid>
 </UserControl>

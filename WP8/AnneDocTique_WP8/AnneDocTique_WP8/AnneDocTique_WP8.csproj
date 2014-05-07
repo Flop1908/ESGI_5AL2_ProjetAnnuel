@@ -138,6 +138,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\SplashScreenImage.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
@@ -149,7 +150,7 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Assets\Images\SplashScreenImage.jpg" />
+    <Content Include="Assets\Images\SplashScreenImage1.jpg" />
     <Content Include="Assets\Images\sync.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
