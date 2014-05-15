@@ -1,4 +1,4 @@
-//
+/*//
 //  MasterSecondViewController.h
 //  Anne&DocTique
 //
@@ -16,7 +16,7 @@
     NSMutableSet *Votemoins;
 }
 
-@end
+@end*/
 
 //
 //  MasterViewController.h
@@ -25,12 +25,12 @@
 //  Created by Kapi on 13/04/2014.
 //  Copyright (c) 2014 Kapi. All rights reserved.
 //
-/*
+
 #import <UIKit/UIKit.h>
 
 #import <CoreData/CoreData.h>
 
-@interface MasterViewController : UITableViewController //<NSFetchedResultsControllerDelegate>
+@interface MasterSecondViewController : UITableViewController //<NSFetchedResultsControllerDelegate>
 {
     NSMutableArray *mySources;
     NSMutableArray *adressesSources;
@@ -39,4 +39,4 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
-*/
+

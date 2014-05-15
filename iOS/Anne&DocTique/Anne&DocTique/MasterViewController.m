@@ -12,12 +12,12 @@
 #import "anecdoteCell.h"
 
 #import "Group.h"
-#import "MeetupManager.h"
-#import "MeetupCommunicator.h"
+#import "AnneManager.h"
+#import "AnneCommunicator.h"
 
-@interface MasterViewController () <MeetupManagerDelegate> {
+@interface MasterViewController () <AnneManagerDelegate> {
     NSArray *_groups;
-    MeetupManager *_manager;
+    AnneManager *_manager;
 }
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
@@ -33,15 +33,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    
 
-    self.navigationItem.title = @"Mes sources d'anecdotes";
-    
+    self.navigationItem.title = @"Anecdotes";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    //Toolbar
+
 }
 - (void)didReceiveMemoryWarning
 {
@@ -69,7 +69,7 @@
     }
 }
 
-#Pragma mark - AnecdoteManagerDelegate
+#pragma mark - AnneManagerDelegate
 - (void)didReceiveGroups:(NSArray *)groups
 {
     _groups = groups;
@@ -87,12 +87,12 @@
     anecdoteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];// @"Sources"
     
     Group *group = _groups[indexPath.row];
-    [cell.authorLabel setText:group.author];
-    [cell.dateLabel setText:group.date];
+    [cell.author setText:group.author];
+    [cell.date setText:group.date];
     [cell.descriptionLabel setText:group.description];
-    [cell.voteplusLabel setText:group.voteplus];
-    [cell.votemoinsLabel setText:group.votemoins];
-    [cell.favoriteLabel setText:group.favorite];
+    [cell.voteplus setText:group.voteplus];
+    [cell.votemoins setText:group.votemoins];
+    [cell.favorite setText:group.favorite];
     //[cell.locationLabel setText:[NSString stringWithFormat:@"%@, %@", group.city, group.country]];
     //[cell.descriptionLabel setText:group.description];
     

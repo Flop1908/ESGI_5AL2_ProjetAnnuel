@@ -11,7 +11,7 @@
 @interface Group : NSObject
 @property (strong, nonatomic) NSString *author;
 @property (strong, nonatomic) NSString *description;
-@property (strong, nonatomic) NSString *date;
+@property (strong, nonatomic) NSDateFormatter *date;
 @property (strong, nonatomic) NSString *voteplus;
 @property (strong, nonatomic) NSString *votemoins;
 @property (strong, nonatomic) NSString *favorite;

@@ -10,6 +10,7 @@
 
 @interface anecdoteCell : UITableViewCell
 
+
 @property (weak, nonatomic) IBOutlet UILabel *author;
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;

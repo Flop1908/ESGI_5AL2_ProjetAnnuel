@@ -7,11 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320300A3190E83D100CC7F70 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320300A0190E83D100CC7F70 /* JASidePanelController.m */; };
+		320300A4190E83D100CC7F70 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 320300A2190E83D100CC7F70 /* UIViewController+JASidePanel.m */; };
+		320300B0190E840800CC7F70 /* JAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 320300A7190E840800CC7F70 /* JAAppDelegate.m */; };
+		320300B1190E840800CC7F70 /* JADebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320300A9190E840800CC7F70 /* JADebugViewController.m */; };
+		320300B2190E840800CC7F70 /* JACenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320300AB190E840800CC7F70 /* JACenterViewController.m */; };
+		320300B3190E840800CC7F70 /* JALeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320300AD190E840800CC7F70 /* JALeftViewController.m */; };
+		320300B4190E840800CC7F70 /* JARightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320300AF190E840800CC7F70 /* JARightViewController.m */; };
 		3238352C18FB23900048A9B1 /* anecdoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238352B18FB23900048A9B1 /* anecdoteCell.m */; };
 		3238352F18FB4A740048A9B1 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238352E18FB4A740048A9B1 /* Group.m */; };
 		3238353518FB4D3F0048A9B1 /* GroupBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238353118FB4D3F0048A9B1 /* GroupBuilder.m */; };
 		3238353618FB4D3F0048A9B1 /* AnneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238353418FB4D3F0048A9B1 /* AnneManager.m */; };
 		3238353A18FB4DB00048A9B1 /* AnneCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238353918FB4DB00048A9B1 /* AnneCommunicator.m */; };
+		32CE6CEA1924ACF800799588 /* AnneAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE6CE51924ACF800799588 /* AnneAppDelegate.m */; };
+		32CE6CEB1924ACF800799588 /* AnneMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE6CE71924ACF800799588 /* AnneMenuViewController.m */; };
+		32CE6CEC1924ACF800799588 /* AnneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE6CE91924ACF800799588 /* AnneViewController.m */; };
+		32CE6CF11924B4FC00799588 /* AnneAirViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE6CEE1924B4FC00799588 /* AnneAirViewController.m */; };
+		32CE6CF21924B4FC00799588 /* AnneSessionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE6CF01924B4FC00799588 /* AnneSessionView.m */; };
+		32CE6CF51924B51B00799588 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE6CF41924B51B00799588 /* UIViewAdditions.m */; };
 		32FC63AA18FA29F000A71065 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FC63A918FA29F000A71065 /* Foundation.framework */; };
 		32FC63AC18FA29F000A71065 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FC63AB18FA29F000A71065 /* CoreGraphics.framework */; };
 		32FC63AE18FA29F000A71065 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FC63AD18FA29F000A71065 /* UIKit.framework */; };
@@ -44,6 +57,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3203009F190E83D100CC7F70 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
+		320300A0190E83D100CC7F70 /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
+		320300A1190E83D100CC7F70 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
+		320300A2190E83D100CC7F70 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
+		320300A6190E840800CC7F70 /* JAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAAppDelegate.h; sourceTree = "<group>"; };
+		320300A7190E840800CC7F70 /* JAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAAppDelegate.m; sourceTree = "<group>"; };
+		320300A8190E840800CC7F70 /* JADebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JADebugViewController.h; sourceTree = "<group>"; };
+		320300A9190E840800CC7F70 /* JADebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JADebugViewController.m; sourceTree = "<group>"; };
+		320300AA190E840800CC7F70 /* JACenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JACenterViewController.h; sourceTree = "<group>"; };
+		320300AB190E840800CC7F70 /* JACenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JACenterViewController.m; sourceTree = "<group>"; };
+		320300AC190E840800CC7F70 /* JALeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JALeftViewController.h; sourceTree = "<group>"; };
+		320300AD190E840800CC7F70 /* JALeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JALeftViewController.m; sourceTree = "<group>"; };
+		320300AE190E840800CC7F70 /* JARightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JARightViewController.h; sourceTree = "<group>"; };
+		320300AF190E840800CC7F70 /* JARightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JARightViewController.m; sourceTree = "<group>"; };
 		3238352A18FB23900048A9B1 /* anecdoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = anecdoteCell.h; sourceTree = "<group>"; };
 		3238352B18FB23900048A9B1 /* anecdoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = anecdoteCell.m; sourceTree = "<group>"; };
 		3238352D18FB4A740048A9B1 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
@@ -56,6 +83,18 @@
 		3238353718FB4DB00048A9B1 /* AnneCommunicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneCommunicatorDelegate.h; sourceTree = "<group>"; };
 		3238353818FB4DB00048A9B1 /* AnneCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneCommunicator.h; sourceTree = "<group>"; };
 		3238353918FB4DB00048A9B1 /* AnneCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneCommunicator.m; sourceTree = "<group>"; };
+		32CE6CE41924ACF700799588 /* AnneAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneAppDelegate.h; sourceTree = "<group>"; };
+		32CE6CE51924ACF800799588 /* AnneAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneAppDelegate.m; sourceTree = "<group>"; };
+		32CE6CE61924ACF800799588 /* AnneMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneMenuViewController.h; sourceTree = "<group>"; };
+		32CE6CE71924ACF800799588 /* AnneMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneMenuViewController.m; sourceTree = "<group>"; };
+		32CE6CE81924ACF800799588 /* AnneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneViewController.h; sourceTree = "<group>"; };
+		32CE6CE91924ACF800799588 /* AnneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneViewController.m; sourceTree = "<group>"; };
+		32CE6CED1924B4FC00799588 /* AnneAirViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnneAirViewController.h; path = "../../../../Desktop/Iphone/PHAirViewController-master/Source/AnneAirViewController.h"; sourceTree = "<group>"; };
+		32CE6CEE1924B4FC00799588 /* AnneAirViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnneAirViewController.m; path = "../../../../Desktop/Iphone/PHAirViewController-master/Source/AnneAirViewController.m"; sourceTree = "<group>"; };
+		32CE6CEF1924B4FC00799588 /* AnneSessionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnneSessionView.h; path = "../../../../Desktop/Iphone/PHAirViewController-master/Source/AnneSessionView.h"; sourceTree = "<group>"; };
+		32CE6CF01924B4FC00799588 /* AnneSessionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnneSessionView.m; path = "../../../../Desktop/Iphone/PHAirViewController-master/Source/AnneSessionView.m"; sourceTree = "<group>"; };
+		32CE6CF31924B51B00799588 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
+		32CE6CF41924B51B00799588 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		32FC63A618FA29F000A71065 /* Anne&DocTique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Anne&DocTique.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32FC63A918FA29F000A71065 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32FC63AB18FA29F000A71065 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -109,6 +148,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3203009E190E838500CC7F70 /* SidePanel */ = {
+			isa = PBXGroup;
+			children = (
+				320300A6190E840800CC7F70 /* JAAppDelegate.h */,
+				320300A7190E840800CC7F70 /* JAAppDelegate.m */,
+				320300A8190E840800CC7F70 /* JADebugViewController.h */,
+				320300A9190E840800CC7F70 /* JADebugViewController.m */,
+				320300AA190E840800CC7F70 /* JACenterViewController.h */,
+				320300AB190E840800CC7F70 /* JACenterViewController.m */,
+				320300AC190E840800CC7F70 /* JALeftViewController.h */,
+				320300AD190E840800CC7F70 /* JALeftViewController.m */,
+				320300AE190E840800CC7F70 /* JARightViewController.h */,
+				320300AF190E840800CC7F70 /* JARightViewController.m */,
+				320300A5190E83DD00CC7F70 /* Source */,
+			);
+			name = SidePanel;
+			sourceTree = "<group>";
+		};
+		320300A5190E83DD00CC7F70 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				320300A1190E83D100CC7F70 /* UIViewController+JASidePanel.h */,
+				320300A2190E83D100CC7F70 /* UIViewController+JASidePanel.m */,
+				3203009F190E83D100CC7F70 /* JASidePanelController.h */,
+				320300A0190E83D100CC7F70 /* JASidePanelController.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		32CE6CF61924B52A00799588 /* KnAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				32CE6CF31924B51B00799588 /* UIViewAdditions.h */,
+				32CE6CF41924B51B00799588 /* UIViewAdditions.m */,
+			);
+			name = KnAdditions;
+			sourceTree = "<group>";
+		};
+		32CE6CF71924B53B00799588 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				32CE6CF61924B52A00799588 /* KnAdditions */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		32CE6CF81924B56B00799588 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CE6CED1924B4FC00799588 /* AnneAirViewController.h */,
+				32CE6CEE1924B4FC00799588 /* AnneAirViewController.m */,
+				32CE6CEF1924B4FC00799588 /* AnneSessionView.h */,
+				32CE6CF01924B4FC00799588 /* AnneSessionView.m */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		32CE6CFA1924B59300799588 /* AirMenu */ = {
+			isa = PBXGroup;
+			children = (
+				32CE6CF71924B53B00799588 /* Library */,
+				32CE6CF81924B56B00799588 /* Sources */,
+				32CE6CE41924ACF700799588 /* AnneAppDelegate.h */,
+				32CE6CE51924ACF800799588 /* AnneAppDelegate.m */,
+				32CE6CE61924ACF800799588 /* AnneMenuViewController.h */,
+				32CE6CE71924ACF800799588 /* AnneMenuViewController.m */,
+				32CE6CE81924ACF800799588 /* AnneViewController.h */,
+				32CE6CE91924ACF800799588 /* AnneViewController.m */,
+			);
+			name = AirMenu;
+			sourceTree = "<group>";
+		};
 		32FC639D18FA29F000A71065 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +254,7 @@
 		32FC63B118FA29F000A71065 /* Anne&DocTique */ = {
 			isa = PBXGroup;
 			children = (
+				3203009E190E838500CC7F70 /* SidePanel */,
 				32FC63BA18FA29F000A71065 /* AppDelegate.h */,
 				32FC63BB18FA29F000A71065 /* AppDelegate.m */,
 				32FC63BD18FA29F100A71065 /* Main.storyboard */,
@@ -164,6 +276,7 @@
 				3238353718FB4DB00048A9B1 /* AnneCommunicatorDelegate.h */,
 				3238353818FB4DB00048A9B1 /* AnneCommunicator.h */,
 				3238353918FB4DB00048A9B1 /* AnneCommunicator.m */,
+				32CE6CFA1924B59300799588 /* AirMenu */,
 				32FC63C918FA29F100A71065 /* Images.xcassets */,
 				32FC63C018FA29F100A71065 /* Anne_DocTique.xcdatamodeld */,
 				32FC63B218FA29F000A71065 /* Supporting Files */,
@@ -298,15 +411,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				32FC63E918FAE46F00A71065 /* MasterSecondViewController.m in Sources */,
+				32CE6CEA1924ACF800799588 /* AnneAppDelegate.m in Sources */,
 				3238353A18FB4DB00048A9B1 /* AnneCommunicator.m in Sources */,
+				320300A3190E83D100CC7F70 /* JASidePanelController.m in Sources */,
+				32CE6CEC1924ACF800799588 /* AnneViewController.m in Sources */,
+				320300A4190E83D100CC7F70 /* UIViewController+JASidePanel.m in Sources */,
 				3238353618FB4D3F0048A9B1 /* AnneManager.m in Sources */,
+				320300B0190E840800CC7F70 /* JAAppDelegate.m in Sources */,
 				32FC63C818FA29F100A71065 /* DetailViewController.m in Sources */,
+				32CE6CF21924B4FC00799588 /* AnneSessionView.m in Sources */,
 				32FC63C518FA29F100A71065 /* MasterViewController.m in Sources */,
+				32CE6CEB1924ACF800799588 /* AnneMenuViewController.m in Sources */,
+				32CE6CF11924B4FC00799588 /* AnneAirViewController.m in Sources */,
+				320300B4190E840800CC7F70 /* JARightViewController.m in Sources */,
 				3238353518FB4D3F0048A9B1 /* GroupBuilder.m in Sources */,
+				320300B1190E840800CC7F70 /* JADebugViewController.m in Sources */,
 				3238352C18FB23900048A9B1 /* anecdoteCell.m in Sources */,
 				32FC63C218FA29F100A71065 /* Anne_DocTique.xcdatamodeld in Sources */,
+				320300B3190E840800CC7F70 /* JALeftViewController.m in Sources */,
 				32FC63BC18FA29F000A71065 /* AppDelegate.m in Sources */,
+				32CE6CF51924B51B00799588 /* UIViewAdditions.m in Sources */,
 				32FC63B818FA29F000A71065 /* main.m in Sources */,
+				320300B2190E840800CC7F70 /* JACenterViewController.m in Sources */,
 				3238352F18FB4A740048A9B1 /* Group.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,13 +8,13 @@
 
 #import "MasterSecondViewController.h"
 
-@interface MasterSecondViewController ()
+//@interface MasterSecondViewController ()
 
-@end
+//@end
 
-@implementation MasterSecondViewController
+//@implementation MasterSecondViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -45,7 +45,7 @@
     
    /* UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    */
+ 
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,7 +72,7 @@
     cell.textLabel.text = cellValue;
     return cell;
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -81,9 +81,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end
+ */
 
 //
 //  MasterViewController.m
@@ -93,15 +94,14 @@
 //  Copyright (c) 2014 Kapi. All rights reserved.
 //
 
-#import "MasterViewController.h"
 
 #import "DetailViewController.h"
 
-@interface MasterViewController ()
+@interface MasterSecondViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
-@implementation MasterViewController
+@implementation MasterSecondViewController
 
 - (void)awakeFromNib
 {
@@ -129,10 +129,10 @@
     [adressesSources addObject:@"Mes Favoris"];
     [adressesSources addObject:@"Setting"];
     
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+   // self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+   // self.navigationItem.rightBarButtonItem = addButton;
 }
 - (void)didReceiveMemoryWarning
 {
