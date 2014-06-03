@@ -1,12 +1,13 @@
 //
 //  AnneViewController.m
-//  Anne&DocTique
+//  Demo2
 //
-//  Created by Kapi on 15/05/2014.
+//  Created by Kapi on 23/05/2014.
 //  Copyright (c) 2014 Kapi. All rights reserved.
 //
 
 #import "AnneViewController.h"
+#import "AnneAirViewController.h"
 
 @implementation AnneViewController
 
@@ -14,15 +15,15 @@
 {
     [super viewDidLoad];
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 80, 35);
-    [button setTitle:@"Sources" forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 50, 35);
+    [button setTitle:@"Menu" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(leftButtonTouch) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     typeof(self) bself = self;
-    self.phSwipeHander = ^{
+    self.AnneSwipeHander = ^{
         [bself.airViewController showAirViewFromViewController:bself.navigationController complete:nil];
     };
 }

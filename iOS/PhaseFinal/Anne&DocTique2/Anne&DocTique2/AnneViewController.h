@@ -1,8 +1,8 @@
 //
 //  AnneViewController.h
-//  Anne&DocTique
+//  Demo2
 //
-//  Created by Kapi on 15/05/2014.
+//  Created by Kapi on 23/05/2014.
 //  Copyright (c) 2014 Kapi. All rights reserved.
 //
 

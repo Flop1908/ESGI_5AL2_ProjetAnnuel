@@ -1,24 +1,16 @@
 //
 //  MasterViewController.m
-//  Anne&DocTique
+//  Anne&DocTique2
 //
-//  Created by Kapi on 13/04/2014.
-//  Copyright (c) 2014 Kapi. All rights reserved.
+//  Created by Kapi on 28/05/2014.
+//  Copyright (c) 2014 Lionel. All rights reserved.
 //
 
 #import "MasterViewController.h"
 
 #import "DetailViewController.h"
-#import "anecdoteCell.h"
 
-#import "Group.h"
-#import "AnneManager.h"
-#import "AnneCommunicator.h"
-
-@interface MasterViewController () <AnneManagerDelegate> {
-    NSArray *_groups;
-    AnneManager *_manager;
-}
+@interface MasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
@@ -33,20 +25,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    self.navigationItem.title = @"Anecdotes";
-    //self.navigationItem.leftBarButtonItem = self.edi
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *menuSource = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.leftBarButtonItem = menuSource;
-    
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    
-    //Toolbar
-
+    //Here for the PageControl-------
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -73,41 +58,25 @@
     }
 }
 
-#pragma mark - AnneManagerDelegate
-- (void)didReceiveGroups:(NSArray *)groups
-{
-    _groups = groups;
-    [self.tableView reloadData];
-}
 #pragma mark - Table View
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _groups.count; //[groups count]
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    anecdoteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];// @"Sources"
-    
-    Group *group = _groups[indexPath.row];
-    [cell.author setText:group.author];
-    [cell.date setText:group.date];
-    [cell.descriptionLabel setText:group.description];
-    [cell.voteplus setText:group.voteplus];
-    [cell.votemoins setText:group.votemoins];
-    [cell.favorite setText:group.favorite];
-    //[cell.locationLabel setText:[NSString stringWithFormat:@"%@, %@", group.city, group.country]];
-    //[cell.descriptionLabel setText:group.description];
-    
-    return cell;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[self.fetchedResultsController sections] count];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {

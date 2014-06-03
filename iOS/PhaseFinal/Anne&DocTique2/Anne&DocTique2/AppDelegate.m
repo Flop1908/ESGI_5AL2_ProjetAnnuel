@@ -1,14 +1,18 @@
 //
 //  AppDelegate.m
-//  Anne&DocTique
+//  Anne&DocTique2
 //
-//  Created by Kapi on 13/04/2014.
-//  Copyright (c) 2014 Kapi. All rights reserved.
+//  Created by Kapi on 28/05/2014.
+//  Copyright (c) 2014 Lionel. All rights reserved.
 //
 
 #import "AppDelegate.h"
 
 #import "MasterViewController.h"
+#import "AnneMultiProductViewController.h"
+#import "AnneProduct.h"
+#import "AnneProductCluster.h"
+#import "AnneLogViewController.h"
 
 @implementation AppDelegate
 
@@ -22,22 +26,19 @@
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
+    return YES;
     
-    //self.menuwindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //[application setStatusBarStyle:UIStatusBarStyleLightContent];    //UIStatusBarStyleBlackOpaque];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     
-   /* AnneViewController * viewController = [[AnneViewController alloc] init];
-    UINavigationController * controllerMenu = [[UINavigationController alloc] initWithRootViewController:viewController];
-    viewController.label.text = @"Root view controller";
-    viewController.view.backgroundColor = [UIColor greenColor];
-    /*AnneMenuViewController   * menuController = [[AnneMenuViewController alloc] initWithRootViewController:controller
-                                                                                           atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    self.menuwindow.rootViewController = menuController;
-    [self.menuwindow makeKeyAndVisible];
-    */
+    ///Probleme ICCCCIIIIII
+    AnneLogViewController *controllerAnne = [[AnneLogViewController alloc] initWithNibName:@"AnneDummyViewController" bundle:nil];
+    self.window.rootViewController = controller;
     return YES;
 }
-
+							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -105,7 +106,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Anne_DocTique" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Anne_DocTique2" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -118,7 +119,7 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Anne_DocTique.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Anne_DocTique2.sqlite"];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
