@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3298BB5619524DE200BD0DC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32FDCB8019355C13001C1F75 /* Main.storyboard */; };
 		32FDCB6D19355C13001C1F75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FDCB6C19355C13001C1F75 /* Foundation.framework */; };
 		32FDCB6F19355C13001C1F75 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FDCB6E19355C13001C1F75 /* CoreGraphics.framework */; };
 		32FDCB7119355C13001C1F75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FDCB7019355C13001C1F75 /* UIKit.framework */; };
@@ -14,7 +15,6 @@
 		32FDCB7919355C13001C1F75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32FDCB7719355C13001C1F75 /* InfoPlist.strings */; };
 		32FDCB7B19355C13001C1F75 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FDCB7A19355C13001C1F75 /* main.m */; };
 		32FDCB7F19355C13001C1F75 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FDCB7E19355C13001C1F75 /* AppDelegate.m */; };
-		32FDCB8219355C13001C1F75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32FDCB8019355C13001C1F75 /* Main.storyboard */; };
 		32FDCB8519355C13001C1F75 /* Anne_DocTique2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32FDCB8319355C13001C1F75 /* Anne_DocTique2.xcdatamodeld */; };
 		32FDCB8819355C13001C1F75 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FDCB8719355C13001C1F75 /* MasterViewController.m */; };
 		32FDCB8B19355C13001C1F75 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FDCB8A19355C13001C1F75 /* DetailViewController.m */; };
@@ -364,13 +364,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3298BB5619524DE200BD0DC4 /* Main.storyboard in Resources */,
 				32FDCBE619357A88001C1F75 /* AnneProductClusterHeaderCell.xib in Resources */,
 				32FDCB8D19355C13001C1F75 /* Images.xcassets in Resources */,
 				32FDCBE11935749A001C1F75 /* example.json in Resources */,
 				32FDCBD1193567D1001C1F75 /* AnneLogViewController.xib in Resources */,
 				32FDCB7919355C13001C1F75 /* InfoPlist.strings in Resources */,
 				32FDCBEC19358B5A001C1F75 /* AnneProductViewCell.xib in Resources */,
-				32FDCB8219355C13001C1F75 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,6 +612,7 @@
 				32FDCBA619355C13001C1F75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		32FDCBA719355C13001C1F75 /* Build configuration list for PBXNativeTarget "Anne&DocTique2Tests" */ = {
 			isa = XCConfigurationList;
@@ -620,6 +621,7 @@
 				32FDCBA919355C13001C1F75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
