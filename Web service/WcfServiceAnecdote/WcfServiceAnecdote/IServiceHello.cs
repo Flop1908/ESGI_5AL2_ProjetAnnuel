@@ -19,8 +19,8 @@ namespace WcfServiceAnecdote
 
         [OperationContract]
         [WebGet(UriTemplate = "Test")]
-        [Description("!! Test function : do not use !!")]
-        String Test();
+        [Description("!! Test function : do not use !!!!")]
+        List<AnecdoteVdm> Test();
 
         [OperationContract]
         [WebGet(UriTemplate = "CNF_RetreiveAnecdote/{tri}/{nombreAnecdote}/{pageNumber}", ResponseFormat = WebMessageFormat.Json)]

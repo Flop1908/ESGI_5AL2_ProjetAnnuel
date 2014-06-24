@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Core.Anecdotes;
 using Core.Tools;
 using log4net;
@@ -12,8 +14,7 @@ namespace Core.Sites
 {
     public class DTC
     {
-        private const String DTC_API_URL = @"https://giyomu-dans-ton-chat.p.mashape.com/";
-        private const String DTC_API_KEY = @"NV8awMWbIGImeoTnXTyUa7wV6EtxpMOx";
+        private const String DTC_API_URL = @"http://danstonchat.com/";
 
         public static readonly ILog Log = LogManager.GetLogger(typeof(DTC));
 
@@ -21,27 +22,70 @@ namespace Core.Sites
         {
             log4net.Config.XmlConfigurator.Configure(); 
             Log.Fatal("Test Log");
-            var url = BuildApiUrl(tri, pageNumber, searchWord);
-            var json = RetrieveWebIntel.Dtc(url,DTC_API_KEY);
+            string raw = "";
+            if (tri == "search")
+            {
+                raw = RetrieveWebIntel.DtcSearch(DTC_API_URL, searchWord);
+            }
+            else
+            {
+                var url = BuildApiUrl(tri, pageNumber);
+                raw = RetrieveWebIntel.ContentFromURL(url);
+            }
 
-            return TransformJsonToListAnecdoteDtc(json);
+            return TransformJsonToListAnecdoteDtc(raw);
         }
 
-        private static List<AnecdoteDtc> TransformJsonToListAnecdoteDtc(string json)
+        private static List<AnecdoteDtc> TransformJsonToListAnecdoteDtc(string pageWeb)
         {
-            var deserializeJson = JObject.Parse(json);
-            var rawListAne = (JArray) deserializeJson["quotes"];
+            List<XElement> listeAnecdote = Essential(pageWeb);
+            //var rawListAne = (JArray) listeAnecdote["quotes"];
 
-            List<AnecdoteDtc> listAne = rawListAne.Select(p => new AnecdoteDtc(
+            List<AnecdoteDtc> listAne = listeAnecdote.Select(p => new AnecdoteDtc(
                 AnecdoteDtc.AdaptatorDtc(
-                    (string) p["id"],
-                    (string) p["quote"]))
+                    p.Element("id").Value,
+                    p.Element("quote").Value))
                 ).ToList();
 
             return listAne;
         }
 
-        private static String BuildApiUrl(string tri, int pageNumber, string searchWord)
+        private static List<XElement> Essential(string pageWeb)
+        {
+            //Cleaning
+            pageWeb = pageWeb.Replace("&nbsp", "");
+            pageWeb = pageWeb.Replace("pw:", "");
+            XDocument doc = XDocument.Parse(pageWeb);
+            List<XElement> returnList = doc.Descendants("body").ToList();
+
+            //<div id="contenu">
+            returnList = returnList.Descendants("div")
+               .Where(node => (string)node.Attribute("id") == "contenu")
+               .ToList();
+
+            //<div class="container_12">
+            returnList = returnList.Descendants("class")
+               .Where(node => (string)node.Attribute("id") == "container_12")
+               .ToList();
+
+            //<div id="content" class="grid_8">
+            returnList = returnList.Descendants("class")
+               .Where(node => (string)node.Attribute("id") == "grid_8")
+               .ToList();
+
+            //<div class="item-listing">
+            returnList = returnList.Descendants("div")
+               .Where(node => (string)node.Attribute("class") == "item-listing")
+               .ToList();
+
+            //Selection de tous les div
+            returnList = returnList.Descendants("div").ToList();
+
+            return returnList;
+
+        }
+
+        private static String BuildApiUrl(string tri, int pageNumber)
         {
             //On commence par placer l'URL de base
             var newUrl = new StringBuilder(DTC_API_URL);
@@ -50,22 +94,20 @@ namespace Core.Sites
             {
                 case "browse":
                     newUrl.Append("browse");
-                    newUrl.Append("/" + pageNumber);
+                    newUrl.Append("/" + pageNumber + ".html");
                     break;
                 case "random":
-                    newUrl.Append("random0");
-                    break;
-                case "search":
-                    newUrl.Append("search");
-                    newUrl.Append("/" + searchWord);
-                    newUrl.Append("/" + pageNumber);
+                    newUrl.Append("random0.html");
                     break;
                 case "top":
-                    newUrl.Append("top50");
+                    newUrl.Append("top50.html");
+                    break;
+                case "flop":
+                    newUrl.Append("flop50.html");
                     break;
                 case "last":
                     newUrl.Append("latest");
-                    newUrl.Append("/" + pageNumber);
+                    newUrl.Append("/" + pageNumber + ".html");
                     break;
                 default:
                     Console.WriteLine("Mauvais parametre de tri : " + tri);

@@ -1,0 +1,7 @@
+2014-04-25 15:56:13,114 [9] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log
+2014-04-25 15:57:09,713 [9] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log
+2014-04-25 15:57:52,842 [9] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log
+2014-04-25 16:00:40,467 [9] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log
+2014-04-25 16:32:24,491 [10] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log
+2014-04-25 16:37:15,042 [9] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log
+2014-04-25 16:41:47,414 [9] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log

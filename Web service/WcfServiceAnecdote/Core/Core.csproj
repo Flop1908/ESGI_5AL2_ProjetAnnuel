@@ -62,12 +62,6 @@
     <Compile Include="Tools\RetrieveWebIntel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Unirest\Unirest.csproj">
-      <Project>{D02841F9-4D91-4635-9A68-026F63483366}</Project>
-      <Name>Unirest</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ClassDiagramCore.cd" />
     <None Include="packages.config" />
   </ItemGroup>

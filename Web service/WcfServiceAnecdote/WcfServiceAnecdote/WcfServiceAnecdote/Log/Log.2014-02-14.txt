@@ -1,0 +1,2 @@
+2014-02-14 19:02:14,075 [24] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log
+2014-02-14 19:11:48,395 [18] FATAL [Core.Sites.DTC.RetrieveListAnecdote] - Test Log

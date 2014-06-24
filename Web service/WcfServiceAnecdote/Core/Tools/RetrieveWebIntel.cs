@@ -3,17 +3,16 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
-using unirest_net.http;
 
 namespace Core.Tools
 {
     public static class RetrieveWebIntel
     {
         public static readonly ILog Log = LogManager.GetLogger(typeof(RetrieveWebIntel));
-
-        public static String Cnf(String trouveMoi)
+        /*
+        public static String ContentFromURL(String trouveMoi)
         {
-            String chaineJson = null;
+            String pageContent = null;
 
             //construction de la requete pour isohunt
             var lienUrl = trouveMoi;
@@ -28,7 +27,7 @@ namespace Core.Tools
                 var receiveReq = result.GetResponseStream();
 
                 //on donne le type d'encodage (utf-8)
-                var encode = Encoding.GetEncoding(0);
+                var encode = Encoding.GetEncoding("utf-8");
 
                 //on créer un flux pour lire le flux web
                 if (receiveReq != null)
@@ -36,31 +35,28 @@ namespace Core.Tools
                     var sr = new StreamReader(receiveReq, encode);
 
                     //on place le résultat du flux dans la réponse
-                    chaineJson = sr.ReadToEnd();
+                    pageContent = sr.ReadToEnd();
                 }
             }
             catch (Exception ex)
             {
                 Console.Error.WriteLine(ex.Message);
-
             }
 
-            return chaineJson;
+            return pageContent;
         }
-
-        public static String Dtc(String url, String apiKey)
+        */
+        //public static String Dtc(String url)
+        public static String ContentFromURL(String url)
         {
+            WebClient wc = new WebClient();
+            string response = wc.DownloadString(url);
 
-            HttpResponse<String> response = Unirest.get(url)
-              .header("X-Mashape-Authorization", apiKey)
-              .asString();
-
-            return response.Body;
+            return response;
         }
 
         public static String Vdm(String url, String apiKey)
         {
-            String chaineXML = null;
 
             ///construction de la requete pour l'api VDM
             var lienUrl = new StringBuilder(url);
@@ -69,34 +65,12 @@ namespace Core.Tools
             //Ajout de la clé
             lienUrl.Append("&key=" + apiKey);
 
-            try
-            {
-                //lancement de la requete
-                var req = WebRequest.Create(lienUrl.ToString());
-                var result = req.GetResponse();
+            return ContentFromURL(lienUrl.ToString());
+        }
 
-                //flux pour lire la réponse web
-                var receiveReq = result.GetResponseStream();
-
-                //on donne le type d'encodage (utf-8)
-                var encode = Encoding.GetEncoding(65001);
-
-                //on créer un flux pour lire le flux web
-                if (receiveReq != null)
-                {
-                    var sr = new StreamReader(receiveReq, encode);
-
-                    //on place le résultat du flux dans la réponse
-                    chaineXML = sr.ReadToEnd();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine(ex.Message);
-
-            }
-
-            return chaineXML;
+        internal static string DtcSearch(string DTC_API_URL, string searchWord)
+        {
+            throw new NotImplementedException();
         }
     }
 }

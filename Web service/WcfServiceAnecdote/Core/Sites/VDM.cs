@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using Core.Anecdotes;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
+using Core.Anecdotes;
 using Core.Tools;
 using log4net;
-using System.Xml.Linq;
+using log4net.Config;
 
 namespace Core.Sites
 {
@@ -13,26 +14,34 @@ namespace Core.Sites
         private const string VDM_API_URL = @"http://api.fmylife.com/view/";
         private const String VDM_API_KEY = @"53316740a4787";
 
-        public static readonly ILog Log = LogManager.GetLogger(typeof(VDM));
+        public static readonly ILog Log = LogManager.GetLogger(typeof (VDM));
 
-        public static List<AnecdoteVdm> RetrieveListAnecdote(string tri = "last", int pageNumber = 1, string searchWord = null)
+        public static List<AnecdoteVdm> RetrieveListAnecdote(string tri = "last", int pageNumber = 1,
+            string searchWord = null)
         {
-            log4net.Config.XmlConfigurator.Configure();
-            Log.Fatal("Test Log");
-            var url = BuildApiUrl(tri, pageNumber, searchWord);
-            var xml = RetrieveWebIntel.Vdm(url, VDM_API_KEY);
+            try
+            {
+                XmlConfigurator.Configure();
+                Log.Fatal("Test Log");
+                string url = BuildApiUrl(tri, pageNumber, searchWord);
+                string xml = RetrieveWebIntel.Vdm(url, VDM_API_KEY);
 
-            return TransformXmlToListAnecdoteVdm(xml);
+                return TransformXmlToListAnecdoteVdm(xml);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private static List<AnecdoteVdm> TransformXmlToListAnecdoteVdm(string xml)
         {
-            var root = XDocument.Parse(xml);
-            var listeRawAnecdotes = root.Descendants("items").Descendants("item");
+            XDocument root = XDocument.Parse(xml);
+            IEnumerable<XElement> listeRawAnecdotes = root.Descendants("items").Descendants("item");
             var listeAne = new List<AnecdoteVdm>();
-            List<string> listTest = new List<string>();
+            var listTest = new List<string>();
 
-            foreach (var item in listeRawAnecdotes)
+            foreach (XElement item in listeRawAnecdotes)
             {
                 listeAne.Add(new AnecdoteVdm(
                     item.Attribute("id").Value,
@@ -45,6 +54,7 @@ namespace Core.Sites
 
             return listeAne;
         }
+
         private static String BuildApiUrl(string tri, int pageNumber, string searchWord)
         {
             //On commence par placer l'URL de base
