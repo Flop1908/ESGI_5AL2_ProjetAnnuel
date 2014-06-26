@@ -9,8 +9,8 @@
 #import "AnneMenuViewController.h"
 #import "MasterViewController.h"
 //#import "AnneLogViewController.h"
-//#import "AnneMultiProductViewController.h"
-//#import "AnneProductCluster.h"
+#import "AnneMultiProductViewController.h"
+#import "AnneProductCluster.h"
 
 @implementation AnneMenuViewController
 
@@ -24,7 +24,7 @@
 //Numbre of Session
 - (NSInteger)numberOfSession
 {
-    return 2;
+    return 1;
 }
 //Number Of Title In AirMenu
 - (NSInteger)numberOfRowsInSession:(NSInteger)sesion
@@ -44,7 +44,6 @@
             break;
             
         case 2:
-            
             return [NSString stringWithFormat:@"DTC"];
             break;
             
@@ -65,7 +64,7 @@
 //Title of HeaderView
 - (NSString*)titleForHeaderAtSession:(NSInteger)session
 {
-    return [NSString stringWithFormat:@"Source d'Anne&DocTique"];
+    return [NSString stringWithFormat:@"Types:"];
 }
 //viewController for Each Title
 - (UIViewController*)viewControllerForIndexPath:(NSIndexPath*)indexPath
@@ -178,16 +177,18 @@
         case 1:
             viewController.view.backgroundColor = [UIColor blueColor];//VDM
             url = [[NSBundle mainBundle] URLForResource:@"exampleVDM" withExtension:@"json"];
+            //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/VDM_RetreiveAnecdote/%d/1", entry.section] toURL];
             
             break;
         case 2:
             viewController.view.backgroundColor = [UIColor greenColor];//DTC
             url = [[NSBundle mainBundle] URLForResource:@"exampleDTC" withExtension:@"json"];
-            
+            //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/DTC_RetreiveAnecdote/%d/1", entry.section] toURL];
             break;
         case 3:
             viewController.view.backgroundColor = [UIColor brownColor];//CNF
             url = [[NSBundle mainBundle] URLForResource:@"exampleCNF" withExtension:@"json"];
+            //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/CNF_RetreiveAnecdote/%d/1", entry.section] toURL];
             
             break;
         case 4:
@@ -198,12 +199,12 @@
     if (jsonData) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
         if (dict) {
-            /*NSArray *specs = dict[@"productSpecs"];
+            NSArray *specs = dict[@"productSpecs"];
             NSArray *productClusters = [AnneProductCluster productClustersFromSpecs:specs];
             [AnneMultiProductViewController runWithTitle:@"Other Apps"
                                          productClusters:productClusters
                                                 delegate:self];
-            NSLog(@"Json's process was finished");*/
+            NSLog(@"Json's process was finished");
         }
         else{
             NSLog(@"dictionary was in trouble");

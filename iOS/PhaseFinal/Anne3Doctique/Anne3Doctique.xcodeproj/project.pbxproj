@@ -22,11 +22,13 @@
 		3298BB851952516900BD0DC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3298BB691952516800BD0DC4 /* CoreData.framework */; };
 		3298BB8D1952516900BD0DC4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3298BB8B1952516900BD0DC4 /* InfoPlist.strings */; };
 		3298BB8F1952516900BD0DC4 /* Anne3DoctiqueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298BB8E1952516900BD0DC4 /* Anne3DoctiqueTests.m */; };
-		3298BB9C1952540D00BD0DC4 /* AnneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298BB991952540D00BD0DC4 /* AnneViewController.m */; };
+		3298BB9C1952540D00BD0DC4 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298BB991952540D00BD0DC4 /* MasterViewController.m */; };
 		3298BB9D1952540D00BD0DC4 /* AnneMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298BB9B1952540D00BD0DC4 /* AnneMenuViewController.m */; };
 		3298BBA21952541F00BD0DC4 /* AnneAirViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298BB9F1952541F00BD0DC4 /* AnneAirViewController.m */; };
 		3298BBA31952541F00BD0DC4 /* AnneSessionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298BBA11952541F00BD0DC4 /* AnneSessionView.m */; };
 		3298BBA71952546500BD0DC4 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298BBA61952546500BD0DC4 /* UIViewAdditions.m */; };
+		3298BBAE19531DF200BD0DC4 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298BBAD19531DF200BD0DC4 /* DetailViewController.m */; };
+		3298BBB019550D5A00BD0DC4 /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3298BBAF19550D5A00BD0DC4 /* main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +60,8 @@
 		3298BB8A1952516900BD0DC4 /* Anne3DoctiqueTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Anne3DoctiqueTests-Info.plist"; sourceTree = "<group>"; };
 		3298BB8C1952516900BD0DC4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3298BB8E1952516900BD0DC4 /* Anne3DoctiqueTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Anne3DoctiqueTests.m; sourceTree = "<group>"; };
-		3298BB981952540D00BD0DC4 /* AnneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneViewController.h; sourceTree = "<group>"; };
-		3298BB991952540D00BD0DC4 /* AnneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneViewController.m; sourceTree = "<group>"; };
+		3298BB981952540D00BD0DC4 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		3298BB991952540D00BD0DC4 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		3298BB9A1952540D00BD0DC4 /* AnneMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneMenuViewController.h; sourceTree = "<group>"; };
 		3298BB9B1952540D00BD0DC4 /* AnneMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneMenuViewController.m; sourceTree = "<group>"; };
 		3298BB9E1952541F00BD0DC4 /* AnneAirViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneAirViewController.h; sourceTree = "<group>"; };
@@ -68,6 +70,9 @@
 		3298BBA11952541F00BD0DC4 /* AnneSessionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneSessionView.m; sourceTree = "<group>"; };
 		3298BBA51952546500BD0DC4 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		3298BBA61952546500BD0DC4 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
+		3298BBAC19531DF200BD0DC4 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		3298BBAD19531DF200BD0DC4 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		3298BBAF19550D5A00BD0DC4 /* main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,13 +138,14 @@
 				3298BBA41952544600BD0DC4 /* Source */,
 				3298BB741952516800BD0DC4 /* AnneAppDelegate.h */,
 				3298BB751952516800BD0DC4 /* AnneAppDelegate.m */,
-				3298BB981952540D00BD0DC4 /* AnneViewController.h */,
-				3298BB991952540D00BD0DC4 /* AnneViewController.m */,
+				3298BB981952540D00BD0DC4 /* MasterViewController.h */,
+				3298BB991952540D00BD0DC4 /* MasterViewController.m */,
 				3298BB9A1952540D00BD0DC4 /* AnneMenuViewController.h */,
 				3298BB9B1952540D00BD0DC4 /* AnneMenuViewController.m */,
 				3298BBA81952546C00BD0DC4 /* Library */,
 				3298BB7A1952516800BD0DC4 /* Images.xcassets */,
 				3298BB771952516800BD0DC4 /* Anne3Doctique.xcdatamodeld */,
+				3298BBAF19550D5A00BD0DC4 /* main.storyboard */,
 				3298BB6C1952516800BD0DC4 /* Supporting Files */,
 			);
 			path = Anne3Doctique;
@@ -181,6 +187,8 @@
 				3298BB9F1952541F00BD0DC4 /* AnneAirViewController.m */,
 				3298BBA01952541F00BD0DC4 /* AnneSessionView.h */,
 				3298BBA11952541F00BD0DC4 /* AnneSessionView.m */,
+				3298BBAC19531DF200BD0DC4 /* DetailViewController.h */,
+				3298BBAD19531DF200BD0DC4 /* DetailViewController.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -278,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3298BB701952516800BD0DC4 /* InfoPlist.strings in Resources */,
+				3298BBB019550D5A00BD0DC4 /* main.storyboard in Resources */,
 				3298BB7B1952516800BD0DC4 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,8 +306,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3298BB9C1952540D00BD0DC4 /* AnneViewController.m in Sources */,
+				3298BB9C1952540D00BD0DC4 /* MasterViewController.m in Sources */,
 				3298BBA21952541F00BD0DC4 /* AnneAirViewController.m in Sources */,
+				3298BBAE19531DF200BD0DC4 /* DetailViewController.m in Sources */,
 				3298BB761952516800BD0DC4 /* AnneAppDelegate.m in Sources */,
 				3298BB721952516800BD0DC4 /* main.m in Sources */,
 				3298BBA71952546500BD0DC4 /* UIViewAdditions.m in Sources */,

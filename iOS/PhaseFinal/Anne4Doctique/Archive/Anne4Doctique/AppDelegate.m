@@ -1,17 +1,16 @@
 //
 //  AppDelegate.m
-//  Anne3Doctique
+//  Anne4Doctique
 //
-//  Created by Kapi on 19/06/2014.
+//  Created by Kapi on 21/06/2014.
 //  Copyright (c) 2014 Lionel. All rights reserved.
 //
 
-#import "AnneAppDelegate.h"
+#import "AppDelegate.h"
 #import "AnneMenuViewController.h"
 #import "MasterViewController.h"
 
-
-@implementation AnneAppDelegate
+@implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -19,34 +18,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Override point for customization after application launch.
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
+    controller.managedObjectContext = self.managedObjectContext;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [application setStatusBarStyle:UIStatusBarStyleLightContent];//UIStatusBarStyleBlackOpaque
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
-    //AnneViewController * viewController = [[AnneViewController alloc] init];
-    MasterViewController * viewController = [[MasterViewController alloc] init];
-    UINavigationController * controller = [[UINavigationController alloc] initWithRootViewController:viewController];
+    //MasterViewController * viewController = [[MasterViewController alloc] init];
+    UINavigationController * NaviController = [[UINavigationController alloc] initWithRootViewController:controller];
     //viewController.label.text = @"Root view controller";
-    viewController.view.backgroundColor = [UIColor greenColor];
-    AnneMenuViewController   * menuController = [[AnneMenuViewController alloc] initWithRootViewController:controller
+    //viewController.view.backgroundColor = [UIColor greenColor];
+    AnneMenuViewController   * menuController = [[AnneMenuViewController alloc] initWithRootViewController:NaviController
                                                                                                atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     
     self.window.rootViewController = menuController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
-
-
-
-/*
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES;
-}*/
-
+							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -114,7 +105,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Anne3Doctique" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Anne4Doctique" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -127,7 +118,7 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Anne3Doctique.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Anne4Doctique.sqlite"];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
