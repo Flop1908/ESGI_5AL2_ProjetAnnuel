@@ -14,37 +14,37 @@ namespace WcfServiceAnecdote
 
         [OperationContract]
         [WebGet(UriTemplate = "SayHello/{who}")]
-        [Description("To say hello to the web service")]
+        [Description("To say hello to the web service BOUM")]
         String SayHello(String who);
 
         [OperationContract]
         [WebGet(UriTemplate = "Test")]
-        [Description("!! Test function : do not use !!!!")]
-        List<AnecdoteVdm> Test();
+        [Description("!! Test function : do not use !! V6")]
+        AnecdoteVdm[] Test();
 
         [OperationContract]
-        [WebGet(UriTemplate = "CNF_RetreiveAnecdote/{tri}/{nombreAnecdote}/{pageNumber}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "CNF_RetreiveAnecdote/{tri}/{pageNumber}")]
         [Description("To retreive quotes from chuck norris fact")]
-        List<AnecdoteCnf> CNF_RetreiveAnecdote(String tri, String nombreAnecdote, String pageNumber);
+        AnecdoteCnf[] CNF_RetreiveAnecdote(String tri, String pageNumber);
 
         [OperationContract]
-        [WebGet(UriTemplate = "DTC_RetreiveAnecdote/{tri}/{pageNumber}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "DTC_RetreiveAnecdote/{tri}/{pageNumber}")]
         [Description("To retreive quotes from Dans Ton Chat")]
-        List<AnecdoteDtc> DTC_RetreiveAnecdote(String tri, String pageNumber);
+        AnecdoteDtc[] DTC_RetreiveAnecdote(String tri, String pageNumber);
 
         [OperationContract]
-        [WebGet(UriTemplate = "DTC_SearchAnecdote/{tri}/{pageNumber}/{searchWord}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "DTC_SearchAnecdote/{tri}/{pageNumber}/{searchWord}")]
         [Description("To search quotes from DTC with a word")]
-        List<AnecdoteDtc> DTC_SearchAnecdote(String tri, String pageNumber, String searchWord);
+        AnecdoteDtc[] DTC_SearchAnecdote(String tri, String pageNumber, String searchWord);
 
         [OperationContract]
-        [WebGet(UriTemplate = "VDM_RetreiveAnecdote/{tri}/{pageNumber}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "VDM_RetreiveAnecdote/{tri}/{pageNumber}")]
         [Description("To retreive quotes from Vie De Merde")]
-        List<AnecdoteVdm> VDM_RetreiveAnecdote(String tri, String pageNumber);
+        AnecdoteVdm[] VDM_RetreiveAnecdote(String tri, String pageNumber);
 
         [OperationContract]
-        [WebGet(UriTemplate = "VDM_SearchAnecdote/{tri}/{pageNumber}/{searchWord}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "VDM_SearchAnecdote/{tri}/{pageNumber}/{searchWord}")]
         [Description("To search quotes from VDM with a word")]
-        List<AnecdoteVdm> VDM_SearchAnecdote(String tri, String pageNumber, String searchWord);
+        AnecdoteVdm[] VDM_SearchAnecdote(String tri, String pageNumber, String searchWord);
     }
 }

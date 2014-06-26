@@ -49,23 +49,16 @@ namespace Core.Tools
         //public static String Dtc(String url)
         public static String ContentFromURL(String url)
         {
+            
             WebClient wc = new WebClient();
-            string response = wc.DownloadString(url);
+            //string response = wc.DownloadString(url);
+
+            Byte[] pageData = wc.DownloadData(url);
+            string response = Encoding.UTF8.GetString(pageData);
+
+            //response = ToolBox.Transcoding(response, Encoding.ASCII, Encoding.UTF8);
 
             return response;
-        }
-
-        public static String Vdm(String url, String apiKey)
-        {
-
-            ///construction de la requete pour l'api VDM
-            var lienUrl = new StringBuilder(url);
-            //Ajout de la langue            
-            lienUrl.Append("&language=fr");
-            //Ajout de la clé
-            lienUrl.Append("&key=" + apiKey);
-
-            return ContentFromURL(lienUrl.ToString());
         }
 
         internal static string DtcSearch(string DTC_API_URL, string searchWord)

@@ -12,6 +12,8 @@
     <AssemblyName>Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -48,24 +54,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Anecdotes\Anecdote_CNF.cs" />
-    <Compile Include="Anecdotes\Anecdote_DTC.cs" />
-    <Compile Include="Anecdotes\Anecdote_VDM.cs" />
+    <Compile Include="Anecdotes\AnecdoteCnf.cs" />
+    <Compile Include="Anecdotes\AnecdoteDtc.cs" />
+    <Compile Include="Anecdotes\AnecdoteVdm.cs" />
     <Compile Include="Comments\Comment_CNF.cs" />
     <Compile Include="Comments\Comment_DTC.cs" />
     <Compile Include="Comments\Comment_VDM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sites\CNF.cs" />
-    <Compile Include="Sites\DTC.cs" />
-    <Compile Include="Sites\VDM.cs" />
+    <Compile Include="Sites\UrlBuilderCNF.cs" />
+    <Compile Include="Sites\UrlBuilderDTC.cs" />
+    <Compile Include="Sites\UrlBuilderVDM.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="Tools\RetrieveWebIntel.cs" />
+    <Compile Include="Tools\ToolBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagramCore.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Activez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est le suivant : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

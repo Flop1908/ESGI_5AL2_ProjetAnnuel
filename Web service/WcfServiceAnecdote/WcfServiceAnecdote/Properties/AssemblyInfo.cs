@@ -15,10 +15,6 @@ using log4net.Config;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-
-// Pour les logs
-[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Web.config", Watch = true)]
-
 // L'affectation de la valeur false à ComVisible rend les types invisibles dans cet assembly 
 // aux composants COM. Si vous devez accéder à un type dans cet assembly à partir de 
 // COM, affectez la valeur true à l'attribut ComVisible sur ce type.
@@ -26,6 +22,9 @@ using log4net.Config;
 
 // Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
 [assembly: Guid("2569d5e1-0786-4547-b93c-88823080a04f")]
+
+//Pour les logs
+//[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Web.config", Watch = true)]
 
 // Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //
