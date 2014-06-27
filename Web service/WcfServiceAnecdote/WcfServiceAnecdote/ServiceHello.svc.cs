@@ -11,6 +11,7 @@ using Core.Sites;
 using log4net;
 using System.ServiceModel;
 using Newtonsoft.Json;
+using Core.Comments;
 
 
 namespace WcfServiceAnecdote
@@ -38,9 +39,6 @@ namespace WcfServiceAnecdote
              */
             //return JsonConvert.SerializeObject(VDM.RetrieveListAnecdote("last", 1));
             return Core.Tools.RetrieveWebIntel.ContentFromURL(@"http://api.fmylife.com/view/last/?language=fr&key=53316740a4787");
-
-
-
         }
 
         public AnecdoteVdm[] Test()
@@ -85,6 +83,11 @@ namespace WcfServiceAnecdote
         {
             Log.Info("Web Service | Consommation de VDM_SearchAnecdote");//
             return UrlBuilderVDM.RetrieveListAnecdote(tri.ToLower(), int.Parse(pageNumber), searchWord);
+        }
+
+        public CommentVdm[] VDM_RetreiveComment(String idAnecdote)
+        {
+            return UrlBuilderVDM.RetreiveComment(idAnecdote);
         }
 
     }

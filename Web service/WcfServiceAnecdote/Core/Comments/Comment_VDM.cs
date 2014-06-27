@@ -10,11 +10,24 @@ namespace Core.Comments
         public static readonly ILog Log = LogManager.GetLogger(typeof(CommentVdm));
 
         [DataMember]
-        String Autor { get; set; }
+        int Id { get; set; }
         [DataMember]
-        String Content { get; set; }
+        String Author { get; set; }
         [DataMember]
-        int Score { get; set; }
+        DateTime Date { get; set; }
+        [DataMember]
+        String Text { get; set; }
+        [DataMember]
+        int Thumbs { get; set; }
+        
+        public CommentVdm(System.Xml.Linq.XElement item)
+        {
+            Id = int.Parse(item.Attribute("id").Value);
+            Author = item.Element("author").Value;
+            Text = item.Element("text").Value;
+            Date = DateTime.Parse(item.Element("date").Value);
+            Thumbs = int.Parse(item.Element("thumbs").Value);
+        }
 
     }
 }

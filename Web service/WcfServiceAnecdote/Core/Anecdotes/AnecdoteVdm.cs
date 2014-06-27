@@ -10,6 +10,7 @@ namespace Core.Anecdotes
     {
         [DataMember]
         public String Type = "VDM";
+        private System.Xml.Linq.XElement item;
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -68,6 +69,17 @@ namespace Core.Anecdotes
             Agree = int.Parse(newJeValide);
             Deserved = int.Parse(newBienMerite);
             NbComments = int.Parse(newNbComments);
+        }
+
+        public AnecdoteVdm(System.Xml.Linq.XElement item)
+        {
+            Id = int.Parse(item.Attribute("id").Value);
+            Author = item.Element("author").Value;
+            Text = item.Element("text").Value;
+            Date = DateTime.Parse(item.Element("date").Value);
+            Agree = int.Parse(item.Element("agree").Value);
+            Deserved = int.Parse(item.Element("deserved").Value);
+            NbComments = int.Parse(item.Element("comments").Value);
         }
     }
 }

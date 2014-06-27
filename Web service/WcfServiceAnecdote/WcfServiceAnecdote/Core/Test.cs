@@ -1,8 +1,0 @@
-﻿namespace Core
-{
-    class Test
-    {
-
-
-    }
-}
