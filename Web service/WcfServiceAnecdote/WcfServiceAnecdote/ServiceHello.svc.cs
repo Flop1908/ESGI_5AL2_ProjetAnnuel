@@ -64,7 +64,6 @@ namespace WcfServiceAnecdote
         {
             Log.Info("Web Service | Consommation de DTC_RetreiveAnecdote");
             return UrlBuilderDTC.RetrieveListAnecdote(tri.ToLower(), int.Parse(pageNumber));
-
         }
 
         public AnecdoteDtc[] DTC_SearchAnecdote(String tri, String pageNumber, String searchWord)
@@ -79,14 +78,15 @@ namespace WcfServiceAnecdote
             return UrlBuilderVDM.RetrieveListAnecdote(tri.ToLower(), int.Parse(pageNumber));
         }
 
-        public AnecdoteVdm[] VDM_SearchAnecdote(String tri, String pageNumber, String searchWord)
+        public AnecdoteVdm[] VDM_SearchAnecdote(String pageNumber, String searchWord)
         {
-            Log.Info("Web Service | Consommation de VDM_SearchAnecdote");//
-            return UrlBuilderVDM.RetrieveListAnecdote(tri.ToLower(), int.Parse(pageNumber), searchWord);
+            Log.Info("Web Service | Consommation de VDM_SearchAnecdote");
+            return UrlBuilderVDM.RetrieveListAnecdote("search", int.Parse(pageNumber), searchWord);
         }
 
         public CommentVdm[] VDM_RetreiveComment(String idAnecdote)
         {
+            Log.Info("Web Service | Consommation de VDM_RetreiveComment");
             return UrlBuilderVDM.RetreiveComment(idAnecdote);
         }
 

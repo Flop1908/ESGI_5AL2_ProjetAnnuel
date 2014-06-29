@@ -44,9 +44,9 @@ namespace WcfServiceAnecdote
         AnecdoteVdm[] VDM_RetreiveAnecdote(String tri, String pageNumber);
 
         [OperationContract]
-        [WebGet(UriTemplate = "VDM_SearchAnecdote/{tri}/{pageNumber}/{searchWord}")]
+        [WebGet(UriTemplate = "VDM_SearchAnecdote/{pageNumber}/{searchWord}")]
         [Description("To search quotes from VDM with a word")]
-        AnecdoteVdm[] VDM_SearchAnecdote(String tri, String pageNumber, String searchWord);
+        AnecdoteVdm[] VDM_SearchAnecdote(String pageNumber, String searchWord);
 
         [OperationContract]
         [WebGet(UriTemplate = "VDM_RetreiveComment/{idAnecdote}")]

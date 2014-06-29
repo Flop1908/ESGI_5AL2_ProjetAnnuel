@@ -1,1 +1,0 @@
-2014-05-15 10:29:18,727 [12] FATAL [Core.Sites.VDM.RetrieveListAnecdote] - Test Log

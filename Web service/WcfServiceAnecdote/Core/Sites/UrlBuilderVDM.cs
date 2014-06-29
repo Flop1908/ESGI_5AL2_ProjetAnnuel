@@ -72,7 +72,7 @@ namespace Core.Sites
                     break;
                 case "random":
                     newUrl.Append("random");
-                    newUrl.Append("/" + pageNumber);
+                    newUrl.Append("/15");
                     break;
                 case "top":
                     newUrl.Append("top");

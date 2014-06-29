@@ -57,9 +57,9 @@
     <Compile Include="Anecdotes\AnecdoteCnf.cs" />
     <Compile Include="Anecdotes\AnecdoteDtc.cs" />
     <Compile Include="Anecdotes\AnecdoteVdm.cs" />
-    <Compile Include="Comments\Comment_CNF.cs" />
-    <Compile Include="Comments\Comment_DTC.cs" />
-    <Compile Include="Comments\Comment_VDM.cs" />
+    <Compile Include="Comments\CommentCnf.cs" />
+    <Compile Include="Comments\CommentDtc.cs" />
+    <Compile Include="Comments\CommentVdm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sites\UrlBuilderCNF.cs" />
     <Compile Include="Sites\UrlBuilderDTC.cs" />
