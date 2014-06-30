@@ -10,7 +10,6 @@ namespace Core.Anecdotes
     {
         [DataMember]
         public String Type = "VDM";
-        private System.Xml.Linq.XElement item;
         [DataMember]
         public int Id { get; set; }
         [DataMember]

@@ -31,14 +31,14 @@ namespace WcfServiceAnecdote
         {
             Log.Info("Web Service | Consommation de SayHello avec parametres who : " + who);
 
-            var stream = File.Create(@"E:\web\ralfesgi\app6\Log\testfile.txt");
-            return (stream != null && stream.CanWrite).ToString();
-            /*
+            //var stream = File.Create(@"E:\web\ralfesgi\app6\Log\testfile.txt");
+            //return (stream != null && stream.CanWrite).ToString();
+            
             Log.Debug(who + " call the SayHello");
             return "Hello " + who + " from web service :)";
-             */
+            
             //return JsonConvert.SerializeObject(VDM.RetrieveListAnecdote("last", 1));
-            return Core.Tools.RetrieveWebIntel.ContentFromURL(@"http://api.fmylife.com/view/last/?language=fr&key=53316740a4787");
+            //return Core.Tools.RetrieveWebIntel.ContentFromURL(@"http://api.fmylife.com/view/last/?language=fr&key=53316740a4787");
         }
 
         public AnecdoteVdm[] Test()

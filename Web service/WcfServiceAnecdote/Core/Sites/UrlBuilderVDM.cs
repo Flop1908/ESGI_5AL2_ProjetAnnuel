@@ -68,7 +68,7 @@ namespace Core.Sites
             {
                 case "last":
                     newUrl.Append("last");
-                    newUrl.Append("/" + pageNumber + 1);
+                    newUrl.Append("/" + (pageNumber - 1));
                     break;
                 case "random":
                     newUrl.Append("random");
@@ -76,11 +76,11 @@ namespace Core.Sites
                     break;
                 case "top":
                     newUrl.Append("top");
-                    newUrl.Append("/" + pageNumber + 1);
+                    newUrl.Append("/" + (pageNumber - 1));
                     break;
                 case "flop":
                     newUrl.Append("flop");
-                    newUrl.Append("/" + pageNumber + 1);
+                    newUrl.Append("/" + (pageNumber - 1));
                     break;
                 case "search":
                     newUrl.Append("search?search=" + searchWord);
