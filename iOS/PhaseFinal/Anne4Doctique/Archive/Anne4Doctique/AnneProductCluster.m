@@ -21,8 +21,8 @@
 + (NSArray *)productClustersFromSpecs:(NSArray *)specs {
     NSMutableArray *clusters = [NSMutableArray arrayWithCapacity:[specs count]];
     for (NSDictionary *spec in specs) {
-        NSString *title = spec[@"title"];
-        NSArray *productSpecs = spec[@"products"];
+        NSString *title = spec[@"type"];
+        NSArray *productSpecs = spec[@"anecdotes"];
         AnneProductCluster *cluster = [self productClusterWithTitle:title
                                                           products:[AnneProduct productsWithArray:productSpecs]];
         [clusters addObject:cluster];

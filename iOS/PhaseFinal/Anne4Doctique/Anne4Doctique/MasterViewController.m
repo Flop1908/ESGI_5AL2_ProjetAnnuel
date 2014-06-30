@@ -9,6 +9,8 @@
 #import "MasterViewController.h"
 #import "AnneAirViewController.h"
 #import "DetailViewController.h"
+#import "VDMEntry.h"
+#import "VDMEntryCell.h"
 
 @interface MasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -95,24 +97,7 @@
                       constrainedToSize:CGSizeMake(tableView.width, 250)
                           lineBreakMode:UILineBreakModeWordWrap].height + 30;
 }
- */
-#pragma mark UITableViewDelegate
--(void) tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
-	VDMReadEntryController *c = [[VDMReadEntryController alloc] init];
-	c.entry = [entries objectAtIndex:indexPath.row];
-	[self.navigationController pushViewController:c animated:YES];
-	SafeRelease(c);
-}
-
--(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	VDMEntry *entry = [entries objectAtIndex:indexPath.row];
-	return [entry.contents sizeWithFont:[UIFont systemFontOfSize:16]
-                      constrainedToSize:CGSizeMake(tableView.width, 250)
-                          lineBreakMode:UILineBreakModeWordWrap].height + 30;
-}
-
+*/
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -124,6 +109,7 @@
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
     return [sectionInfo numberOfObjects];
+    //return entries.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,14 +117,54 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+    
+    /*
+     static NSString *CellId = @"CellId";
+     
+     VDMEntryCell *cell = (VDMEntryCell *)[tableView dequeueReusableCellWithIdentifier:CellId];
+     
+     if (!cell) {
+     cell = LoadViewNib(@"VDMEntryCell");
+     cell.textView.font = [UIFont fontWithName:@"Verdana" size:12];
+     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+     }
+     
+     VDMEntry *entry = [entries objectAtIndex:indexPath.row];
+     //cell.entry = entry;
+     cell.textView.text = entry.contents;
+     //[cell setDeserveCount:entry.deserveCount];
+     //[cell setLifeSucksCount:entry.agreeCount];
+     
+     if ((float)indexPath.row / (float)entries.count >= 0.8 && !loadingExtra && !isFirstLoad) {
+     loadingExtra = YES;
+     currentPage++;
+     
+     if (currentEntryType == VDMEntryTypeRecent) {
+     [self fetchEntriesXML:RECENTS_VDMS_PATH];
+     }
+     else if (currentEntryType == VDMEntryTypeVDM) {
+     [self fetchEntriesXML:RANDOM_VDMS_PATH];
+     }
+     else if (currentEntryType == VDMEntryTypeDTC) {
+     [self fetchEntriesXML:RANDOM_VDMS_PATH];
+     }
+     else if (currentEntryType == VDMEntryTypeCNF) {
+     [self fetchEntriesXML:CATEGORY_VDMS_PATH];
+     }
+     }
+     
+     return cell;
+     */
 }
 
+//Useless
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return NO;
 }
 
+//Don't useful
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -160,14 +186,18 @@
     // The table view should not be re-orderable.
     return NO;
 }
+#pragma mark -
+#pragma mark UITableViewDataSource
+
+//////////////////////
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+    /*if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [[segue destinationViewController] setDetailItem:object];
-    }
+    }*/
 }
 
 #pragma mark - Fetched results controller
@@ -208,7 +238,7 @@
     
     return _fetchedResultsController;
 }    
-
+/*
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView beginUpdates];
@@ -228,7 +258,7 @@
     }
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+/*- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {

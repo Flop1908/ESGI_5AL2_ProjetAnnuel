@@ -17,11 +17,21 @@ typedef enum {
 	AnneEntryTypeDTC
 } AnneEntryType;
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>{
+@interface MasterViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,NSFetchedResultsControllerDelegate>{
 NSMutableArray *entries;
- 
+//AnneFetcher *vdmFetcher;
+//WEPopoverController *categoriesPopover;
+int currentPage;
+NSString *currentCategory;
+BOOL loadingExtra;
+UIView *loadingExtraMessageView;
+BOOL isFirstLoad;
+AnneEntryType currentEntryType;
+int selectedThemeId;
+UIView *loadingView;
 }
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 
 @end

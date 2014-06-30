@@ -74,11 +74,12 @@
 }
 -(UILabel*)setAuthor:(UILabel *)Author
 {
+    _authors=Author;
     return _authors;
 }
--(UITextView *)setTextView:(UITextView *)textView
+-(UITextView *)setTextView:(UITextView *)texteView
 {
-    textView=textView;
+    textView=texteView;
     return textView;
 }
 
@@ -87,10 +88,6 @@
     textView=nil;
     _authors=nil;
     _dates=nil;
-	//SafeRelease(youDeservedIt);
-	//SafeRelease(yourLifeSucks);
-	//SafeRelease(textView);
-	//[super dealloc];
 }
 
 @end

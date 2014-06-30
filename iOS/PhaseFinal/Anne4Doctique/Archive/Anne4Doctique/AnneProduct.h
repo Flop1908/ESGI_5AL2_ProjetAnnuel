@@ -8,17 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AnneProduct : NSObject
+@interface AnneProduct : NSObject{
+    NSDateFormatter *date;
+    NSString *description;
+    NSString *author;
+	int entryId;
+	int agreeCount;
+	int deserveCount;
+	int commentsCount;
+}
 
 @property (strong, nonatomic) NSString *author;
 @property (strong, nonatomic) NSString *description;
 @property (strong, nonatomic) NSDateFormatter *date;
 @property (strong, nonatomic) NSString *voteplus;
 @property (strong, nonatomic) NSString *votemoins;
+@property (strong, nonatomic) NSString *point;
 @property (strong, nonatomic) NSString *nbcoms;
 @property (strong, nonatomic) NSString *Id;
-@property (strong, nonatomic) NSNull *favorite;//bool
+@property (strong, nonatomic) NSNull *favorite;
+@property (strong, nonatomic) NSString *type;
+//@property (nonatomic, retain) int agreeCount;
+//int deserveCount;//bool
 //@property (strong, nonatomic) NSURL *imageURL;
+
 
 /*! Creates a new instance from a dictionary.
  * \param dict A dictionary containing proper values for a given product:

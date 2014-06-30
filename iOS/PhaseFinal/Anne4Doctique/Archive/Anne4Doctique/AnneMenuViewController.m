@@ -18,6 +18,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor cyanColor];
+    NSLog(@"MenuAir's VD did Load");
 }
 
 #pragma mark - AnneAirMenuDelegate & DataSource
@@ -71,7 +72,7 @@
 {
     MasterViewController * viewController = [[MasterViewController alloc] init];
     UINavigationController * controller = [[UINavigationController alloc] initWithRootViewController:viewController];
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"json"];
+    NSURL *url = nil;//[[NSBundle mainBundle] URLForResource:@"example" withExtension:@"json"];
     NSError *error;
     NSData *jsonData;
     //viewController.label.text = [NSString stringWithFormat:@"la source est %d ", indexPath.row];
@@ -169,39 +170,45 @@
             break;
     }
     //Version Simple
-    */switch (indexPath.row) {
+    */
+    switch (indexPath.row) {
         case 0:
-            viewController.view.backgroundColor =[UIColor whiteColor];//Acceuil avec toutes les Annecdotes
+            //viewController.view.backgroundColor =[UIColor whiteColor];//Acceuil avec toutes les Annecdotes
             url = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"json"];
+            NSLog(@"case : 0  %@",url);
             break;
         case 1:
-            viewController.view.backgroundColor = [UIColor blueColor];//VDM
+            //viewController.view.backgroundColor = [UIColor blueColor];//VDM
             url = [[NSBundle mainBundle] URLForResource:@"exampleVDM" withExtension:@"json"];
-            //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/VDM_RetreiveAnecdote/%d/1", entry.section] toURL];
-            
+            //url =[NSURL URLWithString:@"http://ralf-esgi.com/app6/servicehello.svc/VDM_RetreiveAnecdote/%d/1"];
+            NSLog(@"case : 1  %@",url);
             break;
         case 2:
-            viewController.view.backgroundColor = [UIColor greenColor];//DTC
+            //viewController.view.backgroundColor = [UIColor greenColor];//DTC
             url = [[NSBundle mainBundle] URLForResource:@"exampleDTC" withExtension:@"json"];
             //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/DTC_RetreiveAnecdote/%d/1", entry.section] toURL];
+            NSLog(@"case :2 %@",url);
             break;
         case 3:
-            viewController.view.backgroundColor = [UIColor brownColor];//CNF
+            //viewController.view.backgroundColor = [UIColor brownColor];//CNF
             url = [[NSBundle mainBundle] URLForResource:@"exampleCNF" withExtension:@"json"];
-            //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/CNF_RetreiveAnecdote/%d/1", entry.section] toURL];
-            
+            //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/CNF_RetreiveAnecdote/%d/1", entry.section] toURL];[NSURL URLWithString:@"http://ralf-esgi.com/app6/servicehello.svc/CNF_RetreiveAnecdote/%d/1"]
+            NSLog(@"case : 3 %@",url);
             break;
         case 4:
-            viewController.view.backgroundColor =[UIColor purpleColor];//Setting
+            //viewController.view.backgroundColor =[UIColor purpleColor];//Setting
+            NSLog(@"case : 4%@",url);
             break;
     }
+    NSLog(@"Ending of MenuAir's Switch");
     jsonData = [NSData dataWithContentsOfURL:url];
+    NSLog(@"%@",jsonData);
     if (jsonData) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
         if (dict) {
-            NSArray *specs = dict[@"productSpecs"];
+            NSArray *specs = dict[@"anecdotes"];
             NSArray *productClusters = [AnneProductCluster productClustersFromSpecs:specs];
-            [AnneMultiProductViewController runWithTitle:@"Other Apps"
+            [AnneMultiProductViewController runWithTitle:@"Other"
                                          productClusters:productClusters
                                                 delegate:self];
             NSLog(@"Json's process was finished");
