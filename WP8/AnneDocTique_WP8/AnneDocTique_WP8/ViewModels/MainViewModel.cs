@@ -7,20 +7,19 @@ using System.Windows;
 using AnneDocTique_WP8.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using AnneDocTique_WP8.Databases;
 
 namespace AnneDocTique_WP8.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private int PageRandom = 1;
+        private AnecdoteDB AnecdoteDB;
 
-        public MainViewModel()
-        {
-            this.Items = new ObservableCollection<ItemViewModel>();
-            this.TopItems = new ObservableCollection<ItemViewModel>();
-            this.FlopItems = new ObservableCollection<ItemViewModel>();
-            this.RandomItems = new ObservableCollection<ItemViewModel>();
-        }
+        private string ws = "http://ralf-esgi.com/app6/ServiceHello.svc/";
+        public Dictionary<object, DateTime> LastDico { get; set; }
+        public Dictionary<object, DateTime> RandomDico { get; set; }
 
         /// <summary>
         /// Collection pour les objets ItemViewModel.
@@ -29,6 +28,23 @@ namespace AnneDocTique_WP8.ViewModels
         public ObservableCollection<ItemViewModel> TopItems { get; private set; }
         public ObservableCollection<ItemViewModel> FlopItems { get; private set; }
         public ObservableCollection<ItemViewModel> RandomItems { get; private set; }
+
+        Random random = new Random();
+
+        public MainViewModel()
+        {
+            this.Items = new ObservableCollection<ItemViewModel>();
+            this.TopItems = new ObservableCollection<ItemViewModel>();
+            this.FlopItems = new ObservableCollection<ItemViewModel>();
+            this.RandomItems = new ObservableCollection<ItemViewModel>();
+
+            this.LastDico = new Dictionary<object, DateTime>();
+            this.RandomDico = new Dictionary<object, DateTime>();
+
+            AnecdoteDB = new AnecdoteDB(AnecdoteDB.DBConnectionString);
+        }
+
+        
 
         private string _sampleProperty = "Sample Runtime Property Value";
         /// <summary>
@@ -67,97 +83,244 @@ namespace AnneDocTique_WP8.ViewModels
             get;
             private set;
         }
+        
 
         /// <summary>
         /// Crée et ajoute quelques objets ItemViewModel dans la collection Items.
         /// </summary>
         public void LoadData()
         {
-            LoadLastCNF(10, 1);
-            LoadTopCNF(10, 1);
-            LoadFlopCNF(10, 1);
-            LoadRandomCNF(10, 1);
+            this.LastDico.Clear();
+            this.RandomDico.Clear();
 
-            // Exemple de données ; remplacer par des données réelles
-            /*this.Items.Add(new ItemViewModel() { LineOne = "runtime one", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime two", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime three", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime four", LineTwo = "Nascetur pharetra placerat pulvinar", LineThree = "Ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime five", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime six", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime seven", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime eight", LineTwo = "Nascetur pharetra placerat pulvinar", LineThree = "Pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime nine", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime ten", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime eleven", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime twelve", LineTwo = "Nascetur pharetra placerat pulvinar", LineThree = "Ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime thirteen", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime fourteen", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime fifteen", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat" });
-            this.Items.Add(new ItemViewModel() { LineOne = "runtime sixteen", LineTwo = "Nascetur pharetra placerat pulvinar", LineThree = "Pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum" });
-            */
+            List<bool> list = new List<bool>();
+
+            var req = from Filtres f in AnecdoteDB.FiltresDB
+                      select f.Value;
+
+            foreach (bool b in req)
+                list.Add(b);
+
+            if (list[0]) LoadLastVDM(1);
+            if (list[1]) LoadLastCNF(1);
+            if (list[2]) ;
+
+            if (list[3]) LoadRandomVDM(1);
+            if (list[4]) LoadRandomCNF(1);
+            if (list[5]) ;
+
+            if (list[6]) LoadTopVDM(1);
+            else if (list[8]) LoadTopCNF(1);
+            else if (list[9]) ;
+
+            if (list[7]) LoadFlopVDM(1);
+            else if (list[10]) LoadFlopCNF(1);
+            else if (list[11]) ;
+
+            //LoadLastAll(); 
+            //LoadRandomAll();
+
+            this.IsDataLoaded = true;
+
+        }
+
+        public void AppBarRefreshLast()
+        {
+            this.LastDico.Clear();
+
+            List<bool> list = new List<bool>();
+
+            var req = from Filtres f in AnecdoteDB.FiltresDB
+                      select f.Value;
+
+            foreach (bool b in req)
+                list.Add(b);
+
+            if (list[0]) LoadLastVDM(1);
+            if (list[1]) LoadLastCNF(1);
+            if (list[2]) ;
+
             this.IsDataLoaded = true;
         }
 
-        public void LoadRandomCNFData()
+        public void AppBarRefreshRandom()
         {
-            PageRandom++;
+            this.RandomDico.Clear();
+            
+            List<bool> list = new List<bool>();
+
+            var req = from Filtres f in AnecdoteDB.FiltresDB
+                      select f.Value;
+
+            foreach (bool b in req)
+                list.Add(b);
+
+            
+            if (list[3]) LoadRandomVDM(1);
+            if (list[4]) LoadRandomCNF(1);
+            if (list[5]) ;
+
+            this.IsDataLoaded = true;
+        }
+        
+
+        public void RefreshLastFilter(bool VDM_Filter, bool DTC_Filter, bool CNF_Filter)
+        {
+            this.LastDico.Clear();
+            if (VDM_Filter || DTC_Filter || CNF_Filter)
+            {
+                if (VDM_Filter) LoadLastVDM(1);
+                //if (DTC_Filter) LoadLastVDM(0);
+                if (CNF_Filter) LoadLastCNF(1);
+            }
+            else
+            {
+                this.Items.Clear();
+                this.Items.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
+            }
+        }
+
+        public void RefreshRandomFilter(bool VDM_Filter, bool DTC_Filter, bool CNF_Filter)
+        {
+            
+            this.RandomDico.Clear();
+
+            if (VDM_Filter || DTC_Filter || CNF_Filter)
+            {
+                if (VDM_Filter) LoadRandomVDM(1);
+                //if (DTC_Filter) LoadLastVDM(0);
+                if (CNF_Filter) LoadRandomCNF(1);
+            }
+            else
+            {
+                this.RandomItems.Clear();
+                this.RandomItems.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
+            }
+        }
+
+        public bool RefreshTopFilter(string Anecdote)
+        {
+            this.TopItems.Clear();
+            switch (Anecdote)
+            {
+                case "VDM":
+                    LoadTopVDM(1);
+                    return true;
+                case "DTC" : 
+                case "CNF" :
+                    LoadTopCNF(1);
+                    return true;
+                default :
+                    return false;
+            }
+        }
+
+        public bool RefreshFlopFilter(string Anecdote)
+        {
+            this.FlopItems.Clear();
+            switch (Anecdote)
+            {
+                case "VDM":
+                    LoadFlopVDM(0);
+                    return true;
+                case "DTC":
+                case "CNF":
+                    LoadFlopCNF(1);
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        public void LoadLastAll()
+        {
+            this.Items.Clear();            
+            foreach (var item in this.LastDico.OrderByDescending(i => i.Value))
+            {
+                if (typeof(VDM) == item.Key.GetType())
+                {
+                    VDM vdm = (VDM)item.Key;
+                    this.Items.Add(new ItemViewModel() { Content = vdm.Text, Note1 = "Je valide, c'est une VDM " + vdm.Agree, 
+                                                        Note2 = "Tu l'as bien mérité " + vdm.Deserved, Date = vdm.Date.ToShortDateString() });
+                }
+                else if (typeof(CNF) == item.Key.GetType())
+                {
+                    CNF cnf = (CNF)item.Key;
+                    double note = Math.Round(((double)cnf.Points / cnf.Vote) * 2, 2);
+                    this.Items.Add(new ItemViewModel() { Content = cnf.Texte, Note1 = note.ToString() + "/10", Date = cnf.Date.ToShortDateString() });
+                }
+            }
+            
+        }
+
+        public void LoadRandomAll()
+        {
             this.RandomItems.Clear();
-            LoadRandomCNF(10, PageRandom);
-            this.IsDataLoaded = true;
-        }
-
-        /// <summary>
-        /// CNF part
-        /// </summary>
-        /// <param name="nbcnf">nombre d'anecdote</param>
-        /// <param name="nbpage">numero de la page</param>
-        private void LoadLastCNF(int nbcnf, int nbpage)
-        {
-            string param = "last/" + nbcnf + "/" + nbpage;
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += client_RetreiveLastAnecdoteCompleted;
-            client.DownloadStringAsync(new Uri("http://ralf-esgi.com/myapp/ServiceHello.svc/CNF_RetreiveAnecdote/"+ param));
-        }
-       
-        private void LoadTopCNF(int nbcnf, int nbpage)
-        {
-            string param = "top/" + nbcnf + "/" + nbpage;
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += client_RetreiveTopAnecdoteCompleted;
-            client.DownloadStringAsync(new Uri("http://ralf-esgi.com/myapp/ServiceHello.svc/CNF_RetreiveAnecdote/" + param));
-        }
-
-        private void LoadFlopCNF(int nbcnf, int nbpage)
-        {
-            string param = "flop/" + nbcnf + "/" + nbpage;
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += client_RetreiveFlopAnecdoteCompleted;
-            client.DownloadStringAsync(new Uri("http://ralf-esgi.com/myapp/ServiceHello.svc/CNF_RetreiveAnecdote/" + param));
-        }
-
-        private void LoadRandomCNF(int nbcnf, int nbpage)
-        {
-            string param = "random/" + nbcnf + "/" + nbpage;
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += client_RetreiveRandomAnecdoteCompleted;
-            client.DownloadStringAsync(new Uri("http://ralf-esgi.com/myapp/ServiceHello.svc/CNF_RetreiveAnecdote/" + param));
-        }
-
-        private void client_RetreiveRandomAnecdoteCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            if (e.Error == null)
-            {               
-                var cnf = JsonConvert.DeserializeObject<CNF[]>(e.Result);
-                foreach (var anecdote in cnf)
+            foreach (var item in RandomDico.OrderByDescending(i => i.Value))
+            {
+                if (typeof(VDM) == item.Key.GetType())
                 {
-                    double note = Math.Round(((double)anecdote.Points / anecdote.Vote) * 2, 2);
-                    this.RandomItems.Add(new ItemViewModel() { LineOne = anecdote.Fact, LineTwo = note.ToString() + "/10" });
+                    VDM vdm = (VDM)item.Key;
+                    this.RandomItems.Add(new ItemViewModel() { Content = vdm.Text, Note1 = "Je valide, c'est une VDM " + vdm.Agree, Note2 = "Tu l'as bien mérité " + vdm.Deserved });
+                }
+                else if (typeof(CNF) == item.Key.GetType())
+                {
+                    CNF cnf = (CNF)item.Key;
+                    double note = Math.Round(((double)cnf.Points / cnf.Vote) * 2, 2);
+                    this.RandomItems.Add(new ItemViewModel() { Content = cnf.Texte, Note1 = note.ToString() + "/10"});
                 }
             }
         }
+   
 
-        private void client_RetreiveFlopAnecdoteCompleted(object sender, DownloadStringCompletedEventArgs e)
+
+        public void LoadLastCNF(int nbpage)
+        {
+            string param = "last/" + nbpage;
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += client_RetreiveLastCNFCompleted;
+            client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+        }
+
+        public void LoadTopCNF(int nbpage)
+        {
+            string param = "top/" + nbpage;
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += client_RetreiveTopCNFCompleted;
+            client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+        }
+
+        public void LoadFlopCNF(int nbpage)
+        {
+            string param = "flop/" + nbpage;
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += client_RetreiveFlopCNFCompleted;
+            client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+        }
+
+        public void LoadRandomCNF(int nbpage)
+        {
+            string param = "random/" + nbpage;
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += client_RetreiveRandomCNFCompleted;
+            client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+        }
+
+        private void client_RetreiveLastCNFCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            
+            if (e.Error == null)
+            {
+                var cnf = JsonConvert.DeserializeObject<CNF[]>(e.Result);
+                foreach (var anecdote in cnf)
+                {
+                    this.LastDico.Add(anecdote, anecdote.Date);
+                }
+                LoadLastAll();
+            }
+        }
+
+        private void client_RetreiveTopCNFCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error == null)
             {
@@ -165,12 +328,12 @@ namespace AnneDocTique_WP8.ViewModels
                 foreach (var anecdote in cnf)
                 {
                     double note = Math.Round(((double)anecdote.Points / anecdote.Vote) * 2, 2);
-                    this.FlopItems.Add(new ItemViewModel() { LineOne = anecdote.Fact, LineTwo = note.ToString() + "/10" });
+                    this.TopItems.Add(new ItemViewModel() { Content = anecdote.Texte, Note1 = note.ToString() + "/10" });
                 }
             }
         }
 
-        private void client_RetreiveTopAnecdoteCompleted(object sender, DownloadStringCompletedEventArgs e)
+        private void client_RetreiveFlopCNFCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error == null)
             {
@@ -178,23 +341,113 @@ namespace AnneDocTique_WP8.ViewModels
                 foreach (var anecdote in cnf)
                 {
                     double note = Math.Round(((double)anecdote.Points / anecdote.Vote) * 2, 2);
-                    this.TopItems.Add(new ItemViewModel() { LineOne = anecdote.Fact, LineTwo = note.ToString() + "/10" });
+                    this.FlopItems.Add(new ItemViewModel() { Content = anecdote.Texte, Note1 = note.ToString() + "/10" });
                 }
             }
-        }
-
-        private void client_RetreiveLastAnecdoteCompleted(object sender, DownloadStringCompletedEventArgs e)
+        }      
+        
+        private void client_RetreiveRandomCNFCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            
             if (e.Error == null)
             {
                 var cnf = JsonConvert.DeserializeObject<CNF[]>(e.Result);
                 foreach (var anecdote in cnf)
                 {
-                    double note = Math.Round(((double)anecdote.Points / anecdote.Vote) * 2, 2);
-                    this.Items.Add(new ItemViewModel() { LineOne = anecdote.Fact, LineTwo = note.ToString() + "/10" });
+                    this.RandomDico.Add(anecdote, anecdote.Date);
+                }
+                LoadRandomAll();
+            }
+        }
+
+
+
+
+        public void LoadLastVDM(int nbpage)
+        {
+            string param = "last/" + nbpage;
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += client_RetreiveLastVDMCompleted;
+            client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+        }
+
+        public void LoadTopVDM(int nbpage)
+        {
+            string param = "top/" + nbpage;
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += client_RetreiveTopVDMCompleted;
+            client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+        }
+
+        public void LoadFlopVDM(int nbpage)
+        {
+            string param = "flop/" + nbpage;
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += client_RetreiveFlopVDMCompleted;
+            client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+        }
+
+        public void LoadRandomVDM(int nbpage)
+        {
+            
+            string param = "random/" + nbpage;
+            WebClient client = new WebClient();
+            
+            client.DownloadStringCompleted += client_RetreiveRandomVDMCompleted;
+            client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+        }
+
+        private void client_RetreiveLastVDMCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            
+            if (e.Error == null)
+            {
+                var vdm = JsonConvert.DeserializeObject<VDM[]>(e.Result);
+                foreach (var anecdote in vdm)
+                {
+                    this.LastDico.Add(anecdote, anecdote.Date);                   
+                }
+                LoadLastAll();
+            }
+        }
+
+        private void client_RetreiveTopVDMCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                var vdm = JsonConvert.DeserializeObject<VDM[]>(e.Result);
+                foreach (var anecdote in vdm)
+                {
+                    this.TopItems.Add(new ItemViewModel() { Content = anecdote.Text, Note1 = "Je valide, c'est une VDM " + anecdote.Agree, Note2 = "Tu l'as bien mérité " + anecdote.Deserved });
                 }
             }
         }
+
+        private void client_RetreiveFlopVDMCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                var vdm = JsonConvert.DeserializeObject<VDM[]>(e.Result);
+                foreach (var anecdote in vdm)
+                {
+                    this.FlopItems.Add(new ItemViewModel() { Content = anecdote.Text, Note1 = "Je valide, c'est une VDM " + anecdote.Agree, Note2 = "Tu l'as bien mérité " + anecdote.Deserved });
+                }
+            }
+        }        
+
+        private void client_RetreiveRandomVDMCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                var vdm = JsonConvert.DeserializeObject<VDM[]>(e.Result);
+                foreach (var anecdote in vdm)
+                {
+                    this.RandomDico.Add(anecdote, anecdote.Date);
+                }
+                LoadRandomAll();
+            }
+        }
+
 
         
 

@@ -93,6 +93,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Databases\MyDatabase.cs" />
+    <Compile Include="DetailPage.xaml.cs">
+      <DependentUpon>DetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FiltrePage.xaml.cs">
       <DependentUpon>FiltrePage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +124,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="DetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FiltrePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,18 +147,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\SplashScreenImage.png" />
+    <Content Include="Assets\Images\sync1.png" />
     <Content Include="README_FIRST.txt" />
+    <Content Include="Sanstitre.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+    <Content Include="wp_ss_20140630_0001[1].png" />
+    <Content Include="wp_ss_20140630_0002[1].png" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Assets\Images\SplashScreenImage1.jpg" />
     <Content Include="Assets\Images\sync.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>

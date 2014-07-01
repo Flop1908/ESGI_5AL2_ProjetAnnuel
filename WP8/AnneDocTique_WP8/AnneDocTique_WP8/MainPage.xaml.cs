@@ -11,16 +11,19 @@ using AnneDocTique_WP8.Resources;
 using System.Windows.Controls.Primitives;
 using System.ComponentModel;
 using System.Threading;
+using AnneDocTique_WP8.ViewModels;
+using AnneDocTique_WP8.Databases;
 
 namespace AnneDocTique_WP8
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private AnecdoteDB AnecdoteDB;
         // Constructeur
         public MainPage()
         {
             InitializeComponent();
-            
+            AnecdoteDB = new AnecdoteDB(AnecdoteDB.DBConnectionString);
             ShowSplash();
             // Affecter l'exemple de données au contexte de données du contrôle ListBox
             DataContext = App.ViewModel;
@@ -43,11 +46,12 @@ namespace AnneDocTique_WP8
         {
             // Définit l'ApplicationBar de la page sur une nouvelle instance d'ApplicationBar.
             ApplicationBar = new ApplicationBar();
-            ApplicationBar.IsVisible = false;
+
             // Crée un bouton et définit la valeur du texte sur la chaîne localisée issue d'AppResources.
             
             ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/Images/sync.png", UriKind.Relative));
-            appBarButton.Text = AppResources.AppBarButtonText;
+            
+            appBarButton.Text = AppResources.AppBarButtonText; 
             appBarButton.Click += appBarButton_Click;
             ApplicationBar.Buttons.Add(appBarButton);
 
@@ -56,7 +60,8 @@ namespace AnneDocTique_WP8
             appBarMenuItem.Click += appBarMenuItem_Click;
             ApplicationBar.MenuItems.Add(appBarMenuItem);
 
-           
+            ApplicationBar.IsVisible = false;
+            
         }
         
         private void appBarMenuItem_Click(object sender, EventArgs e)
@@ -66,7 +71,15 @@ namespace AnneDocTique_WP8
 
         private void appBarButton_Click(object sender, EventArgs e)
         {
-            App.ViewModel.LoadRandomCNFData();
+
+            if (MainPivot.SelectedIndex == 0)
+                App.ViewModel.AppBarRefreshLast();
+            else if (MainPivot.SelectedIndex == 1) ;
+            else if (MainPivot.SelectedIndex == 2) ;
+            else if (MainPivot.SelectedIndex == 3)
+                App.ViewModel.AppBarRefreshRandom();
+            
+
         }
 
         private Popup popup;
@@ -94,6 +107,7 @@ namespace AnneDocTique_WP8
             {
                 this.popup.IsOpen = false;
                 ApplicationBar.IsVisible = true;
+
             }
             );
         }
@@ -101,7 +115,21 @@ namespace AnneDocTique_WP8
         void backroungWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             //here we can load data
-            Thread.Sleep(5000);
+            Thread.Sleep(5000);           
         }
+
+        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var currentItem = ((sender as StackPanel).DataContext) as ItemViewModel;
+            NavigationService.Navigate(new Uri("/DetailPage.xaml?content=" + currentItem.Content + "&note1=" + currentItem.Note1 + "&note2=" + currentItem.Note2, UriKind.Relative));
+        }
+
+
+        //private void TapGoToDetailPage(object sender, GestureEventArgs e)
+        //{
+        //    var currentItem = ((sender as StackPanel).DataContext) as TextBlock;
+
+        //    NavigationService.Navigate(new Uri("/DetailPage.xaml?content=fdsfsdfs", UriKind.Relative));
+        //}
     }
 }

@@ -16,22 +16,56 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-	<Grid x:Name="LayoutRoot" Background="Transparent">
+	<Grid x:Name="LayoutRoot" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Visible" >
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-
+        <ListBox Height="750" >
 		<!--TitlePanel contient le nom de l'application et le titre de la page-->
 		<StackPanel Grid.Row="0" Margin="12,17,0,28">
 			<TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
 			<TextBlock Text="Filtre" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
-        <StackPanel Grid.Row="1" Margin="12,17,0,28">
-            <tk:ToggleSwitch x:Name="ToggleSwitchVDM"  Content="VDM" Click="ToggleSwitch_Toggled"/>
-            <tk:ToggleSwitch x:Name="ToggleSwitchDTC"  Content="DTC" Click="ToggleSwitch_Toggled"/>
-            <tk:ToggleSwitch x:Name="ToggleSwitchCNF"  Content="CNF" Click="ToggleSwitch_Toggled"/>
+        
+        <StackPanel Grid.Row="1" Margin="12,17,0,28" >
+            <TextBlock Text="Dernières" FontSize="30" />
+                <tk:ToggleSwitch x:Name="ToggleSwitchLastVDM"  Header="VDM" Checked="LastVDMToggleSwitch_Checked" Unchecked="LastVDMToggleSwitch_Unchecked" Width="460"/>
+                <tk:ToggleSwitch x:Name="ToggleSwitchLastDTC"  Header="DTC" Checked="LastDTCToggleSwitch_Checked" Unchecked="LastDTCToggleSwitch_Unchecked" Width="460"/>
+            <tk:ToggleSwitch x:Name="ToggleSwitchLastCNF"  Header="CNF" Checked="LastCNFToggleSwitch_Checked" Unchecked="LastCNFToggleSwitch_Unchecked" Width="460" />
         </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="12,17,0,28" >
+                <TextBlock Text="Aléatoires" FontSize="30" />
+                <tk:ToggleSwitch x:Name="ToggleSwitchRandomVDM"  Header="VDM" Checked="RandomVDMToggleSwitch_Checked" Unchecked="RandomVDMToggleSwitch_Unchecked" Width="460"/>
+                <tk:ToggleSwitch x:Name="ToggleSwitchRandomDTC"  Header="DTC" Checked="RandomDTCToggleSwitch_Checked" Unchecked="RandomDTCToggleSwitch_Unchecked" Width="460"/>
+                <tk:ToggleSwitch x:Name="ToggleSwitchRandomCNF"  Header="CNF" Checked="RandomCNFToggleSwitch_Checked" Unchecked="RandomCNFToggleSwitch_Unchecked" Width="460"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="12,17,0,28">
+                <TextBlock Text="Top" FontSize="30" />
+            <RadioButton x:Name="RadioButtonTopVDM" Content="VDM" GroupName="GroupTop" 
+                   Checked="TopVDMRadioButton_Checked" IsChecked="True"/>
+            <RadioButton x:Name="RadioButtonTopDTC" Content="DTC" GroupName="GroupTop" 
+                   Checked="TopDTCRadioButton_Checked" />
+            <RadioButton x:Name="RadioButtonTopCNF" Content="CNF" GroupName="GroupTop" 
+                   Checked="TopCNFRadioButton_Checked" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Margin="12,17,0,28">
+                <TextBlock Text="Flop" FontSize="30" />
+            <RadioButton x:Name="RadioButtonFlopVDM" Content="VDM" GroupName="GroupFlop" 
+                   Checked="FlopVDMRadioButton_Checked" IsChecked="True"/>
+            <RadioButton x:Name="RadioButtonFlopDTC" Content="DTC" GroupName="GroupFlop" 
+                    Checked="FlopDTCRadioButton_Checked" />
+            <RadioButton x:Name="RadioButtonFlopCNF" Content="CNF" GroupName="GroupFlop" 
+                   Checked="FlopCNFRadioButton_Checked" />
+        </StackPanel>
+
+</ListBox>
     </Grid>
     
 </phone:PhoneApplicationPage>
