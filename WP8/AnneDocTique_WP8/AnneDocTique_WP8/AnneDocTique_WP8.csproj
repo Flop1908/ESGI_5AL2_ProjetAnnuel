@@ -146,8 +146,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\favs.addto.png" />
+    <Content Include="Assets\Images\share.png" />
     <Content Include="Assets\Images\SplashScreenImage.png" />
-    <Content Include="Assets\Images\sync1.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Sanstitre.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
@@ -155,15 +156,18 @@
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
-    <Content Include="wp_ss_20140630_0001[1].png" />
-    <Content Include="wp_ss_20140630_0002[1].png" />
+    <None Include="last1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="last2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
     <Content Include="Assets\Images\sync.png" />
-    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />

@@ -115,13 +115,14 @@ namespace AnneDocTique_WP8
         void backroungWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             //here we can load data
-            Thread.Sleep(5000);           
+            Thread.Sleep(3000);           
         }
 
         private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var currentItem = ((sender as StackPanel).DataContext) as ItemViewModel;
-            NavigationService.Navigate(new Uri("/DetailPage.xaml?content=" + currentItem.Content + "&note1=" + currentItem.Note1 + "&note2=" + currentItem.Note2, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/DetailPage.xaml?content=" + currentItem.Content + "&note1=" + currentItem.Note1 +
+                                                "&note2=" + currentItem.Date + "&type=" + currentItem.Type + "&id=" + currentItem.Id, UriKind.Relative));
         }
 
 

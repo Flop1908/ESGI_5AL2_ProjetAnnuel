@@ -12,7 +12,27 @@ namespace AnneDocTique_WP8.ViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {
-        
+
+        private string _id;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (value != _id)
+                {
+                    _id = value;
+                    NotifyPropertyChanged("Id");
+                }
+            }
+        }
 
         private string _content;
         /// <summary>
@@ -115,6 +135,27 @@ namespace AnneDocTique_WP8.ViewModels
                 {
                     _author = value;
                     NotifyPropertyChanged("Author");
+                }
+            }
+        }
+
+        private string _type;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Type
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                if (value != _type)
+                {
+                    _type = value;
+                    NotifyPropertyChanged("Type");
                 }
             }
         }

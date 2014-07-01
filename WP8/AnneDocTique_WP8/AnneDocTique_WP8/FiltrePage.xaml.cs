@@ -81,6 +81,9 @@ namespace AnneDocTique_WP8
             objet = AnecdoteDB.FiltresDB.Single(fil => fil.Nom == "FlopDTC_RadioButton");
             objet.Value = FlopDTC_RadioButton;
             AnecdoteDB.SubmitChanges();
+
+
+            App.ViewModel.LoadData();
             
         }
 
@@ -140,42 +143,42 @@ namespace AnneDocTique_WP8
         {
             // Add code to perform some action here.
             LastVDM_Toggle = true;
-            App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
+            //App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
         }
 
         private void LastVDMToggleSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             LastVDM_Toggle = false;
-            App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
+            //App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
         }
 
         private void LastDTCToggleSwitch_Checked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             LastDTC_Toggle = true;
-            App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
+            //App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
         }
 
         private void LastDTCToggleSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             LastDTC_Toggle = false;
-            App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
+            //App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
         }
 
         private void LastCNFToggleSwitch_Checked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             LastCNF_Toggle = true;
-            App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
+            //App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
         }
 
         private void LastCNFToggleSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             LastCNF_Toggle = false;
-            App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
+            //App.ViewModel.RefreshLastFilter(LastVDM_Toggle, LastDTC_Toggle, LastCNF_Toggle);
         }
 
         /*
@@ -186,42 +189,42 @@ namespace AnneDocTique_WP8
         {
             // Add code to perform some action here.
             RandomVDM_Toggle = true;
-            App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
+            //App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
         }
 
         private void RandomVDMToggleSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             RandomVDM_Toggle = false;
-            App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
+            //App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
         }
 
         private void RandomDTCToggleSwitch_Checked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             RandomDTC_Toggle = true;
-            App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
+            //App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
         }
 
         private void RandomDTCToggleSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             RandomDTC_Toggle = false;
-            App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
+            //App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
         }
 
         private void RandomCNFToggleSwitch_Checked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             RandomCNF_Toggle = true;
-            App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
+            //App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
         }
 
         private void RandomCNFToggleSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
             // Add code to perform some action here.
             RandomCNF_Toggle = false;
-            App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
+            //App.ViewModel.RefreshRandomFilter(RandomVDM_Toggle, RandomDTC_Toggle, RandomCNF_Toggle);
         }
 
         /*
@@ -234,7 +237,7 @@ namespace AnneDocTique_WP8
             TopVDM_RadioButton = true;
             TopCNF_RadioButton = false;
             TopDTC_RadioButton = false;
-            App.ViewModel.RefreshTopFilter("VDM");
+            //App.ViewModel.RefreshTopFilter("VDM");
         }
 
         private void TopDTCRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -243,7 +246,7 @@ namespace AnneDocTique_WP8
             TopVDM_RadioButton = false;
             TopCNF_RadioButton = false;
             TopDTC_RadioButton = true;
-            App.ViewModel.RefreshTopFilter("DTC");
+            //App.ViewModel.RefreshTopFilter("DTC");
         }
 
         private void TopCNFRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -252,7 +255,7 @@ namespace AnneDocTique_WP8
             TopVDM_RadioButton = false;
             TopCNF_RadioButton = true;
             TopDTC_RadioButton = false;
-            App.ViewModel.RefreshTopFilter("CNF");
+            //App.ViewModel.RefreshTopFilter("CNF");
         }
 
         /*
@@ -265,7 +268,7 @@ namespace AnneDocTique_WP8
             FlopVDM_RadioButton = true;
             FlopCNF_RadioButton = false;
             FlopDTC_RadioButton = false;
-            App.ViewModel.RefreshFlopFilter("VDM");
+            //App.ViewModel.RefreshFlopFilter("VDM");
         }
 
         private void FlopDTCRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -274,7 +277,7 @@ namespace AnneDocTique_WP8
             FlopVDM_RadioButton = false;
             FlopCNF_RadioButton = false;
             FlopDTC_RadioButton = true;
-            App.ViewModel.RefreshFlopFilter("DTC");
+            //App.ViewModel.RefreshFlopFilter("DTC");
         }
 
         private void FlopCNFRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -283,7 +286,7 @@ namespace AnneDocTique_WP8
             FlopVDM_RadioButton = false;
             FlopCNF_RadioButton = true;
             FlopDTC_RadioButton = false;
-            App.ViewModel.RefreshFlopFilter("CNF");
+            //App.ViewModel.RefreshFlopFilter("CNF");
         }
 
 

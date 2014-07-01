@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using AnneDocTique_WP8.Databases;
+using System.IO;
 
 namespace AnneDocTique_WP8.ViewModels
 {
@@ -20,6 +21,8 @@ namespace AnneDocTique_WP8.ViewModels
         private string ws = "http://ralf-esgi.com/app6/ServiceHello.svc/";
         public Dictionary<object, DateTime> LastDico { get; set; }
         public Dictionary<object, DateTime> RandomDico { get; set; }
+        List<DTC> LastDTC { get; set; }
+        List<DTC> RandomDTC { get; set; }
 
         /// <summary>
         /// Collection pour les objets ItemViewModel.
@@ -31,6 +34,9 @@ namespace AnneDocTique_WP8.ViewModels
 
         Random random = new Random();
 
+        private int veriflastVDM = 0, veriflastDTC = 0, veriflastCNF = 0;
+        private int verifrandomVDM = 0, verifrandomDTC = 0, verifrandomCNF = 0;
+
         public MainViewModel()
         {
             this.Items = new ObservableCollection<ItemViewModel>();
@@ -40,6 +46,9 @@ namespace AnneDocTique_WP8.ViewModels
 
             this.LastDico = new Dictionary<object, DateTime>();
             this.RandomDico = new Dictionary<object, DateTime>();
+
+            this.LastDTC = new List<DTC>();
+            this.RandomDTC = new List<DTC>();
 
             AnecdoteDB = new AnecdoteDB(AnecdoteDB.DBConnectionString);
         }
@@ -92,6 +101,10 @@ namespace AnneDocTique_WP8.ViewModels
         {
             this.LastDico.Clear();
             this.RandomDico.Clear();
+            this.Items.Clear();
+            this.RandomItems.Clear();
+            this.RandomDTC.Clear();
+            this.LastDTC.Clear();
 
             List<bool> list = new List<bool>();
 
@@ -101,13 +114,18 @@ namespace AnneDocTique_WP8.ViewModels
             foreach (bool b in req)
                 list.Add(b);
 
-            if (list[0]) LoadLastVDM(1);
-            if (list[1]) LoadLastCNF(1);
-            if (list[2]) ;
+            if (!list[0] && !list[1] && !list[2]) this.Items.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
 
-            if (list[3]) LoadRandomVDM(1);
-            if (list[4]) LoadRandomCNF(1);
-            if (list[5]) ;
+
+            LoadLastVDM(1, list[0]);
+            LoadLastCNF(1, list[1]);
+            LoadLastDTC(list[2]);
+
+            if (!list[3] && !list[4] && !list[5]) this.RandomItems.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
+
+            LoadRandomVDM(1, list[3]);
+            LoadRandomCNF(1, list[4]);
+            LoadRandomDTC(list[5]);
 
             if (list[6]) LoadTopVDM(1);
             else if (list[8]) LoadTopCNF(1);
@@ -117,8 +135,7 @@ namespace AnneDocTique_WP8.ViewModels
             else if (list[10]) LoadFlopCNF(1);
             else if (list[11]) ;
 
-            //LoadLastAll(); 
-            //LoadRandomAll();
+
 
             this.IsDataLoaded = true;
 
@@ -136,11 +153,10 @@ namespace AnneDocTique_WP8.ViewModels
             foreach (bool b in req)
                 list.Add(b);
 
-            if (list[0]) LoadLastVDM(1);
-            if (list[1]) LoadLastCNF(1);
-            if (list[2]) ;
+            LoadLastVDM(1, list[0]);
+            LoadLastCNF(1, list[1]);
+            LoadLastDTC(list[2]);
 
-            this.IsDataLoaded = true;
         }
 
         public void AppBarRefreshRandom()
@@ -156,45 +172,45 @@ namespace AnneDocTique_WP8.ViewModels
                 list.Add(b);
 
             
-            if (list[3]) LoadRandomVDM(1);
-            if (list[4]) LoadRandomCNF(1);
-            if (list[5]) ;
+            LoadRandomVDM(1, list[3]);
+            LoadRandomCNF(1, list[4]);
+            LoadRandomDTC(list[5]);
 
-            this.IsDataLoaded = true;
         }
         
 
         public void RefreshLastFilter(bool VDM_Filter, bool DTC_Filter, bool CNF_Filter)
         {
             this.LastDico.Clear();
-            if (VDM_Filter || DTC_Filter || CNF_Filter)
-            {
-                if (VDM_Filter) LoadLastVDM(1);
-                //if (DTC_Filter) LoadLastVDM(0);
-                if (CNF_Filter) LoadLastCNF(1);
-            }
-            else
+            if (!VDM_Filter && !DTC_Filter && !CNF_Filter)
             {
                 this.Items.Clear();
                 this.Items.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
             }
+            else
+            {
+                LoadLastVDM(1, VDM_Filter);
+                LoadLastDTC(DTC_Filter);
+                LoadLastCNF(1, CNF_Filter);
+                
+            }
         }
 
         public void RefreshRandomFilter(bool VDM_Filter, bool DTC_Filter, bool CNF_Filter)
-        {
-            
+        {         
             this.RandomDico.Clear();
 
-            if (VDM_Filter || DTC_Filter || CNF_Filter)
-            {
-                if (VDM_Filter) LoadRandomVDM(1);
-                //if (DTC_Filter) LoadLastVDM(0);
-                if (CNF_Filter) LoadRandomCNF(1);
-            }
-            else
+            if (!VDM_Filter && !DTC_Filter && !CNF_Filter)
             {
                 this.RandomItems.Clear();
                 this.RandomItems.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
+            }
+            else
+            {
+                
+                LoadRandomVDM(1, VDM_Filter);
+                LoadRandomDTC(DTC_Filter);
+                LoadRandomCNF(1, CNF_Filter);
             }
         }
 
@@ -221,7 +237,7 @@ namespace AnneDocTique_WP8.ViewModels
             switch (Anecdote)
             {
                 case "VDM":
-                    LoadFlopVDM(0);
+                    LoadFlopVDM(1);
                     return true;
                 case "DTC":
                 case "CNF":
@@ -234,52 +250,111 @@ namespace AnneDocTique_WP8.ViewModels
 
         public void LoadLastAll()
         {
-            this.Items.Clear();            
-            foreach (var item in this.LastDico.OrderByDescending(i => i.Value))
+            this.Items.Clear();
+            int index = 0, j = 0;
+            var item = this.LastDico.OrderByDescending(i => i.Value);
+            for (int cpt = 1; cpt < item.Count(); cpt++)
+            //foreach (var item in this.LastDico.OrderByDescending(i => i.Value))
             {
-                if (typeof(VDM) == item.Key.GetType())
+                if (cpt % 3 == 0 && this.LastDTC.Count > index)
                 {
-                    VDM vdm = (VDM)item.Key;
-                    this.Items.Add(new ItemViewModel() { Content = vdm.Text, Note1 = "Je valide, c'est une VDM " + vdm.Agree, 
-                                                        Note2 = "Tu l'as bien mérité " + vdm.Deserved, Date = vdm.Date.ToShortDateString() });
+                    this.Items.Add(new ItemViewModel() { Content = this.LastDTC[index].Text, Type = this.LastDTC[index].Type, Id = this.LastDTC[index].Id.ToString() });
+                    index++;
+                    j++;
                 }
-                else if (typeof(CNF) == item.Key.GetType())
+                else
                 {
-                    CNF cnf = (CNF)item.Key;
-                    double note = Math.Round(((double)cnf.Points / cnf.Vote) * 2, 2);
-                    this.Items.Add(new ItemViewModel() { Content = cnf.Texte, Note1 = note.ToString() + "/10", Date = cnf.Date.ToShortDateString() });
+                    if (typeof(VDM) == item.ElementAt(cpt-j).Key.GetType())
+                    {
+                        VDM vdm = (VDM)item.ElementAt(cpt - j).Key;
+                        this.Items.Add(new ItemViewModel()
+                        {
+                            Content = vdm.Text,
+                            Note1 = "Je valide, c'est une VDM " + vdm.Agree,
+                            Note2 = "Tu l'as bien mérité " + vdm.Deserved,
+                            Date = vdm.Date.ToShortDateString(),
+                            Type = vdm.Type,
+                            Id = vdm.Id.ToString()
+                        });
+                    }
+                    else if (typeof(CNF) == item.ElementAt(cpt - j).Key.GetType())
+                    {
+                        CNF cnf = (CNF)item.ElementAt(cpt - j).Key;
+                        double note = Math.Round(((double)cnf.Points / cnf.Vote) * 2, 2);
+                        this.Items.Add(new ItemViewModel() 
+                        { 
+                            Content = cnf.Texte, 
+                            Note1 = note.ToString() + "/10", 
+                            Date = cnf.Date.ToShortDateString(), 
+                            Type = cnf.Type,
+                            Id = cnf.Id.ToString()
+                        });
+                    }
+                    //else if (typeof(DTC) == item.Key.GetType())
+                    //{
+                    //    DTC dtc = (DTC)item.Key;
+                    //    this.Items.Add(new ItemViewModel() { Content = dtc.Text });
+                    //}
                 }
             }
-            
+            veriflastCNF = 0;
+            veriflastVDM = 0;
+            veriflastDTC = 0;
         }
 
         public void LoadRandomAll()
         {
             this.RandomItems.Clear();
-            foreach (var item in RandomDico.OrderByDescending(i => i.Value))
+            int index = 0, j = 0; ;
+            var item = this.RandomDico.OrderByDescending(i => i.Value);
+            for (int cpt = 1; cpt < item.Count(); cpt++)
+            //foreach (var item in RandomDico.OrderByDescending(i => i.Value))
             {
-                if (typeof(VDM) == item.Key.GetType())
+                if (cpt % 3 == 0 && this.RandomDTC.Count > index)
                 {
-                    VDM vdm = (VDM)item.Key;
-                    this.RandomItems.Add(new ItemViewModel() { Content = vdm.Text, Note1 = "Je valide, c'est une VDM " + vdm.Agree, Note2 = "Tu l'as bien mérité " + vdm.Deserved });
+                    this.RandomItems.Add(new ItemViewModel() { Content = this.RandomDTC[index].Text });
+                    index++;
+                    j++;
                 }
-                else if (typeof(CNF) == item.Key.GetType())
+                else
                 {
-                    CNF cnf = (CNF)item.Key;
-                    double note = Math.Round(((double)cnf.Points / cnf.Vote) * 2, 2);
-                    this.RandomItems.Add(new ItemViewModel() { Content = cnf.Texte, Note1 = note.ToString() + "/10"});
+                    if (typeof(VDM) == item.ElementAt(cpt - j).Key.GetType())
+                    {
+                        VDM vdm = (VDM)item.ElementAt(cpt - j).Key;
+                        this.RandomItems.Add(new ItemViewModel() { Content = vdm.Text, Note1 = "Je valide, c'est une VDM " + vdm.Agree, Note2 = "Tu l'as bien mérité " + vdm.Deserved });
+                    }
+                    else if (typeof(CNF) == item.ElementAt(cpt - j).Key.GetType())
+                    {
+                        CNF cnf = (CNF)item.ElementAt(cpt - j).Key;
+                        double note = Math.Round(((double)cnf.Points / cnf.Vote) * 2, 2);
+                        this.RandomItems.Add(new ItemViewModel() { Content = cnf.Texte, Note1 = note.ToString() + "/10" });
+                    }
+                    //else if (typeof(DTC) == item.Key.GetType())
+                    //{
+                    //    DTC dtc = (DTC)item.Key;
+                    //    this.RandomItems.Add(new ItemViewModel() { Content = dtc.Text });
+                    //}
                 }
             }
+
+            verifrandomCNF = 0;
+            verifrandomVDM = 0;
+            verifrandomDTC = 0;
         }
    
 
 
-        public void LoadLastCNF(int nbpage)
+        public void LoadLastCNF(int nbpage, bool show)
         {
-            string param = "last/" + nbpage;
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += client_RetreiveLastCNFCompleted;
-            client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+            if (show)
+            {
+                string param = "last/" + nbpage;
+                WebClient client = new WebClient();
+                client.DownloadStringCompleted += client_RetreiveLastCNFCompleted;
+                client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+            }
+            else veriflastCNF++;
+
         }
 
         public void LoadTopCNF(int nbpage)
@@ -298,17 +373,20 @@ namespace AnneDocTique_WP8.ViewModels
             client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
         }
 
-        public void LoadRandomCNF(int nbpage)
+        public void LoadRandomCNF(int nbpage, bool show)
         {
-            string param = "random/" + nbpage;
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += client_RetreiveRandomCNFCompleted;
-            client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+            if (show)
+            {
+                string param = "random/" + nbpage;
+                WebClient client = new WebClient();
+                client.DownloadStringCompleted += client_RetreiveRandomCNFCompleted;
+                client.DownloadStringAsync(new Uri(ws + "CNF_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+            }
+            else verifrandomCNF++;
         }
 
         private void client_RetreiveLastCNFCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            
             if (e.Error == null)
             {
                 var cnf = JsonConvert.DeserializeObject<CNF[]>(e.Result);
@@ -316,8 +394,14 @@ namespace AnneDocTique_WP8.ViewModels
                 {
                     this.LastDico.Add(anecdote, anecdote.Date);
                 }
-                LoadLastAll();
+                //LoadLastAll();
+                veriflastCNF++;
+                if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
+                {
+                    LoadLastAll();
+                }
             }
+
         }
 
         private void client_RetreiveTopCNFCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -356,19 +440,28 @@ namespace AnneDocTique_WP8.ViewModels
                 {
                     this.RandomDico.Add(anecdote, anecdote.Date);
                 }
-                LoadRandomAll();
+                //LoadRandomAll();
+                verifrandomCNF++;
+                if (verifrandomCNF != 0 && verifrandomVDM != 0 && verifrandomDTC != 0)
+                {
+                    LoadRandomAll();
+                }
             }
         }
 
 
 
 
-        public void LoadLastVDM(int nbpage)
+        public void LoadLastVDM(int nbpage, bool show)
         {
-            string param = "last/" + nbpage;
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += client_RetreiveLastVDMCompleted;
-            client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+            if (show)
+            {
+                string param = "last/" + nbpage;
+                WebClient client = new WebClient();
+                client.DownloadStringCompleted += client_RetreiveLastVDMCompleted;
+                client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+            }
+            else veriflastVDM++;
         }
 
         public void LoadTopVDM(int nbpage)
@@ -387,19 +480,20 @@ namespace AnneDocTique_WP8.ViewModels
             client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
         }
 
-        public void LoadRandomVDM(int nbpage)
+        public void LoadRandomVDM(int nbpage, bool show)
         {
-            
-            string param = "random/" + nbpage;
-            WebClient client = new WebClient();
-            
-            client.DownloadStringCompleted += client_RetreiveRandomVDMCompleted;
-            client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+            if (show)
+            {
+                string param = "random/" + nbpage;
+                WebClient client = new WebClient();
+                client.DownloadStringCompleted += client_RetreiveRandomVDMCompleted;
+                client.DownloadStringAsync(new Uri(ws + "VDM_RetreiveAnecdote/" + param + "?Unused=" + random.Next().ToString()));
+            }
+            else verifrandomVDM++;
         }
 
         private void client_RetreiveLastVDMCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            
             if (e.Error == null)
             {
                 var vdm = JsonConvert.DeserializeObject<VDM[]>(e.Result);
@@ -407,7 +501,12 @@ namespace AnneDocTique_WP8.ViewModels
                 {
                     this.LastDico.Add(anecdote, anecdote.Date);                   
                 }
-                LoadLastAll();
+                //LoadLastAll();
+                veriflastVDM++;
+                if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
+                {
+                    LoadLastAll();
+                }
             }
         }
 
@@ -444,8 +543,61 @@ namespace AnneDocTique_WP8.ViewModels
                 {
                     this.RandomDico.Add(anecdote, anecdote.Date);
                 }
-                LoadRandomAll();
+                //LoadRandomAll();
+                verifrandomVDM++;
+                if (verifrandomCNF != 0 && verifrandomVDM != 0 && verifrandomDTC != 0)
+                {
+                    LoadRandomAll();
+                }
             }
+        }
+
+        private void LoadLastDTC(bool show)
+        {
+            if (show)
+            {
+                string result;
+                using (StreamReader streamReader = new StreamReader("last1.json"))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                var dtc = JsonConvert.DeserializeObject<DTC[]>(result);
+                foreach (var anecdote in dtc)
+                {
+                    this.LastDTC.Add(anecdote);
+                }
+                veriflastDTC++;
+                if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
+                {
+                    LoadLastAll();
+                }
+            }
+            else veriflastDTC++;
+        }
+
+        private void LoadRandomDTC(bool show)
+        {
+            if (show)
+            {
+                string result;
+                using (StreamReader streamReader = new StreamReader("last2.json"))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                var dtc = JsonConvert.DeserializeObject<DTC[]>(result);
+                foreach (var anecdote in dtc)
+                {
+                    this.RandomDTC.Add(anecdote);
+                }
+                verifrandomDTC++;
+                if (verifrandomCNF != 0 && verifrandomVDM != 0 && verifrandomDTC != 0)
+                {
+                    LoadRandomAll();
+                }
+            }
+            else verifrandomDTC++;
         }
 
 
