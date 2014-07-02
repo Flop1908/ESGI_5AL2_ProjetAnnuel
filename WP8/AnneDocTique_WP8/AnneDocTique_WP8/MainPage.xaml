@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -15,7 +16,7 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#295077">
 
         <!-- REMARQUE CONCERNANT LA LOCALISATION :
             Pour localiser les chaînes affichées, copiez leurs valeurs dans les clés correctes
@@ -35,37 +36,57 @@
             attributs du fichier .resx qui correspond à la valeur
             CurrentUICulture de l'application au moment de l'exécution.
          -->
-
+        
         <!--Contrôle Pivot-->
-        <phone:Pivot Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
+        <phone:Pivot Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" x:Name="MainPivot">
             <!--Élément un de tableau croisé dynamique-->
             <phone:PivotItem Header="Dernières">
+
                 <!--Liste double trait avec habillage du texte-->
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                <TextBlock Text="{Binding LineTwo}" TextWrapping="NoWrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                            </StackPanel>
+                            <Border x:Name="BorderColor" BorderBrush="{Binding Color}" BorderThickness="5, 10, 5, 10" Width="auto" Height="auto" >
+                                <StackPanel Margin="0,0,0,0" Tap="StackPanel_Tap" Background="White" >
+                                    <TextBlock Foreground="Black" Text="{Binding Content}" TextWrapping="Wrap" Margin="12,5,12,5" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left" Margin="12,5,12,5" >
+                                        <ItemsControl Width="250" Height="20"  >
+                                            <TextBlock Foreground="{Binding Color2}"  Text="{Binding Note1}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                        </ItemsControl>
+                                        <ItemsControl Width="200" Height="20">
+                                            <TextBlock Foreground="{Binding Color2}"  Text="{Binding Note2}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                                        </ItemsControl>
+                                    </toolkit:WrapPanel>
+                                </StackPanel>
+                            </Border>
+                            
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
             </phone:PivotItem>
 
             <!--Élément deux de tableau croisé dynamique-->
-            <phone:PivotItem Header="Top">
+            <phone:PivotItem Header="Top" Background="#bfad82">
                 <!--Liste double trait, aucun habillage du texte-->
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding TopItems}">
                     <phone:LongListSelector.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,17">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="NoWrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
+                        <DataTemplate >
+                            <StackPanel Margin="10,10,10,10" Background="White">
+                                <TextBlock Foreground="Black" Text="{Binding Content}" TextWrapping="Wrap" Margin="12,12,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left">
+                                    <ItemsControl Width="250" Height="20" >
+                                        <TextBlock Foreground="Black" Text="{Binding Note1}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                    </ItemsControl>
+                                    <ItemsControl Width="200" Height="20">
+                                        <TextBlock Foreground="Black" Text="{Binding Note2}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                                    </ItemsControl>
+                                </toolkit:WrapPanel>
+                            </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
+                <!--Exemple de code illustrant l'utilisation d'ApplicationBar-->
+                
             </phone:PivotItem>
 
             <!--Élément trois de tableau croisé dynamique-->
@@ -75,8 +96,15 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                <TextBlock Text="{Binding LineTwo}" TextWrapping="NoWrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left">
+                                    <ItemsControl Width="250" Height="20" >
+                                        <TextBlock Text="{Binding Note1}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                    </ItemsControl>
+                                    <ItemsControl Width="200" Height="20">
+                                        <TextBlock Text="{Binding Note2}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                                    </ItemsControl>
+                                </toolkit:WrapPanel>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -90,15 +118,22 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                <TextBlock Text="{Binding LineTwo}" TextWrapping="NoWrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left">
+                                    <ItemsControl Width="250" Height="20" >
+                                        <TextBlock Text="{Binding Note1}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                    </ItemsControl>
+                                    <ItemsControl Width="200" Height="20">
+                                        <TextBlock Text="{Binding Note2}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                                    </ItemsControl>
+                                </toolkit:WrapPanel>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
             </phone:PivotItem>
         </phone:Pivot>
-
+        
         <!--Supprimez les commentaires pour voir une grille d'alignement qui vous aidera à vous assurer que vos contrôles sont
             alignés sur les limites communes.  L'image a une marge supérieure de -32px pour
             tenir compte de la barre d'état système. Attribuez-lui la valeur 0 (ou supprimez la marge)
@@ -107,5 +142,5 @@
             Avant l'envoi, supprimez ce XAML et l'image proprement dite.-->
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" IsHitTestVisible="False" />-->
     </Grid>
-
+    
 </phone:PhoneApplicationPage>

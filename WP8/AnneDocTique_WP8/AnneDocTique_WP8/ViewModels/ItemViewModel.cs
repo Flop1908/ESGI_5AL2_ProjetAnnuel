@@ -12,68 +12,196 @@ namespace AnneDocTique_WP8.ViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {
-        private string _lineOne;
+
+        private string _id;
         /// <summary>
         /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
         /// </summary>
         /// <returns></returns>
-        public string LineOne
+        public string Id
         {
             get
             {
-                return _lineOne;
+                return _id;
             }
             set
             {
-                if (value != _lineOne)
+                if (value != _id)
                 {
-                    _lineOne = value;
-                    NotifyPropertyChanged("LineOne");
+                    _id = value;
+                    NotifyPropertyChanged("Id");
                 }
             }
         }
 
-        private string _lineTwo;
+        private string _content;
         /// <summary>
         /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
         /// </summary>
         /// <returns></returns>
-        public string LineTwo
+        public string Content
         {
             get
             {
-                return _lineTwo;
+                return _content;
             }
             set
             {
-                if (value != _lineTwo)
+                if (value != _content)
                 {
-                    _lineTwo = value;
-                    NotifyPropertyChanged("LineTwo");
+                    _content = value;
+                    NotifyPropertyChanged("Content");
                 }
             }
         }
 
-        private string _lineThree;
+        private string _note1;
         /// <summary>
         /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
         /// </summary>
         /// <returns></returns>
-        public string LineThree
+        public string Note1
         {
             get
             {
-                return _lineThree;
+                return _note1;
             }
             set
             {
-                if (value != _lineThree)
+                if (value != _note1)
                 {
-                    _lineThree = value;
-                    NotifyPropertyChanged("LineThree");
+                    _note1 = value;
+                    NotifyPropertyChanged("Note1");
                 }
             }
         }
+
+        private string _note2;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Note2
+        {
+            get
+            {
+                return _note2;
+            }
+            set
+            {
+                if (value != _note2)
+                {
+                    _note2 = value;
+                    NotifyPropertyChanged("Note2");
+                }
+            }
+        }
+
+        private string _date;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Date
+        {
+            get
+            {
+                return _date;
+            }
+            set
+            {
+                if (value != _date)
+                {
+                    _date = value;
+                    NotifyPropertyChanged("Date");
+                }
+            }
+        }
+
+        private string _author;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Author
+        {
+            get
+            {
+                return _author;
+            }
+            set
+            {
+                if (value != _author)
+                {
+                    _author = value;
+                    NotifyPropertyChanged("Author");
+                }
+            }
+        }
+
+        private string _type;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Type
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                if (value != _type)
+                {
+                    _type = value;
+                    NotifyPropertyChanged("Type");
+                }
+            }
+        }
+
+        private string _color;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Color
+        {
+            get
+            {
+                return _color;
+            }
+            set
+            {
+                if (value != _color)
+                {
+                    _color = value;
+                    NotifyPropertyChanged("Color");
+                }
+            }
+        }
+
+        private string _color2;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Color2
+        {
+            get
+            {
+                return _color2;
+            }
+            set
+            {
+                if (value != _color2)
+                {
+                    _color2 = value;
+                    NotifyPropertyChanged("Color2");
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

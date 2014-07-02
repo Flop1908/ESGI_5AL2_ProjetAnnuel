@@ -33,9 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\..\..\..\..\Downloads\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
@@ -57,9 +56,9 @@
     <Compile Include="Anecdotes\AnecdoteCnf.cs" />
     <Compile Include="Anecdotes\AnecdoteDtc.cs" />
     <Compile Include="Anecdotes\AnecdoteVdm.cs" />
-    <Compile Include="Comments\Comment_CNF.cs" />
-    <Compile Include="Comments\Comment_DTC.cs" />
-    <Compile Include="Comments\Comment_VDM.cs" />
+    <Compile Include="Comments\CommentCnf.cs" />
+    <Compile Include="Comments\CommentDtc.cs" />
+    <Compile Include="Comments\CommentVdm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sites\UrlBuilderCNF.cs" />
     <Compile Include="Sites\UrlBuilderDTC.cs" />

@@ -11,6 +11,7 @@ using Core.Sites;
 using log4net;
 using System.ServiceModel;
 using Newtonsoft.Json;
+using Core.Comments;
 
 
 namespace WcfServiceAnecdote
@@ -30,17 +31,14 @@ namespace WcfServiceAnecdote
         {
             Log.Info("Web Service | Consommation de SayHello avec parametres who : " + who);
 
-            var stream = File.Create(@"E:\web\ralfesgi\app6\Log\testfile.txt");
-            return (stream != null && stream.CanWrite).ToString();
-            /*
+            //var stream = File.Create(@"E:\web\ralfesgi\app6\Log\testfile.txt");
+            //return (stream != null && stream.CanWrite).ToString();
+            
             Log.Debug(who + " call the SayHello");
             return "Hello " + who + " from web service :)";
-             */
+            
             //return JsonConvert.SerializeObject(VDM.RetrieveListAnecdote("last", 1));
-            return Core.Tools.RetrieveWebIntel.ContentFromURL(@"http://api.fmylife.com/view/last/?language=fr&key=53316740a4787");
-
-
-
+            //return Core.Tools.RetrieveWebIntel.ContentFromURL(@"http://api.fmylife.com/view/last/?language=fr&key=53316740a4787");
         }
 
         public AnecdoteVdm[] Test()
@@ -66,7 +64,6 @@ namespace WcfServiceAnecdote
         {
             Log.Info("Web Service | Consommation de DTC_RetreiveAnecdote");
             return UrlBuilderDTC.RetrieveListAnecdote(tri.ToLower(), int.Parse(pageNumber));
-
         }
 
         public AnecdoteDtc[] DTC_SearchAnecdote(String tri, String pageNumber, String searchWord)
@@ -81,10 +78,16 @@ namespace WcfServiceAnecdote
             return UrlBuilderVDM.RetrieveListAnecdote(tri.ToLower(), int.Parse(pageNumber));
         }
 
-        public AnecdoteVdm[] VDM_SearchAnecdote(String tri, String pageNumber, String searchWord)
+        public AnecdoteVdm[] VDM_SearchAnecdote(String pageNumber, String searchWord)
         {
-            Log.Info("Web Service | Consommation de VDM_SearchAnecdote");//
-            return UrlBuilderVDM.RetrieveListAnecdote(tri.ToLower(), int.Parse(pageNumber), searchWord);
+            Log.Info("Web Service | Consommation de VDM_SearchAnecdote");
+            return UrlBuilderVDM.RetrieveListAnecdote("search", int.Parse(pageNumber), searchWord);
+        }
+
+        public CommentVdm[] VDM_RetreiveComment(String idAnecdote)
+        {
+            Log.Info("Web Service | Consommation de VDM_RetreiveComment");
+            return UrlBuilderVDM.RetreiveComment(idAnecdote);
         }
 
     }

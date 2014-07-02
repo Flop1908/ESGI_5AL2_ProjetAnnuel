@@ -6,6 +6,7 @@ using Core.Anecdotes;
 using Core.Tools;
 using log4net;
 using log4net.Config;
+using Core.Comments;
 
 namespace Core.Sites
 {
@@ -26,7 +27,7 @@ namespace Core.Sites
                 //Changement de l'encodage
                 //xml = ToolBox.Transcoding(xml, Encoding.ASCII, Encoding.UTF8);
 
-                return TransformRawToPure(xml);
+                return TransformRawAnnecdotesToPure(xml);
             }
             catch (Exception ex)
             {
@@ -34,7 +35,7 @@ namespace Core.Sites
             }
         }
 
-        private static AnecdoteVdm[] TransformRawToPure(string xml)
+        private static AnecdoteVdm[] TransformRawAnnecdotesToPure(string xml)
         {
             XDocument root = XDocument.Parse(xml);
             IEnumerable<XElement> listeRawAnecdotes = root.Descendants("items").Descendants("item");
@@ -42,6 +43,7 @@ namespace Core.Sites
 
             foreach (XElement item in listeRawAnecdotes)
             {
+                /*
                 listeAne.Add(new AnecdoteVdm(
                     item.Attribute("id").Value,
                     item.Element("author").Value,
@@ -50,6 +52,8 @@ namespace Core.Sites
                     item.Element("agree").Value,
                     item.Element("deserved").Value,
                     item.Element("comments").Value));
+                 */
+                listeAne.Add(new AnecdoteVdm(item));
             }
 
             return listeAne.ToArray();
@@ -64,19 +68,19 @@ namespace Core.Sites
             {
                 case "last":
                     newUrl.Append("last");
-                    newUrl.Append("/" + pageNumber);
+                    newUrl.Append("/" + (pageNumber - 1));
                     break;
                 case "random":
                     newUrl.Append("random");
-                    newUrl.Append("/" + pageNumber);
+                    newUrl.Append("/15");
                     break;
                 case "top":
                     newUrl.Append("top");
-                    newUrl.Append("/" + pageNumber);
+                    newUrl.Append("/" + (pageNumber - 1));
                     break;
                 case "flop":
                     newUrl.Append("flop");
-                    newUrl.Append("/" + pageNumber);
+                    newUrl.Append("/" + (pageNumber - 1));
                     break;
                 case "search":
                     newUrl.Append("search?search=" + searchWord);
@@ -86,12 +90,41 @@ namespace Core.Sites
                     break;
             }
 
-            //Ajout de la langue            
-            newUrl.Append("&language=fr");
-            //Ajout de la clé
-            newUrl.Append("&key=" + VDM_API_KEY);
+            newUrl.Append("&language=fr&key=" + VDM_API_KEY);
 
             return newUrl.ToString();
+        }
+        
+        public static CommentVdm[] RetreiveComment(string idAnecdote)
+        {
+            //On commence par placer l'URL de base
+            var newUrl = new StringBuilder(VDM_API_URL);
+
+            //On ajoute l'id de l'anecdote
+            newUrl.Append(idAnecdote);
+
+            //Et le suffixe obligatoire
+            newUrl.Append("&language=fr&key=" + VDM_API_KEY);
+
+            //Recup du resultat de l'api
+            string xml = RetrieveWebIntel.ContentFromURL(newUrl.ToString());
+
+            return TransformRawCommentsToPure(xml);
+        }
+
+        private static CommentVdm[] TransformRawCommentsToPure(string xml)
+        {
+            XDocument root = XDocument.Parse(xml);
+            var listeRawComments = root.Descendants("comment");
+
+            var listeCom = new List<CommentVdm>();
+
+            foreach (XElement item in listeRawComments)
+            {
+                listeCom.Add(new CommentVdm(item));
+            }
+
+            return listeCom.ToArray();
         }
     }
 }

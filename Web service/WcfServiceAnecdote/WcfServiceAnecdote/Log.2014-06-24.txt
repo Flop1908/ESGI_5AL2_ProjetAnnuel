@@ -1,3 +1,0 @@
-2014-06-24 14:08:08,991 [6] INFO  [WcfServiceAnecdote.ServiceHello.CNF_RetreiveAnecdote] - Web Service | Consommation de CNF_RetreiveAnecdote
-2014-06-24 14:08:09,205 [6] INFO  [Core.Sites.UrlBuilderCNF.RetrieveListAnecdote] - CNF | Création url avec parametres tri : last, page : 1
-2014-06-24 14:08:09,210 [6] INFO  [Core.Sites.UrlBuilderCNF.RetrieveListAnecdote] - CNF | Recupération du contenu de l'URL : http://chucknorrisfacts.fr/api/get?data=tri:last;nb:25;page:1

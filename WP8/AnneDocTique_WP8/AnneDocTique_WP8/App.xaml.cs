@@ -8,6 +8,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AnneDocTique_WP8.Resources;
 using AnneDocTique_WP8.ViewModels;
+using AnneDocTique_WP8.Databases;
+using System.Collections.Generic;
 
 namespace AnneDocTique_WP8
 {
@@ -51,6 +53,55 @@ namespace AnneDocTique_WP8
             // Initialisation spécifique au téléphone
             InitializePhoneApplication();
 
+            using (AnecdoteDB maBase = new AnecdoteDB("isostore:/AnecdoteDB.sdf"))
+            {
+                List<String> ListToggle = new List<string>(new string[] { "LastVDM_Toggle", "LastCNF_Toggle", "LastDTC_Toggle",
+                                                                        "RandomVDM_Toggle", "RandomCNF_Toggle", "RandomDTC_Toggle"
+                                                                        });
+                List<String> ListRB1 = new List<string>(new string[] { "TopVDM_RadioButton", "FlopVDM_RadioButton" });
+                List<String> ListRB2 = new List<string>(new string[] { "TopCNF_RadioButton", "TopDTC_RadioButton", "FlopCNF_RadioButton", "FlopDTC_RadioButton" });
+
+                if (maBase.DatabaseExists() == false)
+                {
+                    maBase.CreateDatabase();
+                    foreach (string s in ListToggle)
+                    {
+                        maBase.FiltresDB.InsertOnSubmit(
+                            new Filtres
+                            {
+                                Nom = s,
+                                Value = true
+                            }
+                        );
+                    }
+
+                    foreach (string s in ListRB1)
+                    {
+                        maBase.FiltresDB.InsertOnSubmit(
+                            new Filtres
+                            {
+                                Nom = s,
+                                Value = true
+                            }
+                        );
+                    }
+
+                    foreach (string s in ListRB2)
+                    {
+                        maBase.FiltresDB.InsertOnSubmit(
+                            new Filtres
+                            {
+                                Nom = s,
+                                Value = false
+                            }
+                        );
+                    }
+
+                    maBase.SubmitChanges();
+                }
+
+            }
+
             // Initialisation de l'affichage de la langue
             InitializeLanguage();
 
@@ -58,7 +109,7 @@ namespace AnneDocTique_WP8
             if (Debugger.IsAttached)
             {
                 // Afficher les compteurs de fréquence des trames actuels
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                Application.Current.Host.Settings.EnableFrameRateCounter = false;
 
                 // Affichez les zones de l'application qui sont redessinées dans chaque frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;

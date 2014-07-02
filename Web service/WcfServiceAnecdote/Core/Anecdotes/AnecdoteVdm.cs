@@ -17,7 +17,7 @@ namespace Core.Anecdotes
         [DataMember]
         public String Text { get; set; }
         [DataMember]
-        public DateTime Date { get; set; }
+        public String Date { get; set; }
         [DataMember]
         public int Agree { get; set; }
         [DataMember]
@@ -30,44 +30,22 @@ namespace Core.Anecdotes
             Id = 0;
             Author = "Flop";
             Text = "Anecdote VDM";
-            Date= DateTime.Now;
+            Date= DateTime.Now.ToShortDateString();
             Agree = 0;
             Deserved = 0;
             NbComments = 0;
         }
 
-        public AnecdoteVdm(AnecdoteVdm anecdoteVdm)
+        public AnecdoteVdm(System.Xml.Linq.XElement item)
         {
-            Id = anecdoteVdm.Id;
-            Author = anecdoteVdm.Author;
-            Text = anecdoteVdm.Text;
-            Date = anecdoteVdm.Date;
-            Agree = anecdoteVdm.Agree;
-            Deserved = anecdoteVdm.Deserved;
-            NbComments = anecdoteVdm.NbComments;
-            
-        }
-
-        public AnecdoteVdm(int id, string author, string contenu, DateTime date, int jeValide, int bienMerite, int nbComments)
-        {
-            Id = id;
-            Author = author;
-            Text = contenu;
-            Date = date;
-            Agree = jeValide;
-            Deserved = bienMerite;
-            NbComments = nbComments;
-        }
-
-        public AnecdoteVdm(string newId, string newAuthor, string newContenu, string newDate, string newJeValide, string newBienMerite, string newNbComments)
-        {
-            Id = int.Parse(newId);
-            Author = newAuthor;
-            Text = newContenu;
-            Date = DateTime.Parse(newDate);
-            Agree = int.Parse(newJeValide);
-            Deserved = int.Parse(newBienMerite);
-            NbComments = int.Parse(newNbComments);
+            Id = int.Parse(item.Attribute("id").Value);
+            Author = item.Element("author").Value;
+            Text = item.Element("text").Value;
+            DateTime newDate = DateTime.Parse(item.Element("date").Value);
+            Date = newDate.ToShortDateString() + " " + newDate.ToShortTimeString();
+            Agree = int.Parse(item.Element("agree").Value);
+            Deserved = int.Parse(item.Element("deserved").Value);
+            NbComments = int.Parse(item.Element("comments").Value);
         }
     }
 }
