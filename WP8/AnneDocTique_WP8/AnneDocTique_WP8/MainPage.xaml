@@ -16,7 +16,7 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#295077">
 
         <!-- REMARQUE CONCERNANT LA LOCALISATION :
             Pour localiser les chaînes affichées, copiez leurs valeurs dans les clés correctes
@@ -46,37 +46,39 @@
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,17"  Tap="StackPanel_Tap"  >
-                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="12,0,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left">
-                                    <ItemsControl Width="250" Height="20" >
-                                        <TextBlock Text="{Binding Note1}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
-                                    </ItemsControl>
-                                    <ItemsControl Width="200" Height="20">
-                                        <TextBlock Text="{Binding Note2}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
-                                    </ItemsControl>
-                                </toolkit:WrapPanel>
-
-                            </StackPanel>
+                            <Border x:Name="BorderColor" BorderBrush="{Binding Color}" BorderThickness="5, 10, 5, 10" Width="auto" Height="auto" >
+                                <StackPanel Margin="0,0,0,0" Tap="StackPanel_Tap" Background="White" >
+                                    <TextBlock Foreground="Black" Text="{Binding Content}" TextWrapping="Wrap" Margin="12,5,12,5" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left" Margin="12,5,12,5" >
+                                        <ItemsControl Width="250" Height="20"  >
+                                            <TextBlock Foreground="{Binding Color2}"  Text="{Binding Note1}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                        </ItemsControl>
+                                        <ItemsControl Width="200" Height="20">
+                                            <TextBlock Foreground="{Binding Color2}"  Text="{Binding Note2}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                                        </ItemsControl>
+                                    </toolkit:WrapPanel>
+                                </StackPanel>
+                            </Border>
+                            
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
             </phone:PivotItem>
 
             <!--Élément deux de tableau croisé dynamique-->
-            <phone:PivotItem Header="Top">
+            <phone:PivotItem Header="Top" Background="#bfad82">
                 <!--Liste double trait, aucun habillage du texte-->
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding TopItems}">
                     <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="12,-6,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        <DataTemplate >
+                            <StackPanel Margin="10,10,10,10" Background="White">
+                                <TextBlock Foreground="Black" Text="{Binding Content}" TextWrapping="Wrap" Margin="12,12,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
                                 <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left">
                                     <ItemsControl Width="250" Height="20" >
-                                        <TextBlock Text="{Binding Note1}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                        <TextBlock Foreground="Black" Text="{Binding Note1}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
                                     </ItemsControl>
                                     <ItemsControl Width="200" Height="20">
-                                        <TextBlock Text="{Binding Note2}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                                        <TextBlock Foreground="Black" Text="{Binding Note2}" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
                                     </ItemsControl>
                                 </toolkit:WrapPanel>
                             </StackPanel>

@@ -61,7 +61,7 @@ namespace AnneDocTique_WP8
             ApplicationBar.MenuItems.Add(appBarMenuItem);
 
             ApplicationBar.IsVisible = false;
-            
+            ApplicationBar.Opacity = 0.5;
         }
         
         private void appBarMenuItem_Click(object sender, EventArgs e)

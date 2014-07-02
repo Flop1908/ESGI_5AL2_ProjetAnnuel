@@ -15,7 +15,7 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#295077">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -41,6 +41,28 @@
                 </toolkit:WrapPanel>
 
             </StackPanel>
+
+
+            <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="BorderColor" BorderBrush="{Binding Color}" BorderThickness="5, 10, 5, 10" Width="auto" Height="auto" >
+                            <StackPanel Margin="0,0,0,0" Tap="StackPanel_Tap" Background="White" >
+                                <TextBlock Foreground="Black" Text="{Binding Content}" TextWrapping="Wrap" Margin="12,5,12,5" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left" Margin="12,5,12,5" >
+                                    <ItemsControl Width="250" Height="20"  >
+                                        <TextBlock Foreground="{Binding Color2}"  Text="{Binding Note1}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                    </ItemsControl>
+                                    <ItemsControl Width="200" Height="20">
+                                        <TextBlock Foreground="{Binding Color2}"  Text="{Binding Note2}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                                    </ItemsControl>
+                                </toolkit:WrapPanel>
+                            </StackPanel>
+                        </Border>
+
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
         </Grid>
     </Grid>
 

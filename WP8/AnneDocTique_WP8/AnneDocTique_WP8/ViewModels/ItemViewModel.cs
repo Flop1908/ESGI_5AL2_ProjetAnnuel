@@ -160,6 +160,48 @@ namespace AnneDocTique_WP8.ViewModels
             }
         }
 
+        private string _color;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Color
+        {
+            get
+            {
+                return _color;
+            }
+            set
+            {
+                if (value != _color)
+                {
+                    _color = value;
+                    NotifyPropertyChanged("Color");
+                }
+            }
+        }
+
+        private string _color2;
+        /// <summary>
+        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// </summary>
+        /// <returns></returns>
+        public string Color2
+        {
+            get
+            {
+                return _color2;
+            }
+            set
+            {
+                if (value != _color2)
+                {
+                    _color2 = value;
+                    NotifyPropertyChanged("Color2");
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

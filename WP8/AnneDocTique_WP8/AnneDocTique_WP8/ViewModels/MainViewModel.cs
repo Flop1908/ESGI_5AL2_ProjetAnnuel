@@ -99,44 +99,50 @@ namespace AnneDocTique_WP8.ViewModels
         /// </summary>
         public void LoadData()
         {
-            this.LastDico.Clear();
-            this.RandomDico.Clear();
-            this.Items.Clear();
-            this.RandomItems.Clear();
-            this.RandomDTC.Clear();
-            this.LastDTC.Clear();
+            //this.LastDico.Clear();
+            //this.RandomDico.Clear();
+            //this.Items.Clear();
+            //this.RandomItems.Clear();
+            //this.RandomDTC.Clear();
+            //this.LastDTC.Clear();
 
-            List<bool> list = new List<bool>();
+            //List<bool> list = new List<bool>();
 
-            var req = from Filtres f in AnecdoteDB.FiltresDB
-                      select f.Value;
+            //var req = from Filtres f in AnecdoteDB.FiltresDB
+            //          select f.Value;
 
-            foreach (bool b in req)
-                list.Add(b);
+            //foreach (bool b in req)
+            //    list.Add(b);
 
-            if (!list[0] && !list[1] && !list[2]) this.Items.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
-
-
-            LoadLastVDM(1, list[0]);
-            LoadLastCNF(1, list[1]);
-            LoadLastDTC(list[2]);
-
-            if (!list[3] && !list[4] && !list[5]) this.RandomItems.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
-
-            LoadRandomVDM(1, list[3]);
-            LoadRandomCNF(1, list[4]);
-            LoadRandomDTC(list[5]);
-
-            if (list[6]) LoadTopVDM(1);
-            else if (list[8]) LoadTopCNF(1);
-            else if (list[9]) ;
-
-            if (list[7]) LoadFlopVDM(1);
-            else if (list[10]) LoadFlopCNF(1);
-            else if (list[11]) ;
+            //if (!list[0] && !list[1] && !list[2]) this.Items.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
 
 
+            //LoadLastVDM(1, list[0]);
+            //LoadLastCNF(1, list[1]);
+            //LoadLastDTC(list[2]);
 
+            //if (!list[3] && !list[4] && !list[5]) this.RandomItems.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
+
+            //LoadRandomVDM(1, list[3]);
+            //LoadRandomCNF(1, list[4]);
+            //LoadRandomDTC(list[5]);
+
+            //if (list[6]) LoadTopVDM(1);
+            //else if (list[8]) LoadTopCNF(1);
+            //else if (list[9]) ;
+
+            //if (list[7]) LoadFlopVDM(1);
+            //else if (list[10]) LoadFlopCNF(1);
+            //else if (list[11]) ;
+
+            //CNF = #bfad82 text = noir note = e9ca8f
+            //VDM = c9d8ed + 4c93d6 - 0062bd
+            //DTC = 559955 - a0c188 + 559955
+
+            ScreenTopCNF();
+            ScreenCNFLast();
+            ScreenDTCLast();
+            ScreenVDMLast();
             this.IsDataLoaded = true;
 
         }
@@ -258,7 +264,14 @@ namespace AnneDocTique_WP8.ViewModels
             {
                 if (cpt % 3 == 0 && this.LastDTC.Count > index)
                 {
-                    this.Items.Add(new ItemViewModel() { Content = this.LastDTC[index].Text, Type = this.LastDTC[index].Type, Id = this.LastDTC[index].Id.ToString() });
+                    
+                    this.Items.Add(new ItemViewModel() { 
+                        Content = this.LastDTC[index].Text.Replace("<br>", "\n"), 
+                        Type = this.LastDTC[index].Type, 
+                        Id = this.LastDTC[index].Id.ToString(),
+                        Color = "#559955", 
+                        Color2 = "Transparent"
+                    });
                     index++;
                     j++;
                 }
@@ -274,7 +287,9 @@ namespace AnneDocTique_WP8.ViewModels
                             Note2 = "Tu l'as bien mérité " + vdm.Deserved,
                             Date = vdm.Date.ToShortDateString(),
                             Type = vdm.Type,
-                            Id = vdm.Id.ToString()
+                            Id = vdm.Id.ToString(),
+                            Color = "#c9d8ed",
+                            Color2 = "#4c93d6"
                         });
                     }
                     else if (typeof(CNF) == item.ElementAt(cpt - j).Key.GetType())
@@ -287,7 +302,9 @@ namespace AnneDocTique_WP8.ViewModels
                             Note1 = note.ToString() + "/10", 
                             Date = cnf.Date.ToShortDateString(), 
                             Type = cnf.Type,
-                            Id = cnf.Id.ToString()
+                            Id = cnf.Id.ToString(),
+                            Color = "#bfad82",
+                            Color2 = "lightgreen"
                         });
                     }
                     //else if (typeof(DTC) == item.Key.GetType())
@@ -557,7 +574,7 @@ namespace AnneDocTique_WP8.ViewModels
             if (show)
             {
                 string result;
-                using (StreamReader streamReader = new StreamReader("last1.json"))
+                using (StreamReader streamReader = new StreamReader("DTCLast.json"))
                 {
                     result = streamReader.ReadToEnd();
                 }
@@ -581,7 +598,7 @@ namespace AnneDocTique_WP8.ViewModels
             if (show)
             {
                 string result;
-                using (StreamReader streamReader = new StreamReader("last2.json"))
+                using (StreamReader streamReader = new StreamReader("DTCLast.json"))
                 {
                     result = streamReader.ReadToEnd();
                 }
@@ -599,6 +616,85 @@ namespace AnneDocTique_WP8.ViewModels
             }
             else verifrandomDTC++;
         }
+
+        //Mélange des 3
+        //TOP CNF
+        //Comment VDM
+
+        private void ScreenTopCNF() 
+        {
+            string result;
+            using (StreamReader streamReader = new StreamReader("CNFTop.json"))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+            var cnf = JsonConvert.DeserializeObject<CNF[]>(result);
+            foreach (var anecdote in cnf)
+            {
+                double note = Math.Round(((double)anecdote.Points / anecdote.Vote) * 2, 2);
+                this.TopItems.Add(new ItemViewModel() { Content = anecdote.Texte, Note1 = note.ToString() + "/10" });
+            }
+
+        }
+        private void ScreenDTCLast() 
+        {
+            string result;
+            using (StreamReader streamReader = new StreamReader("DTCLast.json"))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+            var dtc = JsonConvert.DeserializeObject<DTC[]>(result);
+            foreach (var anecdote in dtc)
+            {
+                this.LastDTC.Add(anecdote);
+            }
+            veriflastDTC++;
+            if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
+            {
+                LoadLastAll();
+            }
+        }
+        private void ScreenVDMLast() 
+        {
+            string result;
+            using (StreamReader streamReader = new StreamReader("VDMLast.json"))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+            var vdm = JsonConvert.DeserializeObject<VDM[]>(result);
+            foreach (var anecdote in vdm)
+            {
+                this.LastDico.Add(anecdote, anecdote.Date); 
+            }
+            veriflastVDM++;
+            if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
+            {
+                LoadLastAll();
+            }
+        }
+        private void ScreenCNFLast()
+        {
+            string result;
+            using (StreamReader streamReader = new StreamReader("CNFLast.json"))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+            var cnf = JsonConvert.DeserializeObject<CNF[]>(result);
+            foreach (var anecdote in cnf)
+            {
+                this.LastDico.Add(anecdote, anecdote.Date);
+            }
+            veriflastCNF++;
+            if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
+            {
+                LoadLastAll();
+            }
+        }
+        private void LoadVDMComment() { }
 
 
         

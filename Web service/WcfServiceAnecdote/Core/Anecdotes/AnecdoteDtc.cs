@@ -60,7 +60,7 @@ namespace Core.Anecdotes
             int newNbComments;
 
             newId = NumberFromString(rawAnecdoteDtc.Attributes["class"].Value);
-            newContent = rawAnecdoteDtc.FirstChild.FirstChild.InnerText;
+            newContent = rawAnecdoteDtc.FirstChild.FirstChild.InnerHtml;
             newBad = NumberFromString(rawAnecdoteDtc.SelectSingleNode("//*[@class=\"vote voteminus\"]").InnerText);
             newGood = NumberFromString(rawAnecdoteDtc.SelectSingleNode("//*[@class=\"vote voteplus\"]").InnerText);
             newNbComments = NumberFromString(rawAnecdoteDtc.SelectSingleNode("//*[@title=\"Commentaires\"]").InnerText);
@@ -68,9 +68,20 @@ namespace Core.Anecdotes
             //Suppression des caractères spéciaux
             Id = newId;
             Text = HttpUtility.HtmlDecode(newContent);
+            Text = CleanText(Text);
             Good = newGood;
             Bad = newBad;
             NbComments = newNbComments;
+        }
+
+        private string CleanText(string p)
+        {
+            var textSansSpan = "";
+            //<span class="decoration">Nick :</span>
+            textSansSpan = p.Replace("<span class=\"decoration\">", "");
+            textSansSpan = textSansSpan.Replace("</span>", "");
+
+            return textSansSpan;
         }
 
         private int NumberFromString(string p)
