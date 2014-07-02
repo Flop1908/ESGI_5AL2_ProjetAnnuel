@@ -1,0 +1,553 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		325146D6196351A90017287B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325146D5196351A90017287B /* Foundation.framework */; };
+		325146D8196351A90017287B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325146D7196351A90017287B /* CoreGraphics.framework */; };
+		325146DA196351A90017287B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325146D9196351A90017287B /* UIKit.framework */; };
+		325146E0196351A90017287B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 325146DE196351A90017287B /* InfoPlist.strings */; };
+		325146E2196351A90017287B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 325146E1196351A90017287B /* main.m */; };
+		325146E6196351A90017287B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 325146E5196351A90017287B /* AppDelegate.m */; };
+		325146E9196351A90017287B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 325146E7196351A90017287B /* Main.storyboard */; };
+		325146EC196351AA0017287B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 325146EB196351AA0017287B /* MasterViewController.m */; };
+		325146EF196351AA0017287B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 325146EE196351AA0017287B /* DetailViewController.m */; };
+		325146F1196351AA0017287B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 325146F0196351AA0017287B /* Images.xcassets */; };
+		325146F8196351AA0017287B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325146F7196351AA0017287B /* XCTest.framework */; };
+		325146F9196351AA0017287B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325146D5196351A90017287B /* Foundation.framework */; };
+		325146FA196351AA0017287B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325146D9196351A90017287B /* UIKit.framework */; };
+		32514702196351AA0017287B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32514700196351AA0017287B /* InfoPlist.strings */; };
+		32514704196351AA0017287B /* Anne_DoctiqueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32514703196351AA0017287B /* Anne_DoctiqueTests.m */; };
+		3251471119635B3B0017287B /* AnneAirViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3251470E19635B3B0017287B /* AnneAirViewController.m */; };
+		3251471219635B3B0017287B /* AnneSessionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3251471019635B3B0017287B /* AnneSessionView.m */; };
+		3251471619635B7A0017287B /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3251471419635B7A0017287B /* UIViewAdditions.m */; };
+		3251471A19635BCF0017287B /* AnneMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3251471919635BCF0017287B /* AnneMenuViewController.m */; };
+		3251472119635C4A0017287B /* AnneProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 3251471E19635C4A0017287B /* AnneProduct.m */; };
+		3251472219635C4A0017287B /* AnneProductViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3251472019635C4A0017287B /* AnneProductViewCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		325146FB196351AA0017287B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 325146CA196351A80017287B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 325146D1196351A90017287B;
+			remoteInfo = "Anne&Doctique";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		325146D2196351A90017287B /* Anne&Doctique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Anne&Doctique.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		325146D5196351A90017287B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		325146D7196351A90017287B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		325146D9196351A90017287B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		325146DD196351A90017287B /* Anne&Doctique-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Anne&Doctique-Info.plist"; sourceTree = "<group>"; };
+		325146DF196351A90017287B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		325146E1196351A90017287B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		325146E3196351A90017287B /* Anne&Doctique-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Anne&Doctique-Prefix.pch"; sourceTree = "<group>"; };
+		325146E4196351A90017287B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		325146E5196351A90017287B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		325146E8196351A90017287B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		325146EA196351AA0017287B /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		325146EB196351AA0017287B /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		325146ED196351AA0017287B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		325146EE196351AA0017287B /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		325146F0196351AA0017287B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		325146F6196351AA0017287B /* Anne&DoctiqueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Anne&DoctiqueTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		325146F7196351AA0017287B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		325146FF196351AA0017287B /* Anne&DoctiqueTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Anne&DoctiqueTests-Info.plist"; sourceTree = "<group>"; };
+		32514701196351AA0017287B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		32514703196351AA0017287B /* Anne_DoctiqueTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Anne_DoctiqueTests.m; sourceTree = "<group>"; };
+		3251470D19635B3B0017287B /* AnneAirViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneAirViewController.h; sourceTree = "<group>"; };
+		3251470E19635B3B0017287B /* AnneAirViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneAirViewController.m; sourceTree = "<group>"; };
+		3251470F19635B3B0017287B /* AnneSessionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneSessionView.h; sourceTree = "<group>"; };
+		3251471019635B3B0017287B /* AnneSessionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneSessionView.m; sourceTree = "<group>"; };
+		3251471419635B7A0017287B /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
+		3251471519635B7A0017287B /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
+		3251471819635BCF0017287B /* AnneMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneMenuViewController.h; sourceTree = "<group>"; };
+		3251471919635BCF0017287B /* AnneMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneMenuViewController.m; sourceTree = "<group>"; };
+		3251471D19635C4A0017287B /* AnneProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneProduct.h; sourceTree = "<group>"; };
+		3251471E19635C4A0017287B /* AnneProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneProduct.m; sourceTree = "<group>"; };
+		3251471F19635C4A0017287B /* AnneProductViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnneProductViewCell.h; sourceTree = "<group>"; };
+		3251472019635C4A0017287B /* AnneProductViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnneProductViewCell.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		325146CF196351A90017287B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				325146D8196351A90017287B /* CoreGraphics.framework in Frameworks */,
+				325146DA196351A90017287B /* UIKit.framework in Frameworks */,
+				325146D6196351A90017287B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		325146F3196351AA0017287B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				325146F8196351AA0017287B /* XCTest.framework in Frameworks */,
+				325146FA196351AA0017287B /* UIKit.framework in Frameworks */,
+				325146F9196351AA0017287B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		325146C9196351A80017287B = {
+			isa = PBXGroup;
+			children = (
+				325146DB196351A90017287B /* Anne&Doctique */,
+				325146FD196351AA0017287B /* Anne&DoctiqueTests */,
+				325146D4196351A90017287B /* Frameworks */,
+				325146D3196351A90017287B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		325146D3196351A90017287B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				325146D2196351A90017287B /* Anne&Doctique.app */,
+				325146F6196351AA0017287B /* Anne&DoctiqueTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		325146D4196351A90017287B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				325146D5196351A90017287B /* Foundation.framework */,
+				325146D7196351A90017287B /* CoreGraphics.framework */,
+				325146D9196351A90017287B /* UIKit.framework */,
+				325146F7196351AA0017287B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		325146DB196351A90017287B /* Anne&Doctique */ = {
+			isa = PBXGroup;
+			children = (
+				325146E4196351A90017287B /* AppDelegate.h */,
+				325146E5196351A90017287B /* AppDelegate.m */,
+				325146E7196351A90017287B /* Main.storyboard */,
+				325146EA196351AA0017287B /* MasterViewController.h */,
+				325146EB196351AA0017287B /* MasterViewController.m */,
+				325146ED196351AA0017287B /* DetailViewController.h */,
+				325146EE196351AA0017287B /* DetailViewController.m */,
+				3251472319635C620017287B /* Product */,
+				3251471C19635BFB0017287B /* MenuAir */,
+				325146F0196351AA0017287B /* Images.xcassets */,
+				325146DC196351A90017287B /* Supporting Files */,
+			);
+			path = "Anne&Doctique";
+			sourceTree = "<group>";
+		};
+		325146DC196351A90017287B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				325146DD196351A90017287B /* Anne&Doctique-Info.plist */,
+				325146DE196351A90017287B /* InfoPlist.strings */,
+				325146E1196351A90017287B /* main.m */,
+				325146E3196351A90017287B /* Anne&Doctique-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		325146FD196351AA0017287B /* Anne&DoctiqueTests */ = {
+			isa = PBXGroup;
+			children = (
+				32514703196351AA0017287B /* Anne_DoctiqueTests.m */,
+				325146FE196351AA0017287B /* Supporting Files */,
+			);
+			path = "Anne&DoctiqueTests";
+			sourceTree = "<group>";
+		};
+		325146FE196351AA0017287B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				325146FF196351AA0017287B /* Anne&DoctiqueTests-Info.plist */,
+				32514700196351AA0017287B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3251471319635B590017287B /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3251470D19635B3B0017287B /* AnneAirViewController.h */,
+				3251470E19635B3B0017287B /* AnneAirViewController.m */,
+				3251470F19635B3B0017287B /* AnneSessionView.h */,
+				3251471019635B3B0017287B /* AnneSessionView.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		3251471719635B8B0017287B /* KNAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				3251471419635B7A0017287B /* UIViewAdditions.m */,
+				3251471519635B7A0017287B /* UIViewAdditions.h */,
+			);
+			name = KNAdditions;
+			sourceTree = "<group>";
+		};
+		3251471B19635BDD0017287B /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				3251471719635B8B0017287B /* KNAdditions */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		3251471C19635BFB0017287B /* MenuAir */ = {
+			isa = PBXGroup;
+			children = (
+				3251471819635BCF0017287B /* AnneMenuViewController.h */,
+				3251471919635BCF0017287B /* AnneMenuViewController.m */,
+				3251471B19635BDD0017287B /* Library */,
+				3251471319635B590017287B /* Source */,
+			);
+			name = MenuAir;
+			sourceTree = "<group>";
+		};
+		3251472319635C620017287B /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				3251471D19635C4A0017287B /* AnneProduct.h */,
+				3251471E19635C4A0017287B /* AnneProduct.m */,
+				3251471F19635C4A0017287B /* AnneProductViewCell.h */,
+				3251472019635C4A0017287B /* AnneProductViewCell.m */,
+			);
+			name = Product;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		325146D1196351A90017287B /* Anne&Doctique */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32514707196351AA0017287B /* Build configuration list for PBXNativeTarget "Anne&Doctique" */;
+			buildPhases = (
+				325146CE196351A90017287B /* Sources */,
+				325146CF196351A90017287B /* Frameworks */,
+				325146D0196351A90017287B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Anne&Doctique";
+			productName = "Anne&Doctique";
+			productReference = 325146D2196351A90017287B /* Anne&Doctique.app */;
+			productType = "com.apple.product-type.application";
+		};
+		325146F5196351AA0017287B /* Anne&DoctiqueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3251470A196351AA0017287B /* Build configuration list for PBXNativeTarget "Anne&DoctiqueTests" */;
+			buildPhases = (
+				325146F2196351AA0017287B /* Sources */,
+				325146F3196351AA0017287B /* Frameworks */,
+				325146F4196351AA0017287B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				325146FC196351AA0017287B /* PBXTargetDependency */,
+			);
+			name = "Anne&DoctiqueTests";
+			productName = "Anne&DoctiqueTests";
+			productReference = 325146F6196351AA0017287B /* Anne&DoctiqueTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		325146CA196351A80017287B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Lionel;
+				TargetAttributes = {
+					325146F5196351AA0017287B = {
+						TestTargetID = 325146D1196351A90017287B;
+					};
+				};
+			};
+			buildConfigurationList = 325146CD196351A90017287B /* Build configuration list for PBXProject "Anne&Doctique" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 325146C9196351A80017287B;
+			productRefGroup = 325146D3196351A90017287B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				325146D1196351A90017287B /* Anne&Doctique */,
+				325146F5196351AA0017287B /* Anne&DoctiqueTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		325146D0196351A90017287B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				325146F1196351AA0017287B /* Images.xcassets in Resources */,
+				325146E0196351A90017287B /* InfoPlist.strings in Resources */,
+				325146E9196351A90017287B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		325146F4196351AA0017287B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32514702196351AA0017287B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		325146CE196351A90017287B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				325146E6196351A90017287B /* AppDelegate.m in Sources */,
+				3251471A19635BCF0017287B /* AnneMenuViewController.m in Sources */,
+				325146EC196351AA0017287B /* MasterViewController.m in Sources */,
+				3251471619635B7A0017287B /* UIViewAdditions.m in Sources */,
+				3251471119635B3B0017287B /* AnneAirViewController.m in Sources */,
+				3251471219635B3B0017287B /* AnneSessionView.m in Sources */,
+				325146E2196351A90017287B /* main.m in Sources */,
+				3251472119635C4A0017287B /* AnneProduct.m in Sources */,
+				3251472219635C4A0017287B /* AnneProductViewCell.m in Sources */,
+				325146EF196351AA0017287B /* DetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		325146F2196351AA0017287B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32514704196351AA0017287B /* Anne_DoctiqueTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		325146FC196351AA0017287B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 325146D1196351A90017287B /* Anne&Doctique */;
+			targetProxy = 325146FB196351AA0017287B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		325146DE196351A90017287B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				325146DF196351A90017287B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		325146E7196351A90017287B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				325146E8196351A90017287B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		32514700196351AA0017287B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32514701196351AA0017287B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		32514705196351AA0017287B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		32514706196351AA0017287B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		32514708196351AA0017287B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Anne&Doctique/Anne&Doctique-Prefix.pch";
+				INFOPLIST_FILE = "Anne&Doctique/Anne&Doctique-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		32514709196351AA0017287B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Anne&Doctique/Anne&Doctique-Prefix.pch";
+				INFOPLIST_FILE = "Anne&Doctique/Anne&Doctique-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		3251470B196351AA0017287B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Anne&Doctique.app/Anne&Doctique";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Anne&Doctique/Anne&Doctique-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Anne&DoctiqueTests/Anne&DoctiqueTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		3251470C196351AA0017287B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Anne&Doctique.app/Anne&Doctique";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Anne&Doctique/Anne&Doctique-Prefix.pch";
+				INFOPLIST_FILE = "Anne&DoctiqueTests/Anne&DoctiqueTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		325146CD196351A90017287B /* Build configuration list for PBXProject "Anne&Doctique" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32514705196351AA0017287B /* Debug */,
+				32514706196351AA0017287B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32514707196351AA0017287B /* Build configuration list for PBXNativeTarget "Anne&Doctique" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32514708196351AA0017287B /* Debug */,
+				32514709196351AA0017287B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3251470A196351AA0017287B /* Build configuration list for PBXNativeTarget "Anne&DoctiqueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3251470B196351AA0017287B /* Debug */,
+				3251470C196351AA0017287B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 325146CA196351A80017287B /* Project object */;
+}

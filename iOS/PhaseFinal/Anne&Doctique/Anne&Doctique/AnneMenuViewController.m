@@ -9,10 +9,12 @@
 #import "AnneMenuViewController.h"
 #import "MasterViewController.h"
 //#import "AnneLogViewController.h"
-#import "AnneMultiProductViewController.h"
-#import "AnneProductCluster.h"
+//#import "AnneMultiProductViewController.h"
+//#import "AnneProductCluster.h"
 
 @implementation AnneMenuViewController
+
+//static NSString *jsonUrl=@"http:ralf-esgi.com/app6/servicehello.svc/CNF_RetreiveAnecdote/top/1";
 
 - (void)viewDidLoad
 {
@@ -181,30 +183,31 @@
             //viewController.view.backgroundColor = [UIColor blueColor];//VDM
             url = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"json"];
             //url =[NSURL URLWithString:@"http://ralf-esgi.com/app6/servicehello.svc/VDM_RetreiveAnecdote/%d/1"];
-            NSLog(@"case : 1  %@",url);
+            viewController.jsonUrl=@"http://ralf-esgi.com/app6/servicehello.svc/VDM_RetreiveAnecdote/%d/1";
+            NSLog(@"case : 1  %@",viewController.jsonUrl);
             break;
         case 2:
             //viewController.view.backgroundColor = [UIColor greenColor];//DTC
             url = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"json"];
             //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/DTC_RetreiveAnecdote/%d/1", entry.section] toURL];
-            NSLog(@"case :2 %@",url);
+            viewController.jsonUrl=@"http://ralf-esgi.com/app6/servicehello.svc/DTC_RetreiveAnecdote/%d/1";
+            NSLog(@"case :2 %@",viewController.jsonUrl);
             break;
         case 3:
             //viewController.view.backgroundColor = [UIColor brownColor];//CNF
             url = [[NSBundle mainBundle] URLForResource:@"example" withExtension:@"json"];
             //url = [[NSString stringWithFormat:@"%@http://ralf-esgi.com/app6/servicehello.svc/CNF_RetreiveAnecdote/%d/1", entry.section] toURL];[NSURL URLWithString:@"http://ralf-esgi.com/app6/servicehello.svc/CNF_RetreiveAnecdote/%d/1"]
-            //jsonUrl=@"tortank";
-            
-            NSLog(@"case : 3 %@",url);
+            viewController.jsonUrl=@"http://ralf-esgi.com/app6/servicehello.svc/CNF_RetreiveAnecdote/%d/1";
+            NSLog(@"case : 3 %@",viewController.jsonUrl);
             break;
         case 4:
             //viewController.view.backgroundColor =[UIColor purpleColor];//Setting
-            NSLog(@"case : 4%@",url);
+            NSLog(@"case : 4%@",viewController.jsonUrl);
             break;
     }
     NSLog(@"Ending of MenuAir's Switch");
-    jsonData = [NSData dataWithContentsOfURL:url];
-    NSLog(@"%@",jsonData);
+    //jsonData = [NSData dataWithContentsOfURL:url];
+    
     /*
     if (jsonData) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];

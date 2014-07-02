@@ -12,14 +12,12 @@
 @interface AnneProductViewCell ()
 //@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 //@property (strong, nonatomic) IBOutlet UILabel *detailsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet UILabel *author;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *textView;
+@property (strong, nonatomic) IBOutlet UILabel *author;
 //@property (strong, nonatomic) IBOutlet UIImageView *iconView;
 @end
 
-static NSString *defaultIconName = @"defaultIcon";
-static NSString *failedIconName = @"failedIcon";
 
 @implementation AnneProductViewCell
 
@@ -33,8 +31,7 @@ static NSString *failedIconName = @"failedIcon";
     selectedBGView.backgroundColor = self.tintColor;
     self.selectedBackgroundView = selectedBGView;
     
-    //self.iconView.layer.cornerRadius = 16;
-    //self.iconView.layer.masksToBounds = YES;
+    
 }
 
 - (void)setProduct:(AnneProduct *)product {
@@ -46,6 +43,13 @@ static NSString *failedIconName = @"failedIcon";
         
     }
 }
+/*
++(void)configureWithText:(AnneProduct*)product{
+    [self setProduct : product];
+    [cell configureWithText:[NSString stringWithFormat:@"Author %zd", indexPath.row]];
+    [self author = product.author];
+    [self date = product.date];
+}*/
 
  -(IBAction) vote:(UIButton *) sender {
  NSLog(@"You");
