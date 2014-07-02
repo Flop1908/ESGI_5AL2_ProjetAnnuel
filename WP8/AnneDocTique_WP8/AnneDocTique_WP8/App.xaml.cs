@@ -16,6 +16,7 @@ namespace AnneDocTique_WP8
     public partial class App : Application
     {
         private static MainViewModel viewModel = null;
+        private static VDMCommentViewModel vdmCommentViewModel = null;
 
         /// <summary>
         /// ViewModel statique utilisé par les vues avec lesquelles établir la liaison.
@@ -30,6 +31,22 @@ namespace AnneDocTique_WP8
                     viewModel = new MainViewModel();
 
                 return viewModel;
+            }
+        }
+
+        /// <summary>
+        /// ViewModel statique utilisé par les vues avec lesquelles établir la liaison.
+        /// </summary>
+        /// <returns>Objet VDMCommentViewModel.</returns>
+        public static VDMCommentViewModel VDMCommentViewModel
+        {
+            get
+            {
+                // Différer la création du modèle de vue autant que nécessaire
+                if (vdmCommentViewModel == null)
+                    vdmCommentViewModel = new VDMCommentViewModel();
+
+                return vdmCommentViewModel;
             }
         }
 

@@ -18,19 +18,28 @@
     <Grid x:Name="LayoutRoot" Background="#295077">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="title" Text="DETAIL" Style="{StaticResource PhoneTextNormalStyle}"/>            
+            <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>            
+            <TextBlock x:Name="title" Margin="9,-7,0,0" FontSize="30"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel Margin="0,0,0,17"  >
-                <TextBlock x:Name="TbContent" TextWrapping="Wrap" Margin="12,0,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                <!--<TextBlock Text="{Binding LineTwo}" TextWrapping="NoWrap" Margin="12,-6,0,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" HorizontalAlignment="Left" Width="223"/>-->
+                <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left">
+                    <ItemsControl Width="250" Height="20" >
+                        <TextBlock x:Name="TbAuthor" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                    </ItemsControl>
+                    <ItemsControl Width="200" Height="20">
+                        <TextBlock x:Name="TbDate" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                    </ItemsControl>
+                </toolkit:WrapPanel>
+                <TextBlock Foreground="White" x:Name="TbContent" TextWrapping="Wrap" Margin="12,0,12,12" Style="{StaticResource PhoneTextSubtleStyle}"/>
                 <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left">
                     <ItemsControl Width="250" Height="20" >
                         <TextBlock x:Name="TbNote1" TextWrapping="NoWrap" Margin="12,0,6,12" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
@@ -40,26 +49,33 @@
                     </ItemsControl>
                 </toolkit:WrapPanel>
 
+
+                
             </StackPanel>
 
 
-            <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+            
+        </Grid>
+        <Grid x:Name="ContentPanel2" Grid.Row="2" Margin="12,0,12,0">
+            <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding CommentItems}">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                        <Border x:Name="BorderColor" BorderBrush="{Binding Color}" BorderThickness="5, 10, 5, 10" Width="auto" Height="auto" >
-                            <StackPanel Margin="0,0,0,0" Tap="StackPanel_Tap" Background="White" >
-                                <TextBlock Foreground="Black" Text="{Binding Content}" TextWrapping="Wrap" Margin="12,5,12,5" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left" Margin="12,5,12,5" >
-                                    <ItemsControl Width="250" Height="20"  >
-                                        <TextBlock Foreground="{Binding Color2}"  Text="{Binding Note1}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
-                                    </ItemsControl>
-                                    <ItemsControl Width="200" Height="20">
-                                        <TextBlock Foreground="{Binding Color2}"  Text="{Binding Note2}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
-                                    </ItemsControl>
-                                </toolkit:WrapPanel>
-                            </StackPanel>
-                        </Border>
-
+                        <StackPanel Margin="0,0,0,0" Background="White" >
+                            <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left" Margin="0,5,0,5" >
+                                <ItemsControl Width="200" Height="20"  >
+                                    <TextBlock Foreground="Gray"  Text="{Binding Author}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                </ItemsControl>
+                                <ItemsControl Width="250" Height="20">
+                                    <TextBlock Foreground="Gray"  Text="{Binding Date}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Right"/>
+                                </ItemsControl>
+                            </toolkit:WrapPanel>
+                            <TextBlock Foreground="Black" Text="{Binding Content}" TextWrapping="Wrap" Margin="12,5,12,5" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            <toolkit:WrapPanel  Height="20" Width="455" HorizontalAlignment="Left" Margin="0,5,0,5" >
+                                <ItemsControl Width="200" Height="20">
+                                    <TextBlock Foreground="#808080"  Text="{Binding Thumbs}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="15" TextAlignment="Left"/>
+                                </ItemsControl>
+                            </toolkit:WrapPanel>
+                        </StackPanel>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
             </phone:LongListSelector>

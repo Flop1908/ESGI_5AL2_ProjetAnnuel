@@ -24,7 +24,6 @@ namespace AnneDocTique_WP8
         {
             InitializeComponent();
             
-
             AnecdoteDB = new AnecdoteDB(AnecdoteDB.DBConnectionString);
             this.DataContext = this;
 
@@ -89,22 +88,7 @@ namespace AnneDocTique_WP8
 
         private void LoadConfig()
         {
-            
-            //ToggleSwitchLastVDM.IsChecked = LastVDM_Toggle;
-            //ToggleSwitchLastCNF.IsChecked = LastCNF_Toggle;
-            //ToggleSwitchLastDTC.IsChecked = LastDTC_Toggle;
 
-            //ToggleSwitchRandomVDM.IsChecked = RandomVDM_Toggle;
-            //ToggleSwitchRandomCNF.IsChecked = RandomCNF_Toggle;
-            //ToggleSwitchRandomDTC.IsChecked = RandomDTC_Toggle;
-
-            //RadioButtonTopVDM.IsChecked = TopVDM_RadioButton;
-            //RadioButtonTopDTC.IsChecked = TopDTC_RadioButton;
-            //RadioButtonTopCNF.IsChecked = TopCNF_RadioButton;
-
-            //RadioButtonFlopVDM.IsChecked = FlopVDM_RadioButton;
-            //RadioButtonFlopDTC.IsChecked = FlopDTC_RadioButton;
-            //RadioButtonFlopCNF.IsChecked = FlopCNF_RadioButton;
 
 
             List<bool> list = new List<bool>();

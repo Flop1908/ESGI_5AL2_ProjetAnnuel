@@ -19,6 +19,7 @@ namespace AnneDocTique_WP8.ViewModels
         private AnecdoteDB AnecdoteDB;
 
         private string ws = "http://ralf-esgi.com/app6/ServiceHello.svc/";
+
         public Dictionary<object, DateTime> LastDico { get; set; }
         public Dictionary<object, DateTime> RandomDico { get; set; }
         List<DTC> LastDTC { get; set; }
@@ -31,6 +32,7 @@ namespace AnneDocTique_WP8.ViewModels
         public ObservableCollection<ItemViewModel> TopItems { get; private set; }
         public ObservableCollection<ItemViewModel> FlopItems { get; private set; }
         public ObservableCollection<ItemViewModel> RandomItems { get; private set; }
+        public ObservableCollection<ItemViewModel> FavorisItems { get; private set; }
 
         Random random = new Random();
 
@@ -43,6 +45,7 @@ namespace AnneDocTique_WP8.ViewModels
             this.TopItems = new ObservableCollection<ItemViewModel>();
             this.FlopItems = new ObservableCollection<ItemViewModel>();
             this.RandomItems = new ObservableCollection<ItemViewModel>();
+            this.FavorisItems = new ObservableCollection<ItemViewModel>();
 
             this.LastDico = new Dictionary<object, DateTime>();
             this.RandomDico = new Dictionary<object, DateTime>();
@@ -53,39 +56,7 @@ namespace AnneDocTique_WP8.ViewModels
             AnecdoteDB = new AnecdoteDB(AnecdoteDB.DBConnectionString);
         }
 
-        
-
-        private string _sampleProperty = "Sample Runtime Property Value";
-        /// <summary>
-        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison
-        /// </summary>
-        /// <returns></returns>
-        public string SampleProperty
-        {
-            get
-            {
-                return _sampleProperty;
-            }
-            set
-            {
-                if (value != _sampleProperty)
-                {
-                    _sampleProperty = value;
-                    NotifyPropertyChanged("SampleProperty");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Exemple de propriété qui retourne une chaîne localisée
-        /// </summary>
-        public string LocalizedSampleProperty
-        {
-            get
-            {
-                return AppResources.SampleProperty;
-            }
-        }
+       
 
         public bool IsDataLoaded
         {
@@ -95,54 +66,54 @@ namespace AnneDocTique_WP8.ViewModels
         
 
         /// <summary>
-        /// Crée et ajoute quelques objets ItemViewModel dans la collection Items.
+        /// Ajoute les objets ItemViewModel dans les collection Items, etc... selon les filtres stockés dans la base local.
         /// </summary>
         public void LoadData()
         {
-            //this.LastDico.Clear();
-            //this.RandomDico.Clear();
-            //this.Items.Clear();
-            //this.RandomItems.Clear();
-            //this.RandomDTC.Clear();
-            //this.LastDTC.Clear();
+            this.LastDico.Clear();
+            this.RandomDico.Clear();
+            this.Items.Clear();
+            this.RandomItems.Clear();
+            this.RandomDTC.Clear();
+            this.LastDTC.Clear();
+            this.TopItems.Clear();
+            this.FlopItems.Clear();
+            List<bool> list = new List<bool>();
 
-            //List<bool> list = new List<bool>();
+            var req = from Filtres f in AnecdoteDB.FiltresDB
+                      select f.Value;
 
-            //var req = from Filtres f in AnecdoteDB.FiltresDB
-            //          select f.Value;
+            foreach (bool b in req)
+                list.Add(b);
 
-            //foreach (bool b in req)
-            //    list.Add(b);
-
-            //if (!list[0] && !list[1] && !list[2]) this.Items.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
+            if (!list[0] && !list[1] && !list[2]) this.Items.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
 
 
-            //LoadLastVDM(1, list[0]);
-            //LoadLastCNF(1, list[1]);
-            //LoadLastDTC(list[2]);
+            LoadLastVDM(1, list[0]);
+            LoadLastCNF(1, list[1]);
+            LoadLastDTC(list[2]);
 
-            //if (!list[3] && !list[4] && !list[5]) this.RandomItems.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
+            if (!list[3] && !list[4] && !list[5]) this.RandomItems.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
 
-            //LoadRandomVDM(1, list[3]);
-            //LoadRandomCNF(1, list[4]);
-            //LoadRandomDTC(list[5]);
+            LoadRandomVDM(1, list[3]);
+            LoadRandomCNF(1, list[4]);
+            LoadRandomDTC(list[5]);
 
-            //if (list[6]) LoadTopVDM(1);
-            //else if (list[8]) LoadTopCNF(1);
-            //else if (list[9]) ;
+            if (list[6]) LoadTopVDM(1);
+            else if (list[8]) LoadTopCNF(1);
+            else if (list[9]) LoadLastDTC(list[9]);
 
-            //if (list[7]) LoadFlopVDM(1);
-            //else if (list[10]) LoadFlopCNF(1);
-            //else if (list[11]) ;
+            if (list[7]) LoadFlopVDM(1);
+            else if (list[10]) LoadFlopCNF(1);
+            else if (list[11]) LoadLastDTC(list[11]); ;
 
-            //CNF = #bfad82 text = noir note = e9ca8f
-            //VDM = c9d8ed + 4c93d6 - 0062bd
-            //DTC = 559955 - a0c188 + 559955
+            //ScreenTopCNF();
+            //ScreenCNFLast();
+            //ScreenDTCLast();
+            //ScreenVDMLast();
 
-            ScreenTopCNF();
-            ScreenCNFLast();
-            ScreenDTCLast();
-            ScreenVDMLast();
+            
+
             this.IsDataLoaded = true;
 
         }
@@ -150,7 +121,6 @@ namespace AnneDocTique_WP8.ViewModels
         public void AppBarRefreshLast()
         {
             this.LastDico.Clear();
-
             List<bool> list = new List<bool>();
 
             var req = from Filtres f in AnecdoteDB.FiltresDB
@@ -162,13 +132,11 @@ namespace AnneDocTique_WP8.ViewModels
             LoadLastVDM(1, list[0]);
             LoadLastCNF(1, list[1]);
             LoadLastDTC(list[2]);
-
         }
 
         public void AppBarRefreshRandom()
         {
-            this.RandomDico.Clear();
-            
+            this.RandomDico.Clear();            
             List<bool> list = new List<bool>();
 
             var req = from Filtres f in AnecdoteDB.FiltresDB
@@ -181,86 +149,15 @@ namespace AnneDocTique_WP8.ViewModels
             LoadRandomVDM(1, list[3]);
             LoadRandomCNF(1, list[4]);
             LoadRandomDTC(list[5]);
-
         }
         
-
-        public void RefreshLastFilter(bool VDM_Filter, bool DTC_Filter, bool CNF_Filter)
-        {
-            this.LastDico.Clear();
-            if (!VDM_Filter && !DTC_Filter && !CNF_Filter)
-            {
-                this.Items.Clear();
-                this.Items.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
-            }
-            else
-            {
-                LoadLastVDM(1, VDM_Filter);
-                LoadLastDTC(DTC_Filter);
-                LoadLastCNF(1, CNF_Filter);
-                
-            }
-        }
-
-        public void RefreshRandomFilter(bool VDM_Filter, bool DTC_Filter, bool CNF_Filter)
-        {         
-            this.RandomDico.Clear();
-
-            if (!VDM_Filter && !DTC_Filter && !CNF_Filter)
-            {
-                this.RandomItems.Clear();
-                this.RandomItems.Add(new ItemViewModel() { Content = "Aucune anecdote sélectionnée dans vos filtres" });
-            }
-            else
-            {
-                
-                LoadRandomVDM(1, VDM_Filter);
-                LoadRandomDTC(DTC_Filter);
-                LoadRandomCNF(1, CNF_Filter);
-            }
-        }
-
-        public bool RefreshTopFilter(string Anecdote)
-        {
-            this.TopItems.Clear();
-            switch (Anecdote)
-            {
-                case "VDM":
-                    LoadTopVDM(1);
-                    return true;
-                case "DTC" : 
-                case "CNF" :
-                    LoadTopCNF(1);
-                    return true;
-                default :
-                    return false;
-            }
-        }
-
-        public bool RefreshFlopFilter(string Anecdote)
-        {
-            this.FlopItems.Clear();
-            switch (Anecdote)
-            {
-                case "VDM":
-                    LoadFlopVDM(1);
-                    return true;
-                case "DTC":
-                case "CNF":
-                    LoadFlopCNF(1);
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
+        // Page Dernières
         public void LoadLastAll()
         {
             this.Items.Clear();
-            int index = 0, j = 0;
+            int index = 0, j = 1;
             var item = this.LastDico.OrderByDescending(i => i.Value);
             for (int cpt = 1; cpt < item.Count(); cpt++)
-            //foreach (var item in this.LastDico.OrderByDescending(i => i.Value))
             {
                 if (cpt % 3 == 0 && this.LastDTC.Count > index)
                 {
@@ -268,16 +165,17 @@ namespace AnneDocTique_WP8.ViewModels
                     this.Items.Add(new ItemViewModel() { 
                         Content = this.LastDTC[index].Text.Replace("<br>", "\n"), 
                         Type = this.LastDTC[index].Type, 
-                        Id = this.LastDTC[index].Id.ToString(),
+                        Id = this.LastDTC[index].Id.ToString(),                      
+                        Note1 = "(*) " + this.LastDTC[index].Good.ToString(),
+                        Note2 = "(-) " + this.LastDTC[index].Bad.ToString(),
                         Color = "#559955", 
                         Color2 = "Transparent"
                     });
                     index++;
-                    j++;
                 }
                 else
                 {
-                    if (typeof(VDM) == item.ElementAt(cpt-j).Key.GetType())
+                    if (typeof(VDM) == item.ElementAt(cpt - j).Key.GetType())
                     {
                         VDM vdm = (VDM)item.ElementAt(cpt - j).Key;
                         this.Items.Add(new ItemViewModel()
@@ -285,7 +183,8 @@ namespace AnneDocTique_WP8.ViewModels
                             Content = vdm.Text,
                             Note1 = "Je valide, c'est une VDM " + vdm.Agree,
                             Note2 = "Tu l'as bien mérité " + vdm.Deserved,
-                            Date = vdm.Date.ToShortDateString(),
+                            Date = vdm.Date.ToString("Le dd/MM/yyyy à HH:mm"),
+                            Author = vdm.Author,
                             Type = vdm.Type,
                             Id = vdm.Id.ToString(),
                             Color = "#c9d8ed",
@@ -299,8 +198,8 @@ namespace AnneDocTique_WP8.ViewModels
                         this.Items.Add(new ItemViewModel() 
                         { 
                             Content = cnf.Texte, 
-                            Note1 = note.ToString() + "/10", 
-                            Date = cnf.Date.ToShortDateString(), 
+                            Note1 = "Moyenne : " + note.ToString() + "/10",
+                            Date = cnf.Date.ToString("Le dd/mm/yyyy à hh:mm"), 
                             Type = cnf.Type,
                             Id = cnf.Id.ToString(),
                             Color = "#bfad82",
@@ -319,47 +218,94 @@ namespace AnneDocTique_WP8.ViewModels
             veriflastDTC = 0;
         }
 
+        // Page Aléatoires
         public void LoadRandomAll()
         {
             this.RandomItems.Clear();
-            int index = 0, j = 0; ;
+            int index = 0, j = 1;
             var item = this.RandomDico.OrderByDescending(i => i.Value);
             for (int cpt = 1; cpt < item.Count(); cpt++)
-            //foreach (var item in RandomDico.OrderByDescending(i => i.Value))
             {
                 if (cpt % 3 == 0 && this.RandomDTC.Count > index)
                 {
-                    this.RandomItems.Add(new ItemViewModel() { Content = this.RandomDTC[index].Text });
+                    this.RandomItems.Add(new ItemViewModel()
+                    {
+                        Content = this.RandomDTC[index].Text.Replace("<br>", "\n"),
+                        Type = this.RandomDTC[index].Type,
+                        Id = this.RandomDTC[index].Id.ToString(),
+                        Note1 = "(*) " + this.RandomDTC[index].Good.ToString(),
+                        Note2 = "(-) " + this.RandomDTC[index].Bad.ToString(),
+                        Color = "#559955",
+                        Color2 = "Transparent"
+                    });
                     index++;
-                    j++;
                 }
                 else
                 {
                     if (typeof(VDM) == item.ElementAt(cpt - j).Key.GetType())
                     {
                         VDM vdm = (VDM)item.ElementAt(cpt - j).Key;
-                        this.RandomItems.Add(new ItemViewModel() { Content = vdm.Text, Note1 = "Je valide, c'est une VDM " + vdm.Agree, Note2 = "Tu l'as bien mérité " + vdm.Deserved });
+                        this.RandomItems.Add(new ItemViewModel()
+                        {
+                            Content = vdm.Text,
+                            Note1 = "Je valide, c'est une VDM " + vdm.Agree,
+                            Note2 = "Tu l'as bien mérité " + vdm.Deserved,
+                            Date = vdm.Date.ToString("Le dd/MM/yyyy à HH:mm"),
+                            Author = vdm.Author,
+                            Type = vdm.Type,
+                            Id = vdm.Id.ToString(),
+                            Color = "#c9d8ed",
+                            Color2 = "#4c93d6"
+                        });
                     }
                     else if (typeof(CNF) == item.ElementAt(cpt - j).Key.GetType())
                     {
                         CNF cnf = (CNF)item.ElementAt(cpt - j).Key;
                         double note = Math.Round(((double)cnf.Points / cnf.Vote) * 2, 2);
-                        this.RandomItems.Add(new ItemViewModel() { Content = cnf.Texte, Note1 = note.ToString() + "/10" });
+                        this.RandomItems.Add(new ItemViewModel()
+                        {
+                            Content = cnf.Texte,
+                            Note1 = "Moyenne : " + note.ToString() + "/10",
+                            Date = cnf.Date.ToString("Le dd/mm/yyyy à hh:mm"),
+                            Type = cnf.Type,
+                            Id = cnf.Id.ToString(),
+                            Color = "#bfad82",
+                            Color2 = "lightgreen"
+                        });
                     }
-                    //else if (typeof(DTC) == item.Key.GetType())
-                    //{
-                    //    DTC dtc = (DTC)item.Key;
-                    //    this.RandomItems.Add(new ItemViewModel() { Content = dtc.Text });
-                    //}
                 }
             }
-
             verifrandomCNF = 0;
             verifrandomVDM = 0;
             verifrandomDTC = 0;
         }
-   
 
+        //Page Favoris
+        public void LoadFavoris()
+        {
+            this.FavorisItems.Clear();
+            var req = from Favoris f in AnecdoteDB.FavorisDB
+                      select f;
+
+            foreach (Favoris favoris in req)
+                this.FavorisItems.Add(new ItemViewModel()
+                {
+                    Content = favoris.Content,
+                    Author = favoris.Author,
+                    Date = favoris.Date,
+                    Note1 = favoris.Vote1,
+                    Note2 = favoris.Vote2,
+                    Color = favoris.Color1,
+                    Color2 = favoris.Color2
+                });
+
+            
+        }
+
+
+        /// <summary>
+        /// Requêtes pour récupérer les anecdotes CNF
+        /// </summary>
 
         public void LoadLastCNF(int nbpage, bool show)
         {
@@ -429,7 +375,15 @@ namespace AnneDocTique_WP8.ViewModels
                 foreach (var anecdote in cnf)
                 {
                     double note = Math.Round(((double)anecdote.Points / anecdote.Vote) * 2, 2);
-                    this.TopItems.Add(new ItemViewModel() { Content = anecdote.Texte, Note1 = note.ToString() + "/10" });
+                    this.TopItems.Add(new ItemViewModel() {
+                        Content = anecdote.Texte,
+                        Note1 = "Moyenne : " + note.ToString() + "/10",
+                        Date = anecdote.Date.ToString("Le dd/mm/yyyy à hh:mm"),
+                        Type = anecdote.Type,
+                        Id = anecdote.Id.ToString(),
+                        Color = "#bfad82",
+                        Color2 = "lightgreen"
+                    });
                 }
             }
         }
@@ -442,7 +396,15 @@ namespace AnneDocTique_WP8.ViewModels
                 foreach (var anecdote in cnf)
                 {
                     double note = Math.Round(((double)anecdote.Points / anecdote.Vote) * 2, 2);
-                    this.FlopItems.Add(new ItemViewModel() { Content = anecdote.Texte, Note1 = note.ToString() + "/10" });
+                    this.FlopItems.Add(new ItemViewModel() {
+                        Content = anecdote.Texte,
+                        Note1 = "Moyenne : " + note.ToString() + "/10",
+                        Date = anecdote.Date.ToString("Le dd/mm/yyyy à hh:mm"),
+                        Type = anecdote.Type,
+                        Id = anecdote.Id.ToString(),
+                        Color = "#bfad82",
+                        Color2 = "lightgreen"
+                    });
                 }
             }
         }      
@@ -467,6 +429,9 @@ namespace AnneDocTique_WP8.ViewModels
         }
 
 
+        /// <summary>
+        /// Requêtes pour récupérer les anecdotes VDM
+        /// </summary>
 
 
         public void LoadLastVDM(int nbpage, bool show)
@@ -534,7 +499,17 @@ namespace AnneDocTique_WP8.ViewModels
                 var vdm = JsonConvert.DeserializeObject<VDM[]>(e.Result);
                 foreach (var anecdote in vdm)
                 {
-                    this.TopItems.Add(new ItemViewModel() { Content = anecdote.Text, Note1 = "Je valide, c'est une VDM " + anecdote.Agree, Note2 = "Tu l'as bien mérité " + anecdote.Deserved });
+                    this.TopItems.Add(new ItemViewModel() {
+                        Content = anecdote.Text,
+                        Note1 = "Je valide, c'est une VDM " + anecdote.Agree,
+                        Note2 = "Tu l'as bien mérité " + anecdote.Deserved,
+                        Date = anecdote.Date.ToString("Le dd/MM/yyyy à HH:mm"),
+                        Author = anecdote.Author,
+                        Type = anecdote.Type,
+                        Id = anecdote.Id.ToString(),
+                        Color = "#c9d8ed",
+                        Color2 = "#4c93d6"
+                    });
                 }
             }
         }
@@ -546,7 +521,17 @@ namespace AnneDocTique_WP8.ViewModels
                 var vdm = JsonConvert.DeserializeObject<VDM[]>(e.Result);
                 foreach (var anecdote in vdm)
                 {
-                    this.FlopItems.Add(new ItemViewModel() { Content = anecdote.Text, Note1 = "Je valide, c'est une VDM " + anecdote.Agree, Note2 = "Tu l'as bien mérité " + anecdote.Deserved });
+                    this.FlopItems.Add(new ItemViewModel() {
+                        Content = anecdote.Text,
+                        Note1 = "Je valide, c'est une VDM " + anecdote.Agree,
+                        Note2 = "Tu l'as bien mérité " + anecdote.Deserved,
+                        Date = anecdote.Date.ToString("Le dd/MM/yyyy à HH:mm"),
+                        Author = anecdote.Author,
+                        Type = anecdote.Type,
+                        Id = anecdote.Id.ToString(),
+                        Color = "#c9d8ed",
+                        Color2 = "#4c93d6"
+                    });
                 }
             }
         }        
@@ -568,6 +553,9 @@ namespace AnneDocTique_WP8.ViewModels
                 }
             }
         }
+
+
+
 
         private void LoadLastDTC(bool show)
         {
@@ -617,9 +605,7 @@ namespace AnneDocTique_WP8.ViewModels
             else verifrandomDTC++;
         }
 
-        //Mélange des 3
-        //TOP CNF
-        //Comment VDM
+
 
         private void ScreenTopCNF() 
         {
@@ -694,8 +680,6 @@ namespace AnneDocTique_WP8.ViewModels
                 LoadLastAll();
             }
         }
-        private void LoadVDMComment() { }
-
 
         
 

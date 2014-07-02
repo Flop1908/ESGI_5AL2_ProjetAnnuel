@@ -2,13 +2,16 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="fr-FR" />
   <App xmlns="" ProductID="{50187946-856e-4630-b68e-f25e8677e558}" Title="ADT" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="AnneDocTique_WP8 author" Description="Anecdote" Publisher="AnneDocTique_WP8" PublisherID="{53e517e3-107d-4e11-9791-af73c47c5b72}">
-    <IconPath IsRelative="true" IsResource="false">Sanstitre.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">Assets\Images\logo.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
       <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_IDENTITY_USER" />
+      <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
+      <Capability Name="ID_CAP_PHONEDIALER" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
@@ -16,9 +19,9 @@
     <Tokens>
       <PrimaryToken TokenID="AnneDocTique_WP8Token" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Images\logo.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Images\logo.png</BackgroundImageURI>
           <Title>AnneDocTique_WP8</Title>
           <BackContent>
           </BackContent>

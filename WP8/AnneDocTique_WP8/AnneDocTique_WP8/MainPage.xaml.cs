@@ -38,6 +38,7 @@ namespace AnneDocTique_WP8
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
+                App.ViewModel.LoadFavoris();
             }
         }
 
@@ -122,7 +123,8 @@ namespace AnneDocTique_WP8
         {
             var currentItem = ((sender as StackPanel).DataContext) as ItemViewModel;
             NavigationService.Navigate(new Uri("/DetailPage.xaml?content=" + currentItem.Content + "&note1=" + currentItem.Note1 +
-                                                "&note2=" + currentItem.Date + "&type=" + currentItem.Type + "&id=" + currentItem.Id, UriKind.Relative));
+                                                "&note2=" + currentItem.Note2 + "&type=" + currentItem.Type + "&id=" + currentItem.Id + 
+                                                "&author=" + currentItem.Author + "&date=" + currentItem.Date, UriKind.Relative));
         }
 
 

@@ -9,24 +9,41 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AnneDocTique_WP8.Resources;
 using Microsoft.Phone.Tasks;
+using AnneDocTique_WP8.Databases;
 
 namespace AnneDocTique_WP8
 {
     public partial class DetailPage : PhoneApplicationPage
     {
+
+        private AnecdoteDB AnecdoteDB;
+
         public DetailPage()
         {
             InitializeComponent();
 
+            AnecdoteDB = new AnecdoteDB(AnecdoteDB.DBConnectionString);
+            DataContext = App.VDMCommentViewModel;
+            
             BuildLocalizedApplicationBar();
         }
 
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (!App.VDMCommentViewModel.IsDataLoaded)
+            {
+                App.VDMCommentViewModel.LoadData();
+            }
+
             base.OnNavigatedTo(e);
             TbContent.Text = NavigationContext.QueryString["content"];
             TbNote1.Text = NavigationContext.QueryString["note1"];
             TbNote2.Text = NavigationContext.QueryString["note2"];
+            TbAuthor.Text = NavigationContext.QueryString["author"];
+            TbDate.Text = NavigationContext.QueryString["date"];
+
+            title.Text = "Commentaires " + NavigationContext.QueryString["type"] + " #" + NavigationContext.QueryString["id"];
         }
 
 
@@ -42,6 +59,8 @@ namespace AnneDocTique_WP8
             appBarButton.Text = "Ajouter aux favoris";
             appBarButton.Click += appBarButton_Click;
             ApplicationBar.Buttons.Add(appBarButton);
+
+            ApplicationBar.Opacity = 0.5;
 
             
             ApplicationBarMenuItem appBarMenuItemShareRS = new ApplicationBarMenuItem("Partager sur réseaux sociaux");
@@ -63,7 +82,20 @@ namespace AnneDocTique_WP8
 
         private void appBarButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            AnecdoteDB.FavorisDB.InsertOnSubmit(
+                new Favoris
+                {
+                    Content = NavigationContext.QueryString["content"],
+                    Type = NavigationContext.QueryString["type"],
+                    Date = NavigationContext.QueryString["date"],
+                    Author = NavigationContext.QueryString["author"],
+                    Vote1 = NavigationContext.QueryString["note1"],
+                    Vote2 = NavigationContext.QueryString["note2"]
+                }
+            ); 
+            AnecdoteDB.SubmitChanges();
+            MessageBox.Show("Anecdote ajouté dans vos favoris !");
+            App.ViewModel.LoadFavoris();
         }
 
         private void appBarMenuItemShareSMS_Click(object sender, EventArgs e)

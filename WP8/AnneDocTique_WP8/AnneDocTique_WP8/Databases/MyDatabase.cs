@@ -53,7 +53,17 @@ namespace AnneDocTique_WP8.Databases
         [Column]
         public string Type { get; set; }
         [Column]
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
+        [Column]
+        public string Author { get; set; }
+        [Column]
+        public string Vote1 { get; set; }
+        [Column]
+        public string Vote2 { get; set; }
+        [Column]
+        public string Color1 { get; set; }
+        [Column]
+        public string Color2 { get; set; }
 
 
         #region INotifyPropertyChanged Members
