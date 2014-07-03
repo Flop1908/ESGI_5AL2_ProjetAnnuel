@@ -2,8 +2,8 @@
 //  AnneManager.m
 //  Anne&DocTique
 //
-//  Created by Kapi on 13/04/2014.
-//  Copyright (c) 2014 Kapi. All rights reserved.
+//  Created by Kapi on 01/03/2014.
+//  Copyright (c) 2014 Lionel. All rights reserved.
 //
 
 #import "AnneManager.h"
@@ -11,9 +11,10 @@
 #import "AnneCommunicator.h"
 
 @implementation AnneManager
-- (void)fetchGroupsAtCoordinate:(CLLocationCoordinate2D)coordinate
+//For Version 2, Use to 
+- (void)fetchCountryAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    [self.communicator searchGroupsAtCoordinate:coordinate];
+    [self.communicator searchCountryAtCoordinate];
 }
 
 #pragma mark - AnneCommunicatorDelegate
@@ -24,15 +25,15 @@
     NSArray *groups = [GroupBuilder groupsFromJSON:objectNotation error:&error];
     
     if (error != nil) {
-        [self.delegate fetchingGroupsFailedWithError:error];
+        [self.delegate fetchingCountryFailedWithError:error];
         
     } else {
-        [self.delegate didReceiveGroups:groups];
+        [self.delegate didReceiveGroup:groups];
     }
 }
 
-- (void)fetchingGroupsFailedWithError:(NSError *)error
+- (void)fetchingCountryFailedWithError:(NSError *)error
 {
-    [self.delegate fetchingGroupsFailedWithError:error];
+    [self.delegate fetchingCountryFailedWithError:error];
 }
 @end

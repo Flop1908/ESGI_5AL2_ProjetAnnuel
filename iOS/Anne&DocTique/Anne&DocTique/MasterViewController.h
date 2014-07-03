@@ -2,17 +2,13 @@
 //  MasterViewController.h
 //  Anne&DocTique
 //
-//  Created by Kapi on 13/04/2014.
-//  Copyright (c) 2014 Kapi. All rights reserved.
+//  Created by Kapi on 29/01/2014.
+//  Copyright (c) 2014 Lionel. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-#import <CoreData/CoreData.h>
-
-@interface MasterViewController : UITableViewController //<NSFetchedResultsControllerDelegate>
-
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@interface MasterViewController : UITableViewController
 
 @end

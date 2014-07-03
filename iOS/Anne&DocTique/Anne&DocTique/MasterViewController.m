@@ -2,253 +2,146 @@
 //  MasterViewController.m
 //  Anne&DocTique
 //
-//  Created by Kapi on 13/04/2014.
-//  Copyright (c) 2014 Kapi. All rights reserved.
+//  Created by Kapi on 29/01/2014.
+//  Copyright (c) 2014 Lionel. All rights reserved.
 //
 
 #import "MasterViewController.h"
-
-#import "DetailViewController.h"
-#import "anecdoteCell.h"
-
+#import "DetailCell.h"
 #import "Group.h"
 #import "AnneManager.h"
 #import "AnneCommunicator.h"
+#import "AnneAirViewController.h"
 
 @interface MasterViewController () <AnneManagerDelegate> {
     NSArray *_groups;
     AnneManager *_manager;
 }
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+@property (weak, nonatomic) CLLocationManager *locationManager;
 @end
 
 @implementation MasterViewController
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-}
-
+//As the title of this, this function is load when the class is called
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-
-    self.navigationItem.title = @"Anecdotes";
-    //self.navigationItem.leftBarButtonItem = self.edi
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *menuSource = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.leftBarButtonItem = menuSource;
+    NSLog(@"MasterView's Did load is Beginning");
+    _manager = [[AnneManager alloc] init];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    _manager.communicator = [[AnneCommunicator alloc] init];
     
-    //Toolbar
+    _manager.communicator.delegate = _manager;
+    
+    _manager.delegate = self;
+    
+    //creation of Menu's Button
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 50, 35);
+    [button setTitle:@"Menu" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(leftButtonTouch) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    typeof(self) bself = self;
+    self.AnneSwipeHander = ^{
+        [bself.airViewController showAirViewFromViewController:bself.navigationController complete:nil];
+    };
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(startFetchingCountry:)
+                                                 name:@"kCLAuthorizationStatusAuthorized"
+                                               object:nil];
+    NSLog(@"MasterView's Did load is Ending");
+   
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)viewFavoris:(id)sender {
+}
+- (IBAction)viewTop:(id)sender {
+}
+- (IBAction)viewRecent:(id)sender {
+}
+- (IBAction)viewRandom:(id)sender {
+}
+- (IBAction)viewFlop:(id)sender {
 }
 
-- (void)insertNewObject:(id)sender
+#pragma mark - Accessors
+//For The Version 2, We can localize The user To have Country's anecdotes
+- (CLLocationManager *)locationManager
 {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-         // Replace this implementation with code to handle the error appropriately.
-         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+    if (_locationManager) {
+        return _locationManager;
     }
+    
+    id appDelegate = [[UIApplication sharedApplication] delegate];
+    if ([appDelegate respondsToSelector:@selector(locationManager)]) {
+        _locationManager = [appDelegate performSelector:@selector(locationManager)];
+    }
+    return _locationManager;
+}
+
+#pragma mark - Notification Observer
+//For The Version 2, It's the user's Notification for the localisation
+- (void)startFetchingCountry:(NSNotification *)notification
+{
+    [_manager fetchCountryAtCoordinate:self.locationManager.location.coordinate];
 }
 
 #pragma mark - AnneManagerDelegate
-- (void)didReceiveGroups:(NSArray *)groups
+- (void)didReceiveGroup:(NSArray *)groups
 {
     _groups = groups;
     [self.tableView reloadData];
 }
-#pragma mark - Table View
 
+//
+- (void)fetchingCountryFailedWithError:(NSError *)error
+{
+    NSLog(@"Error %@; %@", error, [error localizedDescription]);
+}
+
+
+#pragma mark - Table View
+//Function tell us how much there are in groups of the TableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _groups.count; //[groups count]
+    return _groups.count;
 }
 
+//When a new cell was been passed in state Enable, this function was been loaded
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    anecdoteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];// @"Sources"
+    NSLog(@"Cell For Row At Index Path's process is begginning");
+    //Declaration of cellule type
+    DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     Group *group = _groups[indexPath.row];
-    [cell.author setText:group.author];
-    [cell.date setText:group.date];
-    [cell.descriptionLabel setText:group.description];
-    [cell.voteplus setText:group.voteplus];
-    [cell.votemoins setText:group.votemoins];
-    [cell.favorite setText:group.favorite];
-    //[cell.locationLabel setText:[NSString stringWithFormat:@"%@, %@", group.city, group.country]];
-    //[cell.descriptionLabel setText:group.description];
-    
-    return cell;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return [[self.fetchedResultsController sections] count];
-}
-
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    //[cell.nameLabel setText:group.Author];
+    //[cell.whoLabel setText:group.Date];
+    //Declaration of Label
+    if ([group.Type isEqual:@"VDM"]) {
+        [cell.avisLabel setText:[NSString stringWithFormat:@"Je Valide(%@)          Tu l'as bien merité(%@)", group.VotePlus, group.VoteMoins]];
+        cell.backgroundColor= [UIColor colorWithRed:201/255.0f green:216/255.0f blue:237/255.0f alpha:0.3f];
+    }
+    if([group.Type isEqual:@"DTC"]){
+        [cell.avisLabel setText:[NSString stringWithFormat:@"Good(%@)", group.VotePlus]];
+        cell.backgroundColor= [UIColor colorWithRed:85/255.0f green:153/255.0f blue:85/255.0f alpha:1.0f];
+        //cell.avisLabel.textColor= [UIColor colorWithRed:85/255.0f green:153/255.0f blue:85/255.0f alpha:1.0f];
         
-        NSError *error = nil;
-        if (![context save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }   
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // The table view should not be re-orderable.
-    return NO;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setDetailItem:object];
     }
-}
-
-#pragma mark - Fetched results controller
-
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
+    if([group.Type isEqual:@"CNF"]){
+        
+     //   double division=((double *)group.Point/(double *)group.VoteMoins)*2;
+     //   [cell.locationLabel setText:[NSString stringWithFormat:@"Note(%@)", division]];
+        cell.backgroundColor=[UIColor colorWithRed:191/255.0f green:173/255.0f blue:130/255.0f alpha:0.4f];
+        //cell.avisLabel.textColor=[UIColor colorWithRed:233/255.0f green:192/255.0f blue:143/255.0f alpha:1.0f];
     }
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-	     // Replace this implementation with code to handle the error appropriately.
-	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    
-    return _fetchedResultsController;
-}    
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    UITableView *tableView = self.tableView;
-    
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView endUpdates];
-}
-
-/*
-// Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    // In the simplest, most efficient, case, reload the table view.
-    [self.tableView reloadData];
-}
- */
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+    [cell.descriptionLabel setText:group.Text];
+    NSLog(@"Cell For Row At Index Path's process is done");
+    return cell;
 }
 
 @end
