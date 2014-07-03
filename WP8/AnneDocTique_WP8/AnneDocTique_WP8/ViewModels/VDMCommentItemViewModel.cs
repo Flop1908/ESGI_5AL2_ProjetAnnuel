@@ -11,9 +11,8 @@ namespace AnneDocTique_WP8.ViewModels
     {
         private string _id;
         /// <summary>
-        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
+        /// cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
         /// </summary>
-        /// <returns></returns>
         public string Id
         {
             get
@@ -31,10 +30,6 @@ namespace AnneDocTique_WP8.ViewModels
         }
 
         private string _content;
-        /// <summary>
-        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
-        /// </summary>
-        /// <returns></returns>
         public string Content
         {
             get
@@ -54,10 +49,6 @@ namespace AnneDocTique_WP8.ViewModels
         
 
         private string _date;
-        /// <summary>
-        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
-        /// </summary>
-        /// <returns></returns>
         public string Date
         {
             get
@@ -75,10 +66,6 @@ namespace AnneDocTique_WP8.ViewModels
         }
 
         private string _author;
-        /// <summary>
-        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
-        /// </summary>
-        /// <returns></returns>
         public string Author
         {
             get
@@ -96,10 +83,6 @@ namespace AnneDocTique_WP8.ViewModels
         }
 
         private string _thumbs;
-        /// <summary>
-        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
-        /// </summary>
-        /// <returns></returns>
         public string Thumbs
         {
             get
@@ -119,10 +102,6 @@ namespace AnneDocTique_WP8.ViewModels
         
 
         private string _bordercolor;
-        /// <summary>
-        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
-        /// </summary>
-        /// <returns></returns>
         public string BorderColor
         {
             get
@@ -140,10 +119,6 @@ namespace AnneDocTique_WP8.ViewModels
         }
 
         private string _VoteColor;
-        /// <summary>
-        /// Exemple de propriété ViewModel ; cette propriété est utilisée dans la vue pour afficher sa valeur à l'aide d'une liaison.
-        /// </summary>
-        /// <returns></returns>
         public string VoteColor
         {
             get

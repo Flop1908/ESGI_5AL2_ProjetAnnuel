@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnneDocTique_WP8.Models
 {
-    class DTC 
+    public class DTC 
     {
         public int Id { get; set; }
         public int Bad { get; set; }

@@ -49,6 +49,8 @@ namespace AnneDocTique_WP8.Databases
         [Column(IsPrimaryKey = true, CanBeNull = false, IsDbGenerated = true)]
         public int ID { get; set; }
         [Column]
+        public int IdFav { get; set; }
+        [Column]
         public string Content { get; set; }
         [Column]
         public string Type { get; set; }

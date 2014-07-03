@@ -78,6 +78,8 @@ namespace AnneDocTique_WP8.ViewModels
             this.LastDTC.Clear();
             this.TopItems.Clear();
             this.FlopItems.Clear();
+
+
             List<bool> list = new List<bool>();
 
             var req = from Filtres f in AnecdoteDB.FiltresDB
@@ -107,12 +109,7 @@ namespace AnneDocTique_WP8.ViewModels
             else if (list[10]) LoadFlopCNF(1);
             else if (list[11]) LoadLastDTC(list[11]); ;
 
-            //ScreenTopCNF();
-            //ScreenCNFLast();
-            //ScreenDTCLast();
-            //ScreenVDMLast();
-
-            
+  
 
             this.IsDataLoaded = true;
 
@@ -206,11 +203,6 @@ namespace AnneDocTique_WP8.ViewModels
                             Color2 = "lightgreen"
                         });
                     }
-                    //else if (typeof(DTC) == item.Key.GetType())
-                    //{
-                    //    DTC dtc = (DTC)item.Key;
-                    //    this.Items.Add(new ItemViewModel() { Content = dtc.Text });
-                    //}
                 }
             }
             veriflastCNF = 0;
@@ -357,7 +349,6 @@ namespace AnneDocTique_WP8.ViewModels
                 {
                     this.LastDico.Add(anecdote, anecdote.Date);
                 }
-                //LoadLastAll();
                 veriflastCNF++;
                 if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
                 {
@@ -483,7 +474,6 @@ namespace AnneDocTique_WP8.ViewModels
                 {
                     this.LastDico.Add(anecdote, anecdote.Date);                   
                 }
-                //LoadLastAll();
                 veriflastVDM++;
                 if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
                 {
@@ -555,6 +545,9 @@ namespace AnneDocTique_WP8.ViewModels
         }
 
 
+        /// <summary>
+        /// Requêtes pour récupérer les anecdotes DTC
+        /// </summary>
 
 
         private void LoadLastDTC(bool show)
@@ -604,83 +597,6 @@ namespace AnneDocTique_WP8.ViewModels
             }
             else verifrandomDTC++;
         }
-
-
-
-        private void ScreenTopCNF() 
-        {
-            string result;
-            using (StreamReader streamReader = new StreamReader("CNFTop.json"))
-            {
-                result = streamReader.ReadToEnd();
-            }
-
-            var cnf = JsonConvert.DeserializeObject<CNF[]>(result);
-            foreach (var anecdote in cnf)
-            {
-                double note = Math.Round(((double)anecdote.Points / anecdote.Vote) * 2, 2);
-                this.TopItems.Add(new ItemViewModel() { Content = anecdote.Texte, Note1 = note.ToString() + "/10" });
-            }
-
-        }
-        private void ScreenDTCLast() 
-        {
-            string result;
-            using (StreamReader streamReader = new StreamReader("DTCLast.json"))
-            {
-                result = streamReader.ReadToEnd();
-            }
-
-            var dtc = JsonConvert.DeserializeObject<DTC[]>(result);
-            foreach (var anecdote in dtc)
-            {
-                this.LastDTC.Add(anecdote);
-            }
-            veriflastDTC++;
-            if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
-            {
-                LoadLastAll();
-            }
-        }
-        private void ScreenVDMLast() 
-        {
-            string result;
-            using (StreamReader streamReader = new StreamReader("VDMLast.json"))
-            {
-                result = streamReader.ReadToEnd();
-            }
-
-            var vdm = JsonConvert.DeserializeObject<VDM[]>(result);
-            foreach (var anecdote in vdm)
-            {
-                this.LastDico.Add(anecdote, anecdote.Date); 
-            }
-            veriflastVDM++;
-            if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
-            {
-                LoadLastAll();
-            }
-        }
-        private void ScreenCNFLast()
-        {
-            string result;
-            using (StreamReader streamReader = new StreamReader("CNFLast.json"))
-            {
-                result = streamReader.ReadToEnd();
-            }
-
-            var cnf = JsonConvert.DeserializeObject<CNF[]>(result);
-            foreach (var anecdote in cnf)
-            {
-                this.LastDico.Add(anecdote, anecdote.Date);
-            }
-            veriflastCNF++;
-            if (veriflastCNF != 0 && veriflastVDM != 0 && veriflastDTC != 0)
-            {
-                LoadLastAll();
-            }
-        }
-
         
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -49,10 +49,8 @@ namespace AnneDocTique_WP8
 
         private void BuildLocalizedApplicationBar()
         {
-            // Définit l'ApplicationBar de la page sur une nouvelle instance d'ApplicationBar.
+            
             ApplicationBar = new ApplicationBar();
-
-            // Crée un bouton et définit la valeur du texte sur la chaîne localisée issue d'AppResources.
 
             ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/Images/favs.addto.png", UriKind.Relative));
 
@@ -80,22 +78,34 @@ namespace AnneDocTique_WP8
 
         }
 
+        // Ajout favoris
         private void appBarButton_Click(object sender, EventArgs e)
         {
-            AnecdoteDB.FavorisDB.InsertOnSubmit(
-                new Favoris
-                {
-                    Content = NavigationContext.QueryString["content"],
-                    Type = NavigationContext.QueryString["type"],
-                    Date = NavigationContext.QueryString["date"],
-                    Author = NavigationContext.QueryString["author"],
-                    Vote1 = NavigationContext.QueryString["note1"],
-                    Vote2 = NavigationContext.QueryString["note2"]
-                }
-            ); 
-            AnecdoteDB.SubmitChanges();
-            MessageBox.Show("Anecdote ajouté dans vos favoris !");
-            App.ViewModel.LoadFavoris();
+            int id = Convert.ToInt32(NavigationContext.QueryString["id"]);
+            var req = AnecdoteDB.FavorisDB.Where(ane => ane.IdFav == id);
+
+            if (req.Count() > 0)
+            {
+                MessageBox.Show("Anecdote déjà présente dans vos favoris !");
+            }
+            else
+            {
+                AnecdoteDB.FavorisDB.InsertOnSubmit(
+                    new Favoris
+                    {
+                        IdFav = id,
+                        Content = NavigationContext.QueryString["content"],
+                        Type = NavigationContext.QueryString["type"],
+                        Date = NavigationContext.QueryString["date"],
+                        Author = NavigationContext.QueryString["author"],
+                        Vote1 = NavigationContext.QueryString["note1"],
+                        Vote2 = NavigationContext.QueryString["note2"]
+                    }
+                );
+                AnecdoteDB.SubmitChanges();
+                MessageBox.Show("Anecdote ajouté dans vos favoris !");
+                App.ViewModel.LoadFavoris();
+            }
         }
 
         private void appBarMenuItemShareSMS_Click(object sender, EventArgs e)

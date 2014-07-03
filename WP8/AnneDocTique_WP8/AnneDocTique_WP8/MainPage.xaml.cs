@@ -19,6 +19,7 @@ namespace AnneDocTique_WP8
     public partial class MainPage : PhoneApplicationPage
     {
         private AnecdoteDB AnecdoteDB;
+
         // Constructeur
         public MainPage()
         {
@@ -28,7 +29,7 @@ namespace AnneDocTique_WP8
             // Affecter l'exemple de données au contexte de données du contrôle ListBox
             DataContext = App.ViewModel;
 
-            // Exemple de code pour la localisation d'ApplicationBar
+            
             BuildLocalizedApplicationBar();
         }
 
@@ -45,11 +46,9 @@ namespace AnneDocTique_WP8
         // Exemple de code pour la conception d'une ApplicationBar localisée
         private void BuildLocalizedApplicationBar()
         {
-            // Définit l'ApplicationBar de la page sur une nouvelle instance d'ApplicationBar.
+            
             ApplicationBar = new ApplicationBar();
 
-            // Crée un bouton et définit la valeur du texte sur la chaîne localisée issue d'AppResources.
-            
             ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/Images/sync.png", UriKind.Relative));
             
             appBarButton.Text = AppResources.AppBarButtonText; 
@@ -127,12 +126,5 @@ namespace AnneDocTique_WP8
                                                 "&author=" + currentItem.Author + "&date=" + currentItem.Date, UriKind.Relative));
         }
 
-
-        //private void TapGoToDetailPage(object sender, GestureEventArgs e)
-        //{
-        //    var currentItem = ((sender as StackPanel).DataContext) as TextBlock;
-
-        //    NavigationService.Navigate(new Uri("/DetailPage.xaml?content=fdsfsdfs", UriKind.Relative));
-        //}
     }
 }
